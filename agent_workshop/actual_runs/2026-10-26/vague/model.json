@@ -1,0 +1,17 @@
+{
+  "model_type": "motif_logistic_regression",
+  "sequence_length": 160,
+  "allowed_alphabet": "ACGT",
+  "threshold": 0.5,
+  "motif": "TATAAATG",
+  "probability_without_motif": 0.10432385560774064,
+  "probability_with_motif": 0.8849234166796093,
+  "coefficient": [
+    [
+      4.189982102520921
+    ]
+  ],
+  "intercept": [
+    -2.150078844721413
+  ]
+}

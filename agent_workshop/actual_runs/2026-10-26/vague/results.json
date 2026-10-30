@@ -1,0 +1,240 @@
+{
+  "started_utc": "2026-10-26T15:27:13.735705+00:00",
+  "seed": 2026,
+  "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "versions": {
+    "numpy": "2.3.2",
+    "pandas": "2.3.1",
+    "scipy": "1.16.1",
+    "scikit-learn": "1.7.2"
+  },
+  "input_and_source_sha256": {
+    "dataset_description.txt": "81fb3c4136821b705801b2c2f5228146ae84b0ce9f374b3243c5064764a35352",
+    "train.csv": "fa50f7eb6e98e20b2d31155b16e6b577bc8129537a638b06c84a247b0a0500ad",
+    "validation.csv": "6430c8bcfa121dbd4b117eb462771d53f2eb560c2440716c19e57c23e0fb1348",
+    "split_manifest.csv": "24288cacdc09ce3edd271497b9059cbb5ec034106aa3ebe7ff36d9fd98db2710",
+    "analysis.py": "1255c3bcff6e7ccc4448b352e6c786833f6f7e2bbcc9f8c8648c828cc7607bdc"
+  },
+  "train_rows": 720,
+  "validation_rows": 240,
+  "selection": "minimum pooled training-only five-fold out-of-fold log loss",
+  "threshold": 0.5,
+  "cv": {
+    "prior": {
+      "log_loss": 0.6957961923942133,
+      "roc_auc": 0.45000000000000007,
+      "average_precision": 0.4732204861111111,
+      "accuracy": 0.46111111111111114,
+      "balanced_accuracy": 0.46111111111111114,
+      "brier_score": 0.2513237847222222,
+      "confusion_matrix_true_rows_0_1_predicted_columns_0_1": [
+        [
+          130,
+          230
+        ],
+        [
+          158,
+          202
+        ]
+      ],
+      "fold_log_losses": [
+        0.6940152950396772,
+        0.6932014342623146,
+        0.6936354804529623,
+        0.7023225987386534,
+        0.6958061534774593
+      ],
+      "cv_seconds": 0.011444699950516224
+    },
+    "composition": {
+      "log_loss": 0.6844683661973421,
+      "roc_auc": 0.5909953703703704,
+      "average_precision": 0.5543759647548917,
+      "accuracy": 0.5708333333333333,
+      "balanced_accuracy": 0.5708333333333333,
+      "brier_score": 0.24543400267232418,
+      "confusion_matrix_true_rows_0_1_predicted_columns_0_1": [
+        [
+          203,
+          157
+        ],
+        [
+          152,
+          208
+        ]
+      ],
+      "fold_log_losses": [
+        0.6716201155749146,
+        0.6741365432472273,
+        0.7098158984694056,
+        0.6910807341553308,
+        0.6756885395398322
+      ],
+      "cv_seconds": 0.022979200002737343
+    },
+    "disclosed_motif": {
+      "log_loss": 0.3494590176095406,
+      "roc_auc": 0.8707484567901236,
+      "average_precision": 0.8310288311439049,
+      "accuracy": 0.8902777777777777,
+      "balanced_accuracy": 0.8902777777777777,
+      "brier_score": 0.09838694193437118,
+      "confusion_matrix_true_rows_0_1_predicted_columns_0_1": [
+        [
+          318,
+          42
+        ],
+        [
+          37,
+          323
+        ]
+      ],
+      "fold_log_losses": [
+        0.39360915117573314,
+        0.307127991440965,
+        0.4417109065201642,
+        0.2979947384928109,
+        0.30685230041803013
+      ],
+      "cv_seconds": 0.01574370008893311
+    },
+    "kmer_0.1": {
+      "log_loss": 0.39784245711986055,
+      "roc_auc": 0.8832175925925925,
+      "average_precision": 0.8401038688354849,
+      "accuracy": 0.8694444444444445,
+      "balanced_accuracy": 0.8694444444444445,
+      "brier_score": 0.11132923429211247,
+      "confusion_matrix_true_rows_0_1_predicted_columns_0_1": [
+        [
+          305,
+          55
+        ],
+        [
+          39,
+          321
+        ]
+      ],
+      "fold_log_losses": [
+        0.3933103956212958,
+        0.37284366385525086,
+        0.5074900922915907,
+        0.3449168874134016,
+        0.37065124641776387
+      ],
+      "cv_seconds": 1.6714759999886155
+    },
+    "kmer_1.0": {
+      "log_loss": 0.4649135841554607,
+      "roc_auc": 0.8831712962962962,
+      "average_precision": 0.8401530758218114,
+      "accuracy": 0.8708333333333333,
+      "balanced_accuracy": 0.8708333333333333,
+      "brier_score": 0.11314621716004573,
+      "confusion_matrix_true_rows_0_1_predicted_columns_0_1": [
+        [
+          305,
+          55
+        ],
+        [
+          38,
+          322
+        ]
+      ],
+      "fold_log_losses": [
+        0.4657241711027489,
+        0.4174225593140058,
+        0.6311617936503647,
+        0.37668103961318733,
+        0.4335783570969963
+      ],
+      "cv_seconds": 1.8397682999493554
+    },
+    "kmer_10.0": {
+      "log_loss": 0.5709841258909176,
+      "roc_auc": 0.8831327160493827,
+      "average_precision": 0.8402506527901823,
+      "accuracy": 0.8694444444444445,
+      "balanced_accuracy": 0.8694444444444445,
+      "brier_score": 0.11587297654744684,
+      "confusion_matrix_true_rows_0_1_predicted_columns_0_1": [
+        [
+          304,
+          56
+        ],
+        [
+          38,
+          322
+        ]
+      ],
+      "fold_log_losses": [
+        0.5785616282649614,
+        0.4951854694092104,
+        0.7978068143900968,
+        0.4473040006800798,
+        0.5360627167102395
+      ],
+      "cv_seconds": 1.8662831000983715
+    }
+  },
+  "selected_model": "disclosed_motif",
+  "validation": {
+    "log_loss": 0.3160892090551337,
+    "roc_auc": 0.9041666666666667,
+    "average_precision": 0.8589,
+    "accuracy": 0.9041666666666667,
+    "balanced_accuracy": 0.9041666666666667,
+    "brier_score": 0.08669563523873344,
+    "confusion_matrix_true_rows_0_1_predicted_columns_0_1": [
+      [
+        106,
+        14
+      ],
+      [
+        9,
+        111
+      ]
+    ],
+    "accuracy_wilson_95_interval": [
+      0.8603080239740112,
+      0.9352908907398955
+    ]
+  },
+  "motif_counts_true_label_rows_0_1_absent_present_columns": {
+    "train": [
+      [
+        318,
+        42
+      ],
+      [
+        37,
+        323
+      ]
+    ],
+    "validation": [
+      [
+        106,
+        14
+      ],
+      [
+        9,
+        111
+      ]
+    ]
+  },
+  "fitted_details": {
+    "motif": "TATAAATG",
+    "probability_without_motif": 0.10432385560774064,
+    "probability_with_motif": 0.8849234166796093,
+    "coefficient": [
+      [
+        4.189982102520921
+      ]
+    ],
+    "intercept": [
+      -2.150078844721413
+    ]
+  },
+  "elapsed_seconds_excluding_imports": 5.637779300101101
+}

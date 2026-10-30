@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scientific audit — one-page checklist</title>
+<style>
+@page { size: A4 portrait; margin: 13mm; }
+* { box-sizing: border-box; }
+body { margin: 0; color: #18232b; font: 11pt/1.32 Arial, sans-serif; background: transparent; }
+main { max-width: 184mm; margin: 0 auto; }
+h1 { font-size: 22pt; line-height: 1.1; margin: 0 0 3mm; }
+.intro { margin: 0 0 4mm; }
+.record { border-block: 1px solid #697b86; padding: 3mm 0; margin-bottom: 4mm; font-size: 10pt; }
+h2 { font-size: 12pt; margin: 3mm 0 1mm; }
+ul { list-style: none; padding: 0; margin: 0; }
+li { position: relative; padding-left: 5mm; margin-bottom: 1.4mm; break-inside: avoid; }
+li::before { content: ""; position: absolute; left: 0; top: 1.2mm; width: 2.6mm; height: 2.6mm; border: 1px solid #354854; }
+code { font-size: 9pt; overflow-wrap: anywhere; }
+.verdict { border-top: 1px solid #697b86; margin-top: 4mm; padding-top: 3mm; }
+.line { border-bottom: 1px solid #a7b0b6; height: 7mm; }
+footer { margin-top: 3mm; font-size: 9pt; }
+@media screen { main { padding: 16px 0; } }
+@media print { body { color: #000; background: #fff; } main { max-width: none; } }
+</style>
+</head>
+<body><main>
+<h1>Scientific audit</h1>
+<p class="intro">Working code is evidence of execution. Scientific validity requires the checks below.<br>Mark a box only when evidence supports it; otherwise record missing evidence.</p>
+<div class="record">Analysis / variant: ____________________ &nbsp; Date / reviewer: ____________________<br>Evidence type: live run / previous run / manually authored fixture &nbsp; Run ID: __________</div>
+<h2>1 · Question and inputs</h2>
+<ul>
+<li>The prediction target and independence unit are explicit. Simulation results are not claimed as real promoter recognition.</li>
+<li>Data use <code>sample_id, group_id, sequence, label, split</code>. IDs are unique; labels, DNA, and split membership are valid. Metadata and simulation truth are not features.</li>
+</ul>
+<h2>2 · Separation and evaluation boundary</h2>
+<ul>
+<li>Related groups do not cross splits. The separate leakage exercise has not replaced the correct course workflow.</li>
+<li>Learned preprocessing and model fitting use training only. Validation supports development on fixed split identities.</li>
+<li>Protected test labels stay unread until freeze/reveal. Frozen label-independent extraction may use test inputs. Freeze models, preprocessing, selection, metrics, and inference first.</li>
+<li>Revealed test results have not guided later tuning or been called fresh independent evidence for new agent models.</li>
+</ul>
+<h2>3 · Predictions, representations, and comparison</h2>
+<ul>
+<li>Predictions use <code>sample_id, probability</code> for label 1. IDs match exactly; joins are one-to-one; probabilities are finite in [0,1].</li>
+<li>Embedding rows match sample IDs and sequence provenance. Model revision, tokenization, layer, pooling, and sequence handling are recorded.</li>
+<li>Methods use the same dataset variant and evaluation IDs. ROC-AUC, supporting average precision, class balance, and threshold-0.5 confusion matrices follow the declared policy.</li>
+</ul>
+<h2>4 · Evidence and interpretation</h2>
+<ul>
+<li>Inputs, code, configurations, seeds, versions, model artifacts, and timings are traceable. Actual outputs are distinguished from invented examples.</li>
+<li>Claims match known simulation truth. The fixed-position motif-order control is not general grammar; feature importance is not biological causality.</li>
+<li>Baseline comparisons, costs, uncertainty, failures, and missing evidence are reported. No universal model ranking is assumed.</li>
+</ul>
+<div class="verdict"><strong>Decision:</strong> supported within scope / repair required / insufficient evidence<br>Most consequential finding and evidence:<div class="line"></div>Repair or next evidence needed:<div class="line"></div></div>
+<footer>No grades or submission. Use for discussion and future scientific audits.<br>Print: A4 portrait · 100% scale · browser headers/footers off.</footer>
+</main></body></html>

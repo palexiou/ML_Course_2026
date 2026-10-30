@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-26",
+  "provider": "codex",
+  "model": "gpt-6.1-sol",
+  "input_hashes": {
+    "train.csv": "fa50f7eb6e98e20b2d31155b16e6b577bc8129537a638b06c84a247b0a0500ad",
+    "validation.csv": "6430c8bcfa121dbd4b117eb462771d53f2eb560c2440716c19e57c23e0fb1348",
+    "split_manifest.csv": "24288cacdc09ce3edd271497b9059cbb5ec034106aa3ebe7ff36d9fd98db2710",
+    "simulation_truth.csv": "f380e00b7703302919a1c52f6f65db460b07227aea579262be940399ee9b8bdf",
+    "dataset_description.txt": "81fb3c4136821b705801b2c2f5228146ae84b0ce9f374b3243c5064764a35352"
+  },
+  "arms": {
+    "vague": {
+      "metrics": {
+        "evaluation_split": "validation",
+        "primary_metric": "roc_auc",
+        "decision_threshold": 0.5,
+        "sample_count": 240,
+        "roc_auc": 0.9041666666666667,
+        "average_precision": 0.8589,
+        "accuracy": 0.9041666666666667,
+        "balanced_accuracy": 0.9041666666666667,
+        "precision": 0.888,
+        "recall": 0.925,
+        "confusion_matrix": [
+          [
+            106,
+            14
+          ],
+          [
+            9,
+            111
+          ]
+        ]
+      },
+      "cross_split_group_count": 0,
+      "cross_split_duplicate_sequence_count": 0,
+      "claim_disagreements": [],
+      "requires_manual_review": [
+        "Is the independent group definition scientifically justified?",
+        "Were all fitted preprocessing and model choices restricted to training and validation?",
+        "Was the test workflow frozen before the planned reveal?",
+        "Does model and embedding provenance match the claimed inputs?",
+        "Do biological conclusions exceed the simulated task?"
+      ],
+      "scope": "Recomputed evidence and identity checks only; not proof of correct training or biological validity"
+    },
+    "specified": {
+      "metrics": {
+        "evaluation_split": "validation",
+        "primary_metric": "roc_auc",
+        "decision_threshold": 0.5,
+        "sample_count": 240,
+        "roc_auc": 0.8019444444444445,
+        "average_precision": 0.8024506156726241,
+        "accuracy": 0.7416666666666667,
+        "balanced_accuracy": 0.7416666666666667,
+        "precision": 0.7377049180327869,
+        "recall": 0.75,
+        "confusion_matrix": [
+          [
+            88,
+            32
+          ],
+          [
+            30,
+            90
+          ]
+        ]
+      },
+      "cross_split_group_count": 0,
+      "cross_split_duplicate_sequence_count": 0,
+      "claim_disagreements": [],
+      "requires_manual_review": [
+        "Is the independent group definition scientifically justified?",
+        "Were all fitted preprocessing and model choices restricted to training and validation?",
+        "Was the test workflow frozen before the planned reveal?",
+        "Does model and embedding provenance match the claimed inputs?",
+        "Do biological conclusions exceed the simulated task?"
+      ],
+      "scope": "Recomputed evidence and identity checks only; not proof of correct training or biological validity"
+    }
+  },
+  "specified_manual_prediction_max_absolute_difference": 1.1102230246251565e-16,
+  "prediction_column_adapter": "Vague probability_label_1 renamed to probability in memory only; raw files unchanged.",
+  "scope": "Independent saved-prediction recomputation and input identity checks; not proof of training correctness or a causal prompt-quality experiment."
+}

@@ -1,0 +1,10 @@
+{
+  "course_core.py": "5c209e4e4e04f2fd47ec4de10b81bccb8990a64c3bc9e2054a487027151f21b1",
+  "01_simple_signal.py": "72a00982f7268636c5f6359d7d2aa82c54c0f05518e97e4ef3011c1d651a87dd",
+  "02_split_leakage.py": "0f4e91bd690c9dcbe8732966f0b490eab1c4cf05ad40eab4cc974790e930f8a4",
+  "course_inference.py": "17d2af3a8e0f59e854677bd04bc4545871174797c93fe4dc477c9265a198bbf6",
+  "03_representations.py": "fed563b2a5e4e71528a13272a19adcacbef3bd54ef26155c5bec812f623dc7fc",
+  "04_foundation_embeddings.py": "e96d0ce755677c4d7d0935253cbfc6adac57686b0a9b1ae28f4d12fc9ecfadcd",
+  "05_frozen_comparison.py": "ab5affdd44793740e18dcb340bcf2d48ef478a4c1c5e3802ad884446a26cdff3",
+  "06_scientific_audit.py": "32a975b270675b5b8324a11a5900a49673b88b8a3c04f952755153ba209ed150"
+}

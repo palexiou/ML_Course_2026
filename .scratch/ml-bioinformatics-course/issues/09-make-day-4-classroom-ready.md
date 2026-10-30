@@ -4,15 +4,22 @@
 
 **Blocked by:** 08: Deliver the agent specification-and-audit experiment.
 
-**Status:** ready-for-agent
+**Status:** ready-for-human
 
-- [ ] Use minutes 0-10 to recap scientific specification and the evaluation boundary, and 10-50 to introduce LLM context, tools, agent loops, project instructions, and skills before inspecting the vague-request demonstration.
-- [ ] Keep breaks at minutes 50-60 and 100-110; use 60-100 for the explicit specification, project instructions, relevant skill, and clean-run comparison.
-- [ ] Use minutes 110-150 for the verified scientific-audit activity with known simulation truth, manual-workflow comparisons, and ungraded discussion.
-- [ ] Make optional agent participation and observation equally usable for the intended learning outcomes; require no student-run Agentomics workflow or additional paid service.
+- [x] Use minutes 0-10 to recap scientific specification and the evaluation boundary, and 10-50 to introduce LLM context, tools, agent loops, project instructions, and skills before inspecting the vague-request demonstration.
+- [x] Keep breaks at minutes 50-60 and 100-110; use 60-100 for the explicit specification, project instructions, relevant skill, and clean-run comparison.
+- [x] Use minutes 110-150 for the verified scientific-audit activity with known simulation truth, manual-workflow comparisons, and ungraded discussion.
+- [x] Make optional agent participation and observation equally usable for the intended learning outcomes; require no student-run Agentomics workflow or additional paid service.
 - [ ] Prepare and rehearse an instructor-led Agentomics demonstration for minutes 150-170, connecting automation to split integrity, experimentation, reproducibility, and scientific audit rather than teaching another required platform.
-- [ ] Reserve minutes 170-180 for final questions and course synthesis, preserving the approved 20-minute demonstration and 10-minute discussion allocation.
+- [x] Reserve minutes 170-180 for final questions and course synthesis, preserving the approved 20-minute demonstration and 10-minute discussion allocation.
 - [ ] Obtain the actual instructor demonstration access and materials needed for Agentomics; report missing capability promptly rather than inventing product behavior or treating an unverified substitute as a completed rehearsal.
 - [ ] Deliver English-language HTML slides, instructor transitions, discussion prompts, and the audit handout aligned with actual demonstration outputs. Follow the installed frontend-slides workflow and visually inspect rendering and navigation.
 - [ ] Integrate the clearly identified saved-output and recorded-agent contingencies; identify any additional demonstration limitations and rehearse the available route honestly.
 - [ ] Record measured timing and remaining limitations, prioritizing specification and scientific discussion over exhaustive agent operation detail.
+
+
+## Implementation handoff
+
+The instructor explicitly requested all remaining development now and will paste/arrange standalone code and check Colab manually. This authorizes downstream implementation without pretending earlier manual gates passed. Use `paste_ready/README.md`, `instructor/guide.md`, `instructor/verification.md`, and the linked per-experiment records. Distinct student snippets and completed answers replace agent-produced notebook presentation for this handoff; original notebook-presentation checkboxes remain unchecked rather than falsely claiming `.ipynb` delivery.
+
+The executable paths, scientific safeguards, and available teaching materials are locally developed. Actual Colab runs, a timed classroom rehearsal, the planned course test reveal, genuine agent screen recording, and actual Agentomics access/demonstration remain separate instructor work where applicable. Ready-for-human is not resolved or classroom-ready. The course test results remain uncalculated. No commits or pushes were made.

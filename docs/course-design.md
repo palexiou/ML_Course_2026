@@ -64,6 +64,10 @@ The course format is agreed. No format questions remain open. Technical choices 
 - Perform the Colab access check and setup during class. Do not require a pre-course access check.
 - Reserve the opening 10 minutes of Day 1 for access and notebook startup. Move the brief diagnostic discussion into the first teaching block and shorten the introductory ML overview accordingly.
 
+## Implementation handoff update
+
+The instructor requested standalone Python code suitable for manually pasting into Colab and arranging there. Agent-operated Colab sign-in and presentation polishing are not prerequisites for this code handoff. Local execution is verified separately from the instructor's manual Colab check; no local result establishes Colab compatibility.
+
 ## Documentation status
 
-Only confirmed choices are recorded as confirmed. Recommendations in interview questions are not accepted decisions. The controlled simulated sequence-classification task is recorded in ADR 0001. Teaching materials have not been implemented.
+Only confirmed choices are recorded as confirmed. Recommendations in interview questions are not accepted decisions. The controlled simulated sequence-classification task is recorded in ADR 0001. The standalone computational workflows, student snippets, completed answers, instructor guide, audit materials, and HTML slide implementation are developed for manual instructor review. See `instructor/verification.md` for actual local execution and pending checks. No actual Colab or full classroom readiness is inferred from implementation.

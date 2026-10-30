@@ -177,6 +177,8 @@ Before expanding teaching materials, verify the simulated examples, model behavi
 
 ## Further Notes
 
+- Implementation handoff update: the instructor subsequently requested standalone Python code to paste into Colab and arrange manually. Agent-operated Colab execution is not a prerequisite for the code handoff; actual Colab verification is an instructor-performed check, recorded separately from local verification. No unrun Colab check may be reported as passed, and no full notebook presentation work is required for the current standalone-code handoff.
+
 - This spec synthesizes the completed course-format interview and the instructor's subsequent approval of the validation seam. No further format interview is required to begin the defined technical verification.
 - Preserve the canonical meanings of course dataset, dataset variant, scaffolded practical, and scientific audit. Preserve the accepted decisions on controlled simulated sequence classification and validation-based development with a protected test comparison.
 - The original conversation and supplied HTML are design inputs. Later explicit interview decisions take precedence over assumptions or additional deliverables introduced in that outline.
