@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from course_core import classification_metrics, file_hash, read_dataset
+from course_core import classification_metrics, file_hash, read_dataset, validate_generation, generation_contract, settings_fingerprint, simulation_settings
 from course_inference import SequenceCNN, one_hot, predict_cnn, load_embedding_cache, sequence_hashes
 
 REVEAL_CONFIRMATION = "REVEAL THE FROZEN TEST RESULTS"
@@ -34,7 +34,7 @@ def artifact_paths(root: Path) -> list[Path]:
 
 
 def inference_identity() -> dict[str, Any]:
-    functions: dict[str, Callable[..., Any]] = {"cnn_init": SequenceCNN.__init__, "cnn_forward": SequenceCNN.forward, "one_hot": one_hot, "predict_cnn": predict_cnn, "sequence_hashes": sequence_hashes, "load_embedding_cache": load_embedding_cache, "read_dataset": read_dataset, "classification_metrics": classification_metrics, "reveal_test": reveal_test}
+    functions: dict[str, Callable[..., Any]] = {"cnn_init": SequenceCNN.__init__, "cnn_forward": SequenceCNN.forward, "one_hot": one_hot, "predict_cnn": predict_cnn, "sequence_hashes": sequence_hashes, "load_embedding_cache": load_embedding_cache, "validate_generation": validate_generation, "generation_contract": generation_contract, "settings_fingerprint": settings_fingerprint, "simulation_settings": simulation_settings, "read_dataset": read_dataset, "classification_metrics": classification_metrics, "reveal_test": reveal_test}
     fingerprints = {}
     for name, function in functions.items():
         try:
@@ -62,13 +62,15 @@ def freeze_workflows(output_dir: str | Path = "course_output") -> dict[str, Any]
         samples = read_dataset(root / "datasets" / variant)
         load_embedding_cache(root / "embeddings" / f"{variant}.npz", samples)
         for record in (representation["runs"][variant], embedding["runs"][variant]):
+            if record.get("dataset_generation_sha256") != samples.attrs["dataset_generation_sha256"]:
+                raise ValueError("Model generation identity mismatch; regenerate development artifacts")
             if record["test_evaluated"]:
                 raise ValueError("Development metadata reports previous test evaluation")
             for split, key in (("train", "training_ids"), ("validation", "validation_ids")):
                 if sorted(record[key]) != sorted(samples.loc[samples["split"] == split, "sample_id"]):
                     raise ValueError("Model development identities differ from the dataset")
     fingerprints = {path.relative_to(root).as_posix(): file_hash(path) for path in artifact_paths(root)}
-    manifest = {"created_utc": datetime.now(timezone.utc).isoformat(), "primary_metric": "roc_auc", "decision_threshold": 0.5, "methods": ["logistic_regression", "random_forest", "cnn", "foundation"], "artifacts": fingerprints, "inference_identity": inference_identity(), "policy": "Freeze all four workflows before test reveal. No post-reveal tuning is independent test evidence. Hashes enforce an accident guard, not adversarial access security."}
+    manifest = {"generation_contract": generation_contract(), "created_utc": datetime.now(timezone.utc).isoformat(), "primary_metric": "roc_auc", "decision_threshold": 0.5, "methods": ["logistic_regression", "random_forest", "cnn", "foundation"], "artifacts": fingerprints, "inference_identity": inference_identity(), "policy": "Freeze all four workflows before test reveal. No post-reveal tuning is independent test evidence. Hashes enforce an accident guard, not adversarial access security."}
     write_exclusive(root / "frozen_manifest.json", manifest)
     print("Frozen. Test results have NOT been calculated. Discuss expected outcomes before revealing.")
     return manifest
@@ -81,6 +83,8 @@ def reveal_test(output_dir: str | Path = "course_output", confirmation: str = ""
     if (root / "test_results.json").exists():
         raise FileExistsError("Results have already been revealed. Read the saved results; do not retune and repeat.")
     manifest = json.loads((root / "frozen_manifest.json").read_text(encoding="utf-8"))
+    if settings_fingerprint(manifest.get("generation_contract", {})) != settings_fingerprint(generation_contract()):
+        raise ValueError("Incompatible frozen generator contract; keep historical evidence and regenerate development separately")
     if manifest["inference_identity"] != inference_identity():
         raise ValueError("Frozen inference implementation or package versions changed")
     expected_paths = {path.relative_to(root).as_posix() for path in artifact_paths(root)}

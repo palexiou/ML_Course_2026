@@ -43,6 +43,9 @@ def sequence_hashes(samples: pd.DataFrame) -> np.ndarray:
 
 def load_embedding_cache(path: str | Path, samples: pd.DataFrame) -> np.ndarray:
     with np.load(path, allow_pickle=False) as cache:
+        identity = samples.attrs.get("dataset_generation_sha256")
+        if identity is not None and ("dataset_generation_sha256" not in cache or str(cache["dataset_generation_sha256"]) != identity):
+            raise ValueError("Embedding cache generation identity mismatch; regenerate the cache")
         ids = cache["sample_ids"].astype(str)
         if len(set(ids)) != len(ids) or set(ids) != set(samples["sample_id"]):
             raise ValueError("Embedding cache sample identities do not match the dataset")

@@ -1,6 +1,5 @@
 """A standalone simulated DNA classification experiment for a script or Colab cell."""
 
-from dataclasses import asdict, dataclass
 from importlib.metadata import version
 from pathlib import Path
 from time import perf_counter
@@ -37,7 +36,7 @@ PRIMARY_METRIC = "roc_auc"
 DECISION_THRESHOLD = 0.5
 
 
-from course_core import SimulationConfig, generate_course_dataset, assign_splits, validation_metrics, write_json
+from course_core import SimulationConfig, generate_course_dataset, assign_splits, validation_metrics, write_json, save_dataset, simulation_settings, settings_fingerprint, expected_motif_kmers
 
 
 def run_experiment(
@@ -48,6 +47,8 @@ def run_experiment(
     started = perf_counter()
     config = config if config is not None else SimulationConfig()
     destination = Path(output_dir)
+    if any((destination / marker).exists() for marker in ("frozen_manifest.json", "test_results.json")):
+        raise RuntimeError("This experiment is frozen or revealed. Use a new development directory.")
     destination.mkdir(parents=True, exist_ok=True)
     samples, truth = generate_course_dataset(config)
     samples = assign_splits(samples, config.seed)
@@ -91,16 +92,7 @@ def run_experiment(
     }
     evaluation_seconds = perf_counter() - evaluation_started
 
-    for split, filename in (
-        ("train", "train.csv"),
-        ("validation", "validation.csv"),
-        ("test", "protected_test.csv"),
-    ):
-        samples.loc[samples["split"] == split].to_csv(destination / filename, index=False)
-    samples[["sample_id", "group_id", "split"]].to_csv(
-        destination / "split_manifest.csv", index=False
-    )
-    truth.to_csv(destination / "simulation_truth.csv", index=False)
+    save_dataset(destination, samples, truth, simulation_settings(config))
     validation_predictions = validation[["sample_id", "label"]].copy()
     validation_predictions["probability"] = probabilities
     validation_predictions["prediction"] = predictions
@@ -110,9 +102,10 @@ def run_experiment(
     )
     vectorizer = pipeline.named_steps["kmers"]
     classifier = pipeline.named_steps["classifier"]
+    annotations = expected_motif_kmers(config, vectorizer.get_feature_names_out())
     pd.DataFrame(
         {"kmer": vectorizer.get_feature_names_out(), "coefficient": classifier.coef_[0]}
-    ).sort_values("coefficient", ascending=False).to_csv(
+    ).merge(annotations, on="kmer", how="left").sort_values("coefficient", ascending=False).to_csv(
         destination / "kmer_coefficients.csv", index=False
     )
 
@@ -126,9 +119,8 @@ def run_experiment(
     forest_predictions = validation[["sample_id", "group_id", "label"]].copy()
     forest_predictions["probability"] = forest_probabilities
     forest_predictions.to_csv(destination / "random_forest_validation_predictions.csv", index=False)
-    motif_kmers = {config.motif[start:start + config.kmer_length] for start in range(len(config.motif) - config.kmer_length + 1)}
     importance = pd.DataFrame({"kmer": vectorizer.get_feature_names_out(), "importance": forest.feature_importances_})
-    importance["within_planted_motif"] = importance["kmer"].isin(motif_kmers)
+    importance = importance.merge(annotations, on="kmer", how="left")
     importance.sort_values("importance", ascending=False).to_csv(destination / "random_forest_importance.csv", index=False)
     comparison = pd.DataFrame([{"method": "logistic_regression", **metrics}, {"method": "random_forest", **forest_metrics}])
     comparison.to_csv(destination / "classical_validation.csv", index=False)
@@ -151,10 +143,12 @@ def run_experiment(
 
     metadata = {
         "dataset_variant": "simple_signal",
-        "simulation": asdict(config),
+        "simulation": simulation_settings(config),
+        "settings_sha256": settings_fingerprint(simulation_settings(config)),
         "simulation_limitations": "Independent uniform-background sequences, not real promoters. Labels define a planted-motif mixture; motif presence is not a deterministic label rule.",
         "group_policy": "Each independently generated sequence is a singleton group; this does not infer biological homology.",
-        "truth_policy": "motif_planted records deliberate insertion, not incidental motif occurrences. Truth fields are never model inputs.",
+        "truth_policy": "motif_planted records deliberate insertion, not a scan or consensus match. Unplanted start/site are null. Truth fields are never model inputs.",
+        "kmer_annotation": "motif_window_probability is the mean product of PPM probabilities across the 15-k+1 wholly internal windows. Enrichment divides by uniform-background probability 4^-k. Boundary windows and label mixtures are excluded; undefined for k>15. All words have positive probability, so there is no binary motif membership.",
         "split_counts": {name: int(count) for name, count in samples["split"].value_counts().items()},
         "split_policy": "Stratified 60/20/20 with recorded sample identities; reuse the manifest across representations.",
         "feature_fit_split": "train",

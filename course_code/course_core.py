@@ -1,6 +1,6 @@
 """Shared simulation, evaluation, and artifact contracts for the course."""
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 import hashlib
@@ -11,14 +11,37 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, average_precision_score, balanced_accuracy_score, confusion_matrix, precision_score, recall_score, roc_auc_score
 from sklearn.model_selection import train_test_split
 
+BASE_ORDER = "ACGT"
+PRIMARY_GENERATOR_VERSION = "independent-ppm15-forward-v2"
+DATASET_SCHEMA_VERSION = 2
+# Rows are positions, columns A/C/G/T. Fixed independently of the dataset seed.
+DEFAULT_MOTIF_PPM = (
+    (0.05, 0.05, 0.10, 0.80),
+    (0.70, 0.10, 0.10, 0.10),
+    (0.05, 0.05, 0.15, 0.75),
+    (0.65, 0.15, 0.10, 0.10),
+    (0.50, 0.40, 0.05, 0.05),
+    (0.60, 0.10, 0.20, 0.10),
+    (0.10, 0.10, 0.10, 0.70),
+    (0.10, 0.10, 0.70, 0.10),
+    (0.10, 0.65, 0.15, 0.10),
+    (0.15, 0.10, 0.65, 0.10),
+    (0.55, 0.15, 0.20, 0.10),
+    (0.10, 0.60, 0.10, 0.20),
+    (0.10, 0.10, 0.75, 0.05),
+    (0.10, 0.10, 0.15, 0.65),
+    (0.15, 0.55, 0.20, 0.10),
+)
+
 @dataclass(frozen=True)
 class SimulationConfig:
     seed: int = 2026
     sample_count: int = 1200
     sequence_length: int = 160
-    motif: str = "TATAAATG"
-    positive_plant_probability: float = 0.9
-    negative_plant_probability: float = 0.1
+    # Array inputs are copied into immutable tuples during validation.
+    motif_ppm: tuple[tuple[float, ...], ...] | np.ndarray = DEFAULT_MOTIF_PPM
+    positive_plant_probability: float = 0.95
+    negative_plant_probability: float = 0.05
     kmer_length: int = 4
 
     def __post_init__(self) -> None:
@@ -26,9 +49,17 @@ class SimulationConfig:
             raise ValueError("seed must be between 0 and 2**32 - 1")
         if self.sample_count < 20 or self.sample_count % 2:
             raise ValueError("sample_count must be an even integer of at least 20")
-        if not self.motif or not set(self.motif) <= set("ACGT"):
-            raise ValueError("motif must be a nonempty uppercase DNA sequence")
-        if self.sequence_length < len(self.motif):
+        matrix = np.array(self.motif_ppm, dtype=float, copy=True)
+        if matrix.shape != (15, 4):
+            raise ValueError("motif_ppm must have shape (15 positions, 4 ACGT bases)")
+        if not np.isfinite(matrix).all() or np.any(matrix <= 0) or np.any(matrix >= 1):
+            raise ValueError("motif_ppm entries must be finite, strictly positive and less than one")
+        if not np.allclose(matrix.sum(axis=1), 1.0, rtol=0, atol=1e-12):
+            raise ValueError("motif_ppm rows must sum to one")
+        if np.any(matrix.max(axis=1) < 0.5):
+            raise ValueError("Each motif_ppm position needs a leading probability of at least 0.5")
+        object.__setattr__(self, "motif_ppm", tuple(tuple(float(p) for p in row) for row in matrix))
+        if self.sequence_length < len(self.motif_ppm):
             raise ValueError("sequence_length must be at least the motif length")
         if not 1 <= self.kmer_length <= self.sequence_length:
             raise ValueError("kmer_length must be between 1 and sequence_length")
@@ -38,6 +69,49 @@ class SimulationConfig:
         ):
             if not 0 <= probability <= 1:
                 raise ValueError("motif planting probabilities must be between 0 and 1")
+
+
+def simulation_settings(config: SimulationConfig) -> dict[str, Any]:
+    return {"dataset_variant": "simple_signal", "algorithm_version": PRIMARY_GENERATOR_VERSION,
+            "base_order": BASE_ORDER, "background_probabilities": [0.25] * 4,
+            "orientation": "forward_only", **asdict(config)}
+
+
+def settings_fingerprint(settings: dict[str, Any]) -> str:
+    return hashlib.sha256(json.dumps(settings, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
+
+
+def generation_contract() -> dict[str, Any]:
+    return {"schema_version": DATASET_SCHEMA_VERSION,
+            "primary_defaults": simulation_settings(SimulationConfig())}
+
+
+def expected_motif_kmers(config: SimulationConfig, words: Any) -> pd.DataFrame:
+    """Average internal-window probability; enrichment denominator is uniform 4^-k.
+
+    Excludes windows crossing site boundaries, label mixtures and full-sequence counts.
+    For k > 15 there are no wholly internal windows, so the annotation is undefined.
+    """
+    k = config.kmer_length
+    if k > 15:
+        return pd.DataFrame(columns=["kmer", "motif_window_probability", "motif_vs_background_enrichment"])
+    matrix = np.asarray(config.motif_ppm)
+    records = []
+    for word in words:
+        if len(word) != k or set(word) - set(BASE_ORDER):
+            raise ValueError("Expected ACGT words of the configured k-mer length")
+        bases = [BASE_ORDER.index(base) for base in word]
+        probability = sum(float(np.prod(matrix[start + np.arange(k), bases]))
+                          for start in range(16 - k)) / (16 - k)
+        records.append({"kmer": word,
+                        "motif_window_probability": probability,
+                        "motif_vs_background_enrichment": probability / (0.25 ** k)})
+    return pd.DataFrame(records)
+
+
+def sample_motif_site(random: np.random.Generator, config: SimulationConfig) -> str:
+    # Independent draws for every position of every inserted site.
+    return "".join(random.choice(list(BASE_ORDER), p=row) for row in config.motif_ppm)
 
 
 def generate_course_dataset(
@@ -54,10 +128,13 @@ def generate_course_dataset(
     )
     planted = random.random(config.sample_count) < planting_probabilities
     starts = np.full(config.sample_count, -1, dtype=int)
+    sites: list[str | None] = [None] * config.sample_count
     for index in np.flatnonzero(planted):
-        start = int(random.integers(0, config.sequence_length - len(config.motif) + 1))
-        sequences[index, start : start + len(config.motif)] = list(config.motif)
+        start = int(random.integers(0, config.sequence_length - len(config.motif_ppm) + 1))
+        site = sample_motif_site(random, config)
+        sequences[index, start : start + len(config.motif_ppm)] = list(site)
         starts[index] = start
+        sites[index] = site
     sample_ids = [f"simple-{config.seed}-{index:05d}" for index in range(config.sample_count)]
     samples = pd.DataFrame(
         {
@@ -70,7 +147,9 @@ def generate_course_dataset(
     if samples["sequence"].duplicated().any():
         raise ValueError("The independent-sample variant contains duplicate sequences")
     truth = pd.DataFrame(
-        {"sample_id": sample_ids, "motif_planted": planted, "motif_start": starts}
+        {"sample_id": sample_ids, "motif_planted": planted,
+         "motif_start": pd.array([int(start) if flag else None for start, flag in zip(starts, planted)], dtype="Int64"),
+         "sampled_site": sites}
     )
     return samples, truth
 
@@ -137,17 +216,50 @@ def sample_hash(samples: pd.DataFrame) -> str:
 
 
 def save_dataset(root: str | Path, samples: pd.DataFrame, truth: pd.DataFrame, settings: dict[str, Any]) -> None:
+    if "motif" in settings or ("motif_ppm" in settings and settings.get("algorithm_version") != PRIMARY_GENERATOR_VERSION):
+        raise ValueError("Legacy primary settings: regenerate using simulation_settings(config)")
     root = Path(root)
     root.mkdir(parents=True, exist_ok=True)
     for split, filename in (("train", "train.csv"), ("validation", "validation.csv"), ("test", "protected_test.csv")):
         samples.loc[samples["split"] == split].to_csv(root / filename, index=False)
     samples[["sample_id", "group_id", "split"]].to_csv(root / "split_manifest.csv", index=False)
     truth.to_csv(root / "simulation_truth.csv", index=False)
-    write_json(root / "generation.json", {"settings": settings, "dataset_sha256": sample_hash(samples)})
+    write_json(root / "generation.json", {
+        "schema_version": DATASET_SCHEMA_VERSION, "settings": settings,
+        "settings_sha256": settings_fingerprint(settings), "dataset_sha256": sample_hash(samples),
+        "files": {name: file_hash(root / name) for name in
+                  ("train.csv", "validation.csv", "protected_test.csv", "split_manifest.csv", "simulation_truth.csv")},
+    })
+
+
+def validate_generation(root: str | Path) -> dict[str, Any]:
+    """Reject legacy generation and tampered data before development/freeze reads."""
+    root = Path(root)
+    metadata = json.loads((root / "generation.json").read_text(encoding="utf-8"))
+    if metadata.get("schema_version") != DATASET_SCHEMA_VERSION:
+        raise ValueError("Incompatible dataset metadata; regenerate development artifacts in a new directory")
+    settings = metadata["settings"]
+    if "motif" in settings:
+        raise ValueError("Legacy fixed-motif dataset; regenerate with the PPM generator")
+    if settings.get("dataset_variant") == "simple_signal" or "motif_ppm" in settings:
+        fields = SimulationConfig.__dataclass_fields__
+        config = SimulationConfig(**{key: settings[key] for key in fields})
+        if settings_fingerprint(settings) != settings_fingerprint(simulation_settings(config)):
+            raise ValueError("Incompatible primary generator algorithm or settings")
+    if metadata.get("settings_sha256") != settings_fingerprint(settings):
+        raise ValueError("Generation settings fingerprint mismatch")
+    names = {"train.csv", "validation.csv", "protected_test.csv", "split_manifest.csv", "simulation_truth.csv"}
+    if set(metadata.get("files", {})) != names:
+        raise ValueError("Incomplete dataset file identity metadata")
+    for name in names:
+        if file_hash(root / name) != metadata["files"][name]:
+            raise ValueError(f"Dataset file identity mismatch: {name}")
+    return metadata
 
 
 def read_dataset(root: str | Path, include_test_labels: bool = False) -> pd.DataFrame:
     root = Path(root)
+    validate_generation(root)
     partitions = []
     for split, filename in (("train", "train.csv"), ("validation", "validation.csv"), ("test", "protected_test.csv")):
         if split == "test" and not include_test_labels:
@@ -175,6 +287,7 @@ def read_dataset(root: str | Path, include_test_labels: bool = False) -> pd.Data
     actual = manifest.sort_values("sample_id").reset_index(drop=True)
     if not expected.equals(actual):
         raise ValueError("Split manifest does not match sample identities")
+    samples.attrs["dataset_generation_sha256"] = file_hash(root / "generation.json")
     return samples
 
 

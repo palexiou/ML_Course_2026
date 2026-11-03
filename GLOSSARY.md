@@ -19,3 +19,9 @@ _Avoid_: Coding-from-scratch exercise when referring to this activity
 **Scientific audit**:
 An examination of whether an analysis answers the intended question with valid evaluation and supported conclusions, rather than merely producing working code.
 _Avoid_: Code execution check when referring to scientific validity
+
+**Primary motif PPM (position probability matrix)**:
+The position-specific base probabilities defining the variable regulatory pattern in the primary course dataset; each planted site is an independent sequence sampled from that distribution. “PWM” is informal course shorthand here; a technical position weight matrix contains log-odds scores relative to a background distribution.
+
+**Planted site**:
+A sequence deliberately inserted by the simulator, with a known insertion position. Planting truth records the generating event, not a consensus match or a motif-scan threshold.

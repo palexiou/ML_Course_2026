@@ -1,6 +1,5 @@
 """Compare bag-of-k-mers and a small position-aware CNN without scoring test data."""
 
-from dataclasses import asdict
 from pathlib import Path
 from time import perf_counter
 from typing import Any
@@ -17,7 +16,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from torch import nn
 
-from course_core import SimulationConfig, assign_splits, build_interaction_dataset, generate_course_dataset, read_dataset, save_dataset, validation_metrics, write_json, sample_hash
+from course_core import SimulationConfig, assign_splits, build_interaction_dataset, generate_course_dataset, read_dataset, save_dataset, validation_metrics, write_json, sample_hash, simulation_settings, file_hash
 
 
 from course_inference import SequenceCNN, one_hot, predict_cnn
@@ -61,7 +60,7 @@ def run_representations(output_dir: str | Path = "course_output", seed: int = 20
         raise RuntimeError("Test results have been revealed. Do not tune this course experiment afterward; use a new development directory.")
     config = SimulationConfig(seed=seed)
     samples, truth = generate_course_dataset(config)
-    save_dataset(root / "datasets" / "simple", assign_splits(samples, seed), truth, asdict(config))
+    save_dataset(root / "datasets" / "simple", assign_splits(samples, seed), truth, simulation_settings(config))
     interaction, interaction_truth = build_interaction_dataset(seed)
     save_dataset(root / "datasets" / "interaction", interaction, interaction_truth, {"seed": seed, "pair_count": 240, "positions": [32, 80], "matching_flanks": 6, "lesson": "fixed-position motif order, not universal CNN superiority"})
     results, all_predictions, run_records = [], [], {}
@@ -106,7 +105,7 @@ def run_representations(output_dir: str | Path = "course_output", seed: int = 20
             for name, probabilities in probabilities_by_method.items():
                 controlled[f"{name}_probability"] = probabilities
             controlled.to_csv(destination / "controlled_order_changes.csv", index=False)
-        run_records[variant] = {"dataset_sha256": sample_hash(dataset), "training_ids": train["sample_id"].tolist(), "validation_ids": validation["sample_id"].tolist(), "seconds": perf_counter() - started, "cnn_epochs": epochs, "cnn_selection": "highest validation ROC-AUC, earliest tie", "test_evaluated": False}
+        run_records[variant] = {"dataset_sha256": sample_hash(dataset), "dataset_generation_sha256": file_hash(root / "datasets" / variant / "generation.json"), "training_ids": train["sample_id"].tolist(), "validation_ids": validation["sample_id"].tolist(), "seconds": perf_counter() - started, "cnn_epochs": epochs, "cnn_selection": "highest validation ROC-AUC, earliest tie", "test_evaluated": False}
     result = pd.DataFrame(results)
     result.to_csv(root / "representation_validation.csv", index=False)
     pd.concat(all_predictions, ignore_index=True).to_csv(root / "representation_validation_predictions.csv", index=False)

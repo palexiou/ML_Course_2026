@@ -1,4 +1,4 @@
-"""Standalone miniature development-only classification exercise."""
+"""Standalone miniature development-only fixture, not the primary PPM simulator."""
 
 from io import StringIO
 

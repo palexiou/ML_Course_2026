@@ -1,3 +1,6 @@
 # Use controlled simulated DNA sequence classification
 
 The course uses simulated DNA sequence classification with planted motifs and known ground truth, rather than a real-data discovery task or chromosome scanning. This prioritizes a controlled teaching example and scientific audit over biological realism, while keeping the biological context familiar to the instructor. Results on the course dataset must not be presented as evidence of real promoter prediction or biological discovery.
+
+
+2026-11-03 refinement: the instructor replaced the primary fixed string with a fixed, explicit 15-position PPM in `course_code/course_core.py` (`DEFAULT_MOTIF_PPM`, A/C/G/T columns). Every position has strictly positive probabilities summing to one and a largest probability of at least 0.5. Independently sampled sites overwrite a uniformly chosen valid forward-strand interval, with planting probability 0.95 for positive labels and 0.05 for negative labels. No reverse-complement augmentation is implied. This refines the planted-motif construction without changing the controlled sequence-classification decision. Family memorization and fixed-position motif-order remain separate controlled variants; their different generating rules are intentional.

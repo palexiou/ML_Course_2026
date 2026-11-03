@@ -135,12 +135,12 @@ importance = pd.read_csv("simple_signal_output/random_forest_importance.csv")
 display(coefficients.head(10))
 display(importance.head(10))
 
-motif = "TATAAATG"
-motif_words = {motif[start:start + 4] for start in range(len(motif) - 3)}
-print("4-mers inside the planted motif:", sorted(motif_words))
+print("Expected motif/background enrichment for highly weighted words:")
+display(importance[["kmer", "importance", "motif_window_probability",
+                    "motif_vs_background_enrichment"]].head(10))
 ```
 
-Find words that overlap the known planted motif. Explain what that supports and what it cannot establish. Logistic-regression coefficients have a direction; forest impurity importance does not indicate whether a word raises or lowers the class-1 prediction. Their numeric scales are different.
+Compare learned weights with the PPM-derived enrichment. The pattern is variable, so every four-base word is possible: binary membership in one fixed string is inappropriate. The expected probability averages the 12 wholly internal four-base windows; enrichment divides by uniform-background probability 1/256, excluding boundary windows and whole-sequence class mixtures. Explain what agreement supports and what it cannot establish. Logistic-regression coefficients have a direction; forest impurity importance does not indicate whether a word raises or lowers the class-1 prediction. Their numeric scales are different.
 
 ## Practical D — slides 58–60: investigate related-sequence leakage
 

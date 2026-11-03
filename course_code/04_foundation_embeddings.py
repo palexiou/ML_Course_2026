@@ -15,7 +15,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from transformers import AutoModelForMaskedLM, AutoTokenizer
 
-from course_core import read_dataset, validation_metrics, write_json
+from course_core import read_dataset, validation_metrics, write_json, file_hash
 
 from course_inference import MODEL_ID, REVISION, POOLING, sequence_hashes, load_embedding_cache
 
@@ -60,6 +60,8 @@ def run_foundation(output_dir: str | Path = "course_output", live_example: bool 
         samples = read_dataset(root / "datasets" / variant)
         cache_path = root / "embeddings" / f"{variant}.npz"
         started = perf_counter()
+        if cache_path.exists():
+            load_embedding_cache(cache_path, samples)
         extracted = not cache_path.exists()
         live_seconds = None
         live = None
@@ -79,7 +81,7 @@ def run_foundation(output_dir: str | Path = "course_output", live_example: bool 
             if live is not None and not np.allclose(live, embeddings[:2], atol=1e-4, rtol=1e-4):
                 raise ValueError("Live and batched extraction disagree")
             cache_path.parent.mkdir(parents=True, exist_ok=True)
-            np.savez_compressed(cache_path, sample_ids=samples["sample_id"].to_numpy(dtype=str), sequence_sha256=sequence_hashes(samples), embeddings=embeddings, model_id=np.array(MODEL_ID), revision=np.array(REVISION), pooling=np.array(POOLING))
+            np.savez_compressed(cache_path, sample_ids=samples["sample_id"].to_numpy(dtype=str), sequence_sha256=sequence_hashes(samples), embeddings=embeddings, model_id=np.array(MODEL_ID), revision=np.array(REVISION), pooling=np.array(POOLING), dataset_generation_sha256=np.array(samples.attrs["dataset_generation_sha256"]))
         features = load_embedding_cache(cache_path, samples)
         extraction_seconds = perf_counter() - started
         train_mask = samples["split"] == "train"
@@ -97,7 +99,7 @@ def run_foundation(output_dir: str | Path = "course_output", live_example: bool 
         predictions = samples.loc[validation_mask, ["sample_id", "group_id", "label"]].copy()
         predictions["probability"] = probabilities
         predictions.to_csv(destination / "foundation_validation_predictions.csv", index=False)
-        records[variant] = {"cache": str(cache_path.relative_to(root)), "cache_created_this_run": extracted, "cache_load_or_extraction_seconds": extraction_seconds, "live_two_sequence_seconds": live_seconds, "classifier_fit_seconds": fit_seconds, "training_ids": samples.loc[train_mask, "sample_id"].tolist(), "validation_ids": samples.loc[validation_mask, "sample_id"].tolist(), "test_evaluated": False}
+        records[variant] = {"dataset_generation_sha256": file_hash(root / "datasets" / variant / "generation.json"), "cache": str(cache_path.relative_to(root)), "cache_created_this_run": extracted, "cache_load_or_extraction_seconds": extraction_seconds, "live_two_sequence_seconds": live_seconds, "classifier_fit_seconds": fit_seconds, "training_ids": samples.loc[train_mask, "sample_id"].tolist(), "validation_ids": samples.loc[validation_mask, "sample_id"].tolist(), "test_evaluated": False}
     result = pd.DataFrame(results)
     result.to_csv(root / "embedding_validation.csv", index=False)
     write_json(root / "embedding_run.json", {"model_id": MODEL_ID, "revision": REVISION, "pooling": POOLING, "license": "CC-BY-NC-SA-4.0", "device": "cpu", "torch_version": torch.__version__, "batch_size": 32, "runs": records, "limitation": "Frozen pretraining does not guarantee transfer to engineered motif order or real promoters. Pretraining overlap has not been audited."})
