@@ -8,6 +8,7 @@ import json
 import math
 from pathlib import Path
 import re
+from build_day2_section1 import required_match
 
 from build_day2_section1 import (ROOT, DECK, BLUE, ORANGE, INK, GRAY, PURPLE,
                                   text, line, arrow, circle, svg, dna, network)
@@ -174,9 +175,9 @@ def records():
     records=[]
     for num,title,body in blocks:
         def field(name):
-            value=re.search(r'\*\*'+re.escape(name)+r':\*\* (.*?)(?=\n\n|\Z)',body,re.S)[1]
+            value=required_match(r'\*\*'+re.escape(name)+r':\*\* (.*?)(?=\n\n|\Z)',body,re.S)[1]
             return E(value).replace('`','')
-        key=re.search(r'\*\*Proposed slide ID:\*\* `([^`]+)`',body)[1]
+        key=required_match(r'\*\*Proposed slide ID:\*\* `([^`]+)`',body)[1]
         provenance=PROVENANCE
         if int(num)==10:provenance+=' Epoch row labels illustrate positions within a training set, not real sample IDs. Subsequent passes show a deterministic permutation for visual explanation rather than Torch\'s actual shuffled order.'
         records.append(dict(day=2,id=key,anchor=key,sectionLearning=True,kind='day-two-opening day-two-learning',title=title,time=field('Time'),body=figure(int(num)),subtitle='',takeaway='',notes=field('What I want to say'),point=field('Point / reveal'),transition=field('Transition'),sourceNote=E(provenance)))
@@ -186,10 +187,10 @@ def records():
 
 
 def build():
-    source=DECK.read_text();m=re.search(r'<script id="day-data" type="application/json">(.*?)</script>',source,re.S)
+    source=DECK.read_text();m=required_match(r'<script id="day-data" type="application/json">(.*?)</script>',source,re.S)
     old=json.loads(m[1]);opening=[s for s in old if s.get('sectionOne')];assert len(opening)==12
     later=[s for s in old if not s.get('sectionOne') and not s.get('sectionLearning') and s['anchor'] not in ['day-2-slide-3','day-2-slide-4','day-2-slide-6']]
-    assert len(later)==10 and later[0]['anchor']=='day-2-slide-5'
+    assert later and later[0]['anchor'] in ['day-2-slide-5','day-2-s3-section']
     current=opening+records()+later
     source=source[:m.start(1)]+json.dumps(current,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')+source[m.end(1):]
     source=re.sub(r'/\* DAY 2 SECTION 2 — LEARNING \*/.*?/\* END DAY 2 SECTION 2 \*/\n','',source,flags=re.S)
@@ -197,13 +198,15 @@ def build():
     source=source.replace('${slide.sectionOne ?', '${slide.sectionOne || slide.sectionLearning ?')
     source=source.replace('href="story.md#section-1">Section 1 story','href="story.md#section-${slide.sectionLearning ? 2 : 1}">Section ${slide.sectionLearning ? 2 : 1} story')
     aliases={'#day-2-slide-1':'day-2-s1-welcome','#day-2-slide-2':'day-2-s1-weighted-sum','#day-2-slide-3':'day-2-s2-loss','#day-2-slide-4':'day-2-s2-update','#day-2-slide-6':'day-2-s2-break'}
+    if any(s.get('sectionNumber')==3 for s in current):aliases.update({'#day-2-slide-5':'day-2-s3-sequence-matrix','#day-2-slide-7':'day-2-s3-move-window'})
+    if any(s.get('sectionNumber')==4 for s in current):aliases.update({'#day-2-slide-8':'day-2-s4-architecture','#day-2-slide-10':'day-2-s4-break'})
     source=re.sub(r'const openingAliases = \{.*?\};','const openingAliases = '+json.dumps(aliases)+';',source)
     source=re.sub(r'<script id="day-two-learning-interactions">.*?</script>\n?','',source,flags=re.S)
     js=(ROOT/'tools/day2_section2_interactions.js').read_text()
     source=source.replace('<script id="presentation-controller">','<script id="day-two-learning-interactions">\n'+js+'\n</script>\n<script id="presentation-controller">',1)
     if 'bindDayTwoLearning();' not in source:source=source.replace('bindDayTwoOpening();','bindDayTwoOpening();\nbindDayTwoLearning();')
     DECK.write_text(source)
-    print(f'Built 14 learning slides + break; preserved 12 opening and 10 later records ({len(current)} total).')
+    print(f'Built 14 learning slides + break; preserved 12 opening and {len(later)} later records ({len(current)} total).')
 
 
 if __name__=='__main__':build()

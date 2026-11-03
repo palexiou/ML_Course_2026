@@ -37,6 +37,18 @@ The generated Day 1 notebook was executed locally from a clean working directory
 
 **Delivery state (2026-11-03):** the Sections 3–6 teaching path and revised primary generator are local changes awaiting the next push. The `main` Colab badge currently opens the previously published notebook; it will include these revisions after that push. Local execution verifies the generated cells; actual Colab execution and classroom timing remain unverified.
 
+## Day 2 Sections 5–6: selected cells
+
+Open [03_representations.ipynb](03_representations.ipynb) through its Colab badge, run **setup → both shared definition cells → stage 03 definitions → Day 2 Section 5**. The guided path is complete working code for instructor demonstration or optional follow-along:
+
+1. Run stage 03 once. It captures the full two-variant output so the primary experiment is introduced first. Repeating the cell reads a compatible completed run without refitting; incomplete, mismatched, frozen or revealed workspaces are rejected.
+2. Check source/generation identities, matching validation IDs/labels, recomputed ROC-AUC/AP and checkpoint inference. Read actual training-loss and validation-ROC-AUC histories, marking the earliest best validation epoch after all 24 epochs.
+3. Inspect one validation sequence and one second-convolution post-ReLU response channel. Change only the row/channel and rerun the inspection cell; do not fit again. A response map is not attribution or biological proof.
+4. At Section 6, inspect one opposite-label control pair. All 48 validation pairs have complete overlapping 4-mer Counter equality and matching bag-model probabilities checked; choose another group without refitting.
+5. **STOP at “end of Day 2,” before stage 04.** Run all would cross into Day 3 embeddings/freeze. Retain the complete course_output workspace for Day 3.
+
+Teaching cells live in [day2_teaching.py](../tools/day2_teaching.py), integrated by the existing builder and hash/exact-cell checked. The [current local record](../instructor/verification/day2-current.json) supplies the slide figures. Local setup dependencies were already satisfied for execution; actual Colab startup, downloads and classroom timing remain unverified. These revisions are local until the next push; the main-branch Colab badge includes them after publication.
+
 ## Run and retain work
 
 1. Open the GitHub-hosted notebook with its **Open in Colab** badge, run setup, then its normal definition cells and the cells selected by the instructor. For Day 1 Section 3, follow the short path above and stop before the full workflow. Setup installs missing direct packages at the locally rehearsed versions and prints existing versions; it does not silently replace installed packages. Rehearse compatibility and restart behavior in the actual classroom runtime. No account check or setup is homework.
@@ -49,7 +61,7 @@ Saved outputs, model checkpoints, embedding caches and pretrained weights are no
 
 ## Canonical source and rebuilding
 
-Edit [course_code/](../course_code/), then run `python tools/build_course.py` from the repository root. Section 3 teaching cells live in `section3_cells()` in [the builder](../tools/build_course.py); Sections 4–6 live in [day1_teaching.py](../tools/day1_teaching.py). Edit those sources and rebuild. The four notebooks are generated delivery artifacts, replacing the six duplicated paste-ready `.py` copies. Each notebook records hashes of its exact source modules in `metadata.course_sources`; Day 1 also binds its teaching source with `metadata.course_teaching_sources`. The checker verifies exact canonical definitions and exact teaching cells and lesson order, including the paired workflow boundary. Normal definition cells preserve source history for freeze; no dynamic `exec` loader or repository import is required.
+Edit [course_code/](../course_code/), then run `python tools/build_course.py` from the repository root. Section 3 teaching cells live in `section3_cells()` in [the builder](../tools/build_course.py); Sections 4–6 live in [day1_teaching.py](../tools/day1_teaching.py). Edit those sources and rebuild. The four notebooks are generated delivery artifacts, replacing the six duplicated paste-ready `.py` copies. Each notebook records hashes of its exact source modules in `metadata.course_sources`; Days 1 and 2 also bind their teaching source with `metadata.course_teaching_sources`. The checker verifies exact canonical definitions and exact teaching cells and lesson order, including the paired workflow boundary. Normal definition cells preserve source history for freeze; no dynamic `exec` loader or repository import is required.
 
 For maintainers' local verification, the six numbered Python modules remain entrypoints. Classroom execution uses the GitHub/Colab route above. `course_core.py` owns simulation, identity, metrics and dataset validation; `course_inference.py` owns shared CNN inference and embedding-cache alignment. Keep these supporting modules beside the numbered scripts. Python 3.11+ is required. Exact locally rehearsed direct versions are in [base requirements](../course_code/requirements.txt) and [ML requirements](../course_code/requirements-ml.txt). Maintainer execution example:
 

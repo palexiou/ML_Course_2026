@@ -27,6 +27,26 @@ The executable paths, scientific safeguards, and available teaching materials ar
 
 ## Comments
 
+### November 3, 2026 · Day 4 section-by-section breakdown
+
+At the instructor's request, updated the [Day 4 story](../../../Slides/Day_4/story.md) to follow the approved Day 2 and Day 3 section-by-section breakdown format. It specifies all 53 content beats (10/9/8/8/11/7) plus two 10-minute breaks across the 180-minute structure (160 teaching minutes + breaks at 50–60 and 100–110). Every slide includes slide ID, timing, slide content, speaking notes, Point / reveal guidance, and a transition. Fully grounded in course artifacts:
+- Division of scientific responsibility: "agent executes; researcher defends".
+- Enforces evaluation boundary (Day 3 test data is historical, never feedback for Day 4 agent development).
+- Deconstructs `vague-prompt.md` and its dozen silent assumptions.
+- Analyzes the authored teaching fixture (`fixture.md` / `flawed_analysis.py`) with all four flaws: group leakage, preprocessing leakage, inverted positional array join, and biological overclaims.
+- Details the five pillars of `precise-spec.md`.
+- Establishes the three-tier instruction model (`specification.md`, `AGENTS.md`, and skills).
+- Inspects the October 26 actual runs (explaining the 0.904 vague run vs 0.802 specified run as different search spaces/objectives rather than prompt superiority).
+- Guides the hands-on audit with `06_scientific_audit.py` and `audit-checklist.html`.
+- Protects the reserved 20-minute Agentomics demonstration (150–170) with clear contingency labeling.
+- Concludes with the 10-minute whole-course synthesis (170–180) across Count → Learn → Reuse → Delegate.
+
+Status remains ready-for-human pending slide build authorization and instructor review. This supersedes the preliminary 68-beat entry below.
+
+### November 3, 2026 · Day 4 story specification drafted
+
+Drafted the complete [Day 4 story specification](../../../Slides/Day_4/story.md) across six sections and 68 content beats within the 180-minute structure (160 teaching minutes + two 10-minute breaks at 50–60 and 100–110). Covers the core division of scientific responsibility ("agent executes; researcher defends"); enforces the evaluation boundary (Day 3 test data is historical, never feedback for Day 4 agent development); deconstructs the vague prompt and its dozen silent assumptions; analyzes the authored teaching fixture (`fixture.md`) with its group leakage, preprocessing leakage, inverted predictions, and biological overclaims; details the five pillars of `precise-spec.md`; establishes the three-tier instruction model (`specification.md`, `AGENTS.md`, and skills); inspects the actual October 26 clean agent runs (explaining the 0.904 vague run vs 0.802 baseline as different search spaces/objectives rather than prompt superiority); guides the hands-on audit with `06_scientific_audit.py` and `audit-checklist.html`; protects the reserved 20-minute Agentomics demonstration (150–170) with clear contingency labeling; and concludes with the 10-minute whole-course synthesis (170–180). All slide IDs, visible content, speaking notes, and workshop checkpoints are specced out. Status remains ready-for-human pending slide build and instructor review.
+
 ### November 2, 2026 · story-driven presentation revision
 
 Rewrote the four-day HTML deck around questions, predictions, experiments, and evidence. Visible teaching text is approximately 52% shorter; detailed teaching content remains in expandable Notes references. Timings and scientific boundaries are preserved. All 60 scenes passed local Chrome layout checks at three viewport sizes, navigation, notes, local links, editing/export, and 60-page printing. See [presentation QA](../../../Slides/qa.md) for evidence and limits. The original bundled slide acceptance criterion is not claimed fully complete: the named frontend-slides skill was unavailable, classroom-output alignment remains an instructor check, and the actual Agentomics materials remain pending. Overall ticket status stays ready-for-human.

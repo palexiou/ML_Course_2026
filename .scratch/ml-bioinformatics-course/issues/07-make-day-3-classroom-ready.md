@@ -27,6 +27,22 @@ The executable paths, scientific safeguards, and available teaching materials ar
 
 ## Comments
 
+### November 3, 2026 · Day 3 section-by-section breakdown
+
+At the instructor's request ("put this in the spec of Day 3 and do the same for all the sections"), rewrote the [Day 3 story](../../../Slides/Day_3/story.md) in the Day 2 format. It now has 65 content beats (11/12/9/7/12/14) plus two breaks. Each beat has content, notes, pointing/reveal guidance and a transition. Ideas from the instructor's earlier foundation-model deck are integrated. Facts were checked against `course_code/` and `instructor/verification/embeddings.md`, which corrected the earlier draft:
+- Live extraction uses the first two training rows.
+- Timings are the measured October 26 values.
+- The model card excludes plants and viruses.
+- Old fixed-motif primary scores are barred from the revised chart.
+- The freeze completes before 150, and the reveal prints only test values, never prefilled.
+- Caches are absent from Git, so a fresh Colab runtime extracts every row.
+
+One deviation from the guide is flagged: extraction takes 60–80 instead of 60–75. This is a specification only; no HTML, notebook, run or reveal was performed, and the status remains ready-for-human. This supersedes the "70 beats" description in the entry below.
+
+### November 3, 2026 · Day 3 story specification drafted
+
+Drafted the complete [Day 3 story specification](../../../Slides/Day_3/story.md) across six sections and 70 content beats within the 180-minute structure (160 teaching minutes + two 10-minute breaks at 50–60 and 100–110). Connects Day 2 convolutional feature detectors to self-supervised pretraining (MLM) and attention mechanisms; pins Nucleotide Transformer v2 50M (`InstaDeepAI/nucleotide-transformer-v2-50m-multi-species`, revision `81b29e5786726d891dbf929404ef20adca5b36f1`) and CC-BY-NC-SA-4.0 license; details small live extraction vs full cached embeddings; enforces defensive sample ID cache alignment and sequence SHA-256 matching; compares k-mer, CNN, and embedding representations on validation data across compute, metrics, and domain shift; and details the formal 140–150 verbal freeze gate and explicit 150–165 test reveal protocol (`REVEAL THE FROZEN TEST RESULTS`). All slide IDs, visible content, speaking notes, and practical checkpoints are specced out. Status remains ready-for-human pending slide build and instructor review.
+
 ### November 2, 2026 · story-driven presentation revision
 
 Rewrote the four-day HTML deck around questions, predictions, experiments, and evidence. Visible teaching text is approximately 52% shorter; detailed teaching content remains in expandable Notes references. Timings and scientific boundaries are preserved. All 60 scenes passed local Chrome layout checks at three viewport sizes, navigation, notes, local links, editing/export, and 60-page printing. See [presentation QA](../../../Slides/qa.md) for evidence and limits. The original bundled slide acceptance criterion is not claimed fully complete: the named frontend-slides skill was unavailable, classroom-output alignment remains an instructor check, and the actual Agentomics materials remain pending. Overall ticket status stays ready-for-human.

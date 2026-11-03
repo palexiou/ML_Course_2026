@@ -579,7 +579,12 @@
   "source_sha256": {
     "course_code/course_core.py": "ece9dac6edebf6296e0ba3fae6d6c665ceb8a26b35f517c11591924b7f40c7b0",
     "course_code/01_simple_signal.py": "81c61986859f7b665660bb47828bafdbda25a3386ff99c6cb00492653a787682",
-    "tools/build_course.py": "4eba91e966693f0e4b6c375fa7e88804d2cc7c018861f3e27121aa4df3dced88",
+    "tools/build_course.py": "f1beed2c4a40ffd4954fa6f60e31b065c88c0631730c4c2ddf51c8046ac6bf7f",
     "tools/day1_teaching.py": "bca9f00ad56ea2b6587ac205297ca0f706f59b2ab0eb90cd658bf5b290959e68"
+  },
+  "builder_revalidation_2026_11_03": {
+    "reason": "Day 2 teaching integration changed the shared builder. Day 1 generated cells and scientific source hashes were independently verified identical to the recorded notebook; only builder metadata changed. No Day 1 refitting or result changes.",
+    "previous_builder_sha256": "4eba91e966693f0e4b6c375fa7e88804d2cc7c018861f3e27121aa4df3dced88",
+    "current_builder_sha256": "f1beed2c4a40ffd4954fa6f60e31b065c88c0631730c4c2ddf51c8046ac6bf7f"
   }
 }

@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from textwrap import dedent
 from day1_teaching import before_workflow, after_workflow
+import day2_teaching
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "course_code"
@@ -322,15 +323,24 @@ def build() -> None:
                       "Old fixed-string datasets/caches need regeneration; see the notebook guide. "
                       "The fixed-position interaction and family-memorization controls retain separate rules.\n")
         if number == "03":
+            intro = intro.replace("Run setup, definition cells, then the workflow cell.", "Run setup, shared definitions and stage 03 definitions, then the Day 2 checkpoints below.")
+            intro = intro.replace("Student follow-along is optional pending the instructor's delivery choice.", "Students may follow along or watch the instructor demonstration.")
+            intro += "\n[Open in Colab](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/notebooks/03_representations.ipynb)\n"
             intro += ("\nThis notebook keeps stages 03–05 in **one runtime and working directory**, preserving `course_output/`. Run stage 03 on Day 2; continue with stages 04 and 05 on Day 3. "
                       "Alternatively transfer the required provenance-checked outputs explicitly; Git does not contain them.\n")
         if number == "03":
+            intro = intro.replace("Run setup, definition cells, then the workflow cell.", "Run setup, shared definitions and stage 03 definitions, then the Day 2 checkpoints below.")
+            intro = intro.replace("Student follow-along is optional pending the instructor's delivery choice.", "Students may follow along or watch the instructor demonstration.")
+            intro += "\n[Open in Colab](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/notebooks/03_representations.ipynb)\n"
             intro += ("\nThe first encoder load needs internet and about 224 MB of weights plus libraries. "
                       "The pinned checkpoint uses custom model code and has a CC-BY-NC-SA-4.0 license. "
                       "The default performs a small live extraction and reuses verified caches if supplied. "
                       "For an explicitly labeled cached-only contingency, change the stage 04 workflow call to "
                       "`run_foundation(live_example=False)` **before** freeze.\n")
         if number == "03":
+            intro = intro.replace("Run setup, definition cells, then the workflow cell.", "Run setup, shared definitions and stage 03 definitions, then the Day 2 checkpoints below.")
+            intro = intro.replace("Student follow-along is optional pending the instructor's delivery choice.", "Students may follow along or watch the instructor demonstration.")
+            intro += "\n[Open in Colab](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/notebooks/03_representations.ipynb)\n"
             intro += ("\n**Stage 05 freezes only.** It does not reveal test results. Run stage 03 on Day 2 and continue stages 04–05 on Day 3; Run all would execute all three stages. "
                       "No executable reveal cell is included: the instructor must separately authorize "
                       "`reveal_test(confirmation=\"REVEAL THE FROZEN TEST RESULTS\")` at the planned comparison. "
@@ -380,7 +390,12 @@ def build() -> None:
             if number == "01":
                 cells.extend(section3_cells())
                 cells.extend(before_workflow(cell))
-            cells.append(cell("code", actions[stage], f"run-{stage}"))
+            if number == "03" and stage == "03":
+                cells.extend(day2_teaching.before_workflow(cell, hashes))
+                cells.append(cell("code", day2_teaching.RUN_SOURCE, "run-03"))
+                cells.extend(day2_teaching.after_workflow(cell))
+            else:
+                cells.append(cell("code", actions[stage], f"run-{stage}"))
             if number == "01":
                 cells.extend(after_workflow(cell))
         notebook: dict = {
@@ -397,6 +412,11 @@ def build() -> None:
             notebook["metadata"]["course_teaching_sources"] = {
                 name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                 for name in ("tools/build_course.py", "tools/day1_teaching.py")
+            }
+        if number == "03":
+            notebook["metadata"]["course_teaching_sources"] = {
+                name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+                for name in ("tools/build_course.py", "tools/day2_teaching.py")
             }
         (DESTINATION / (script.stem + ".ipynb")).write_text(
             json.dumps(notebook, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

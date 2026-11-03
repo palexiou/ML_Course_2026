@@ -18,6 +18,12 @@ SEQ = 'TATACCGCGCGCGTATAAATG'
 E = html.escape
 
 
+def required_match(pattern: str, value: str, flags: int = 0) -> re.Match[str]:
+    result = re.search(pattern, value, flags)
+    assert result is not None, f"Required deck/story pattern missing: {pattern}"
+    return result
+
+
 def text(x, y, value, size=44, color=INK, anchor='middle', weight=400, attrs=''):
     return f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" text-anchor="{anchor}" font-weight="{weight}" {attrs}>{E(str(value))}</text>'
 
@@ -143,8 +149,8 @@ def figure(n):
         p+=text(865,620,'Fitted intermediate features',33,ORANGE)+arrow(1080,495,1220,495)+text(1450,510,'P(B)',65,BLUE)
     elif n==4:
         p=inputs(270,[170,340,510])
-        for i,(y,c,w,v) in enumerate(zip([170,340,510],COLORS,['× 0.6','× 0.8','× −0.2'],['+1.2','+0.8','−0.6'])):
-            p+=text(460,y+14,w,43,c)+arrow(565,y,790,340,c,4)+text(670,y-22,v,36,c)
+        for i,(y,c,w,contribution) in enumerate(zip([170,340,510],COLORS,['× 0.6','× 0.8','× −0.2'],['+1.2','+0.8','−0.6'])):
+            p+=text(460,y+14,w,43,c)+arrow(565,y,790,340,c,4)+text(670,y-22,contribution,36,c)
         p+=circle(850,340,60,'Σ',BLUE,54)+text(850,485,'bias −0.4',36,GRAY)
         p+=arrow(910,340,1085,340)+text(1000,295,'z = 1',42,BLUE)
         p+=plot(1130,170,420,320)+text(1375,660,'P(B) ≈ 0.731',67,ORANGE)
@@ -243,9 +249,9 @@ def records():
     ]
     result=[]
     for number,title,body in blocks:
-        n=int(number);key=re.search(r'\*\*Proposed slide ID:\*\* `([^`]+)`',body)[1]
-        time=re.search(r'\*\*Time:\*\* (.*)',body)[1]
-        say=re.search(r'\*\*What I want to say:\*\* (.*?)(?=\n\n|\Z)',body,re.S)[1]
+        n=int(number);key=required_match(r'\*\*Proposed slide ID:\*\* `([^`]+)`',body)[1]
+        time=required_match(r'\*\*Time:\*\* (.*)',body)[1]
+        say=required_match(r'\*\*What I want to say:\*\* (.*?)(?=\n\n|\Z)',body,re.S)[1]
         source='Constructed teaching example, not a fitted model or empirical result. The 21-base Day 1 sequence has 18 overlapping four-base windows; only TATA=2, AATG=1 and CGCG=3 are displayed. Suggested Section 1 pacing totals 25 minutes; not rehearsed.'
         if n in [8,9]:source+=' Hidden weights: h₁=ReLU(0.6×2+0.8×1−0.2×3−0.4)=1; h₂=ReLU(−0.3×2+0.2×1+0.5×3−0.1)=1; h₃=ReLU(0.2×2−0.5×1+0.1×3−0.4)=0. Output weights 1.2, −0.7, 0.5, bias −0.2 give z=0.3 and sigmoid(z)=0.574443. Independent invented weights for illustration; not a fitted biological explanation.'
         if n==10:source+=' Affine example: f(x)=2x+1, g(u)=3u−4; g(f(x))=6x−1. Replacing f by ReLU(f) gives 3max(0,2x+1)−4. These scalar response sketches are not DNA measurements.'
@@ -256,7 +262,7 @@ def records():
 def build():
     counts=Counter(SEQ[i:i+4] for i in range(len(SEQ)-3))
     assert [counts[k] for k in ['TATA','AATG','CGCG']]==[2,1,3]
-    source=DECK.read_text();m=re.search(r'<script id="day-data" type="application/json">(.*?)</script>',source,re.S)
+    source=DECK.read_text();m=required_match(r'<script id="day-data" type="application/json">(.*?)</script>',source,re.S)
     old=json.loads(m[1]);later=[x for x in old if not x.get('sectionOne')]
     if not any(x.get('sectionOne') for x in old):
         assert len(later)==15
@@ -276,7 +282,7 @@ def build():
     source=source.replace('slide.anchor = `day-${slide.day}-slide-${slide.local}`;', 'slide.anchor = slide.id || slide.anchor || `day-${slide.day}-slide-${slide.local}`;')
     # Keep old scene/edit anchors stable; new opening keys cannot inherit old wording.
     source=source.replace("    readHash() {\n        const localMatch", "    readHash() {\n        const openingAliases = {'#day-2-slide-1':'day-2-s1-welcome','#day-2-slide-2':'day-2-s1-weighted-sum'};\n        const target = openingAliases[location.hash] || location.hash.slice(1);\n        const exact = slides.findIndex(slide => slide.anchor === target);\n        if (exact >= 0) { this.go(exact, false); return; }\n        const localMatch")
-    if '${slide.sectionOne ?' not in source and '${slide.sectionOne || slide.sectionLearning ?' not in source:
+    if '<strong>SAY:</strong>' not in source:
         source=source.replace('<p>${slide.notes}</p>', '''${slide.sectionOne ? `<p><strong>SAY:</strong> ${slide.notes}</p><p><strong>POINT:</strong> ${slide.point}</p><p><strong>TRANSITION:</strong> ${slide.transition}</p><p class="small"><strong>Timing:</strong> ${slide.time}</p><p class="small">${slide.sourceNote}</p><p><a href="story.md#section-1">Section 1 story</a></p>` : `<p>${slide.notes}</p>`}''')
     source=source.replace("closest('.d1-demo')", "closest('.d1-demo, .d2-live')")
     source=source.replace("closest('.deck-controls, .d1-demo')", "closest('.deck-controls, .d1-demo, .d2-live')")

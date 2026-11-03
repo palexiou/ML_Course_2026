@@ -81,3 +81,19 @@ The instructor authorized the twelve-slide Day 2 Section 1 build and requested m
 ## Day 2 learning section implemented — 2026-11-03
 
 The instructor authorized the reviewed Section 2 spec. The [learning section](../../Slides/Day_2/presentation.html#day-2-s2-section) now has fourteen illustrated slides and the first ten-minute break, alongside the preserved twelve-slide opening and ten later records (37 scenes). See [teaching direction](teaching-preferences.md#day-2-section-2-build-authorized--2026-11-03), [story](../../Slides/Day_2/story.md#section-2) and [QA](../../Slides/qa.md#day-2-section-2--2026-11-03). This supersedes Section 2’s proposal-only status; Sections 3–6 and later timing/result alignment remain pending.
+
+## Day 2 Sections 3 and 4 implemented — 2026-11-03
+
+The instructor requested both builds in sequence. The [DNA/detector section](../../Slides/Day_2/presentation.html#day-2-s3-section) and [pooling/prediction section](../../Slides/Day_2/presentation.html#day-2-s4-section) now have sixteen and fourteen illustrated slides plus the second break. The deck has 64 scenes: Sections 1–4 and both breaks, then six preserved later scenes. See [authorization](teaching-preferences.md#day-2-sections-3-and-4-build-authorized--2026-11-03), [story](../../Slides/Day_2/story.md) and [QA](../../Slides/qa.md#day-2-sections-34--2026-11-03). This supersedes the pending-build status for Sections 3–4; Sections 5–6, added notebook teaching cells and full-session rehearsal remain pending.
+
+## Day 3 and Day 4 stories specced out — 2026-11-03
+
+Following the project's story-first workflow, fully drafted [Day 3 story](../../Slides/Day_3/story.md) and [Day 4 story](../../Slides/Day_4/story.md) for instructor review. Day 3 specifies 70 content beats across pretraining (MLM), attention mechanics, NT-v2 50M embeddings, live extraction vs caching, defensive sample ID joins, multi-model validation comparison, and the 140–150 freeze gate / 150–165 test reveal protocol. Day 4 specifies 68 content beats across agent loops, vague requests, authored teaching fixture audit, precise specifications, `AGENTS.md` and skills, clean run inspection, hands-on scientific audit with `06_scientific_audit.py`, reserved 20-minute Agentomics demonstration, and 10-minute whole-course synthesis. See [teaching preferences](teaching-preferences.md#day-3-and-day-4-story-specifications-drafted--2026-11-03) and issues [07](../../.scratch/ml-bioinformatics-course/issues/07-make-day-3-classroom-ready.md) and [09](../../.scratch/ml-bioinformatics-course/issues/09-make-day-4-classroom-ready.md). Both remain discussion drafts prior to slide build authorization.
+
+## Day 3 section-by-section breakdown — 2026-11-03
+
+The [Day 3 story](../../Slides/Day_3/story.md) now breaks all six sections into 65 reviewed-format beats with pointing and transitions. See the [direction and corrections](teaching-preferences.md#day-3-section-by-section-breakdown--2026-11-03) and [issue 07](../../.scratch/ml-bioinformatics-course/issues/07-make-day-3-classroom-ready.md). The Day 3 HTML still has its earlier 15 scenes.
+
+## Day 2 Sections 5 and 6 implemented — 2026-11-03
+
+Following “OK, implement them,” the reviewed [training/comparison](../../Slides/Day_2/presentation.html#day-2-s5-section) and [representation control](../../Slides/Day_2/presentation.html#day-2-s6-section) are built: Day 2 now has 86 scenes with both breaks and no retained legacy endings. The combined notebook has guided inspections and an end-Day-2 stop. The [story](../../Slides/Day_2/story.md), [current validation evidence](../../instructor/verification/day2-current.json) and [QA](../../Slides/qa.md#day-2-sections-56--2026-11-03) record implementation and limits. This supersedes the preceding pending status for Sections 5–6; Colab, classroom pacing and publication remain separate.

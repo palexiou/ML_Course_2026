@@ -13,7 +13,7 @@
 - [x] Use minutes 110-150 for the verified interaction experiment and controlled sequence changes, comparing methods on the same dataset variants and split identities.
 - [x] Preserve minutes 150-180 for representation, cost, interpretation limits, questions, and buffer. Do not turn the session into a predetermined CNN victory.
 - [x] Keep development comparisons on validation data, with protected test results unavailable as tuning feedback.
-- [ ] Deliver English-language HTML slides aligned with notebook outputs and terminology. Follow the installed frontend-slides workflow and visually check rendered content, equations, labels, readability, and navigation.
+- [x] Deliver English-language HTML slides aligned with notebook outputs and terminology. Follow the installed frontend-slides workflow and visually check rendered content, equations, labels, readability, and navigation.
 - [x] Supply ungraded prediction/interpretation questions, completed answers, instructor transitions, and clearly identified saved outputs for slow or failed live training.
 - [ ] Rehearse the practical and document measured computation time within the teaching blocks, limitations of interpretation, and which optional details to cut before scientific discussion.
 
@@ -26,6 +26,22 @@ The executable paths, scientific safeguards, and available teaching materials ar
 
 
 ## Comments
+
+### November 3, 2026 · Sections 5 and 6 implemented
+
+The instructor authorized “OK, implement them.” Built the [28 final slides](../../../Slides/Day_2/presentation.html#day-2-s5-section), preserving all first 58 records and replacing all six legacy endings: 86 total scenes. The existing combined notebook now captures/reuses stage 03, verifies identities/alignment, reads curves/checkpoints/maps, inspects paired counts/probabilities and stops before Day 3. A current default local PPM run supplies empirical figures; no tuning or test scoring followed. [QA](../../../Slides/qa.md#day-2-sections-56--2026-11-03) records notebook execution, thirteen tests, type/source checks, offline 172 slide/viewport combinations, controls/export and 86-page printing. Guided Day 2 delivery is implemented; actual Colab execution, pacing and projector review remain open, so overall status stays ready-for-human. No commit or push.
+
+### November 3, 2026 · Sections 5 and 6 specified first
+
+At the instructor's request, expanded [Section 5](../../../Slides/Day_2/story.md#section-5) and [Section 6](../../../Slides/Day_2/story.md#section-6) to fourteen proposed slides each, retaining minutes 125–155 and 155–180. Every beat includes visible content, speaking notes, pointing/reveal guidance and a transition. Section 5 follows setup, one supplied run, actual histories, selected weights, inference/map inspection and matched validation metrics; Section 6 follows a swapped-block pair through complete count equality, equal predictions, the ROC-AUC 0.5 limit, positional readout and a five-minute paired notebook inspection, then closes toward Day 3. The full-day story is now 84 content beats plus two breaks. Timing, architecture dimensions, links and an independent synthetic check of the boundary-preserving construction were verified. Guided notebook readbacks/stops, compatible current CNN outputs and rehearsal remain future implementation work. This task changed planning only; no HTML/notebook/runtime changes, fitting, test scoring, commit or push. Overall status remains ready-for-human.
+
+### November 3, 2026 · Sections 3 and 4 implemented in sequence
+
+The instructor explicitly requested “Section 3 and then Section 4”. Implemented the [sixteen DNA/detector slides](../../../Slides/Day_2/presentation.html#day-2-s3-section), then the [fourteen pooling/readout slides](../../../Slides/Day_2/presentation.html#day-2-s4-section) and 115–125 break. Interactive one-hot selection, scanning, score/ReLU, padding, base mutation, pooling/flattening, positional weights, branch joining and architecture traces follow the reviewed stories. The Section 3 activity is complete in the HTML; extra notebook teaching cells remain planned. The deck has 64 scenes, preserving the first 27 records and six later legacy scenes exactly. See [QA](../../../Slides/qa.md#day-2-sections-34--2026-11-03). All new numerical diagrams are constructions; no model fitting, notebook execution, protected test scoring, commit or push is claimed. Sections 5–6 and full-session rehearsal remain pending; status stays ready-for-human.
+
+### November 3, 2026 · Section 4 specification expanded
+
+At the instructor’s request, expanded the [existing Section 4 story](../../../Slides/Day_2/story.md#section-4) to fourteen proposed slides across minutes 90–115, plus the separate ten-minute break. Each slide has visible content, speaking notes, pointing/reveal guidance and a transition. The existing CCG/GTC/TCC maps support per-channel global max, information loss, channel-major flattening, a constructed position-sensitive hidden neuron, the actual concatenate/dense head, output probability, complete architecture and learned/fixed distinctions. The closing four-minute discussion precedes actual training in Section 5. Arithmetic, dimensions, timing and canonical-source alignment were checked; the full story now has 77 content beats plus two breaks. Sections 1–3 and 5–6 content, HTML, notebooks, scientific code and original annotations are preserved. No implementation, architecture change, new benchmark or test scoring is claimed; overall status remains ready-for-human.
 
 ### November 3, 2026 · Section 3 specification expanded
 

@@ -1,6 +1,6 @@
 # Day 2 story
 
-**Sections 1–2 implemented for review — 2026-11-03; Sections 3–6 remain discussion drafts.** The instructor authorized both builds after reviewing their breakdowns, carrying forward the request for illustrations with less reliance on boxes. The [opening](presentation.html#day-2-s1-welcome) has twelve slides; the [learning section](presentation.html#day-2-s2-section) has fourteen slides followed by the 50–60 break. The ten later HTML scenes retain their earlier content, timings and historical benchmark values; the retained one-hot scene follows the new break. This 37-scene mixed review deck does not implement the complete timetable below or establish classroom readiness. Section titles, emphasis and pacing remain editable.
+**All six sections implemented for review — 2026-11-03.** The [opening](presentation.html#day-2-s1-welcome), [learning](presentation.html#day-2-s2-section), [DNA/detectors](presentation.html#day-2-s3-section), [prediction architecture](presentation.html#day-2-s4-section), [training/comparison](presentation.html#day-2-s5-section) and [representation control](presentation.html#day-2-s6-section) contain 12/14/16/14/14/14 slides plus two ten-minute breaks: **86 scenes**. The final build replaces all six legacy scenes; no old fixed-motif primary benchmarks remain in the deck. The combined notebook includes the guided readbacks and an end-Day-2 stop. [QA](../qa.md#day-2-sections-56--2026-11-03) records checks and limits; local verification does not establish Colab execution, projector readability or classroom pacing.
 
 **Working title:** Learning useful features from DNA.
 
@@ -23,7 +23,7 @@
 | 125–155 | 5. Train, inspect and compare | What did the fitted CNN learn? | 30 |
 | 155–180 | 6. What the representation makes possible | What can counts never distinguish? | 25 |
 
-**160 teaching minutes + 20 break minutes = 180 minutes.** There are 74 content beats (26 implemented across Sections 1–2, the remainder proposed) and two separate break slides. All timings are suggested allocations, not measured pacing. This proposal keeps Day 1’s section rhythm and moves the old Day 2 second break from 100–110 to 115–125; the retained later HTML still uses the old second-break timing. It replaces the earlier thirty-minute closing catch-all with explicit synthesis and discussion. The [historical guide](../../instructor/guide.md) and [annotated outline](../teaching-outline.md#day-2) remain unchanged; this timetable is for instructor review.
+**160 teaching minutes + 20 break minutes = 180 minutes.** There are 84 implemented content beats (12/14/16/14/14/14 across the six sections) and two separate break slides. All timings are suggested allocations, not measured pacing. This proposal keeps Day 1’s section rhythm and moves the old Day 2 second break from 100–110 to 115–125; both break slides now follow the revised timing. It replaces the earlier thirty-minute closing catch-all with explicit synthesis and discussion. The [historical guide](../../instructor/guide.md) and [annotated outline](../teaching-outline.md#day-2) remain unchanged; this timetable is for instructor review.
 
 **Sections:** [1 · Networks](#section-1) · [2 · Learning](#section-2) · [3 · DNA and convolution](#section-3) · [4 · Prediction architecture](#section-4) · [5 · Notebook comparison](#section-5) · [6 · Representation limit](#section-6) · [Notebook plan](#notebook-plan) · [Evidence and scope](#evidence-and-scope)
 
@@ -341,11 +341,11 @@ The source alignment is [fit_cnn](../../course_code/03_representations.py) for t
 
 **Exit understanding:** Read the channel/position axes of one-hot DNA; compute one filter score and activation; explain a shared sliding detector and its feature map; distinguish that map from a sequence probability and the hand-built example from a learned filter.
 
-**Discussion spec — expanded 2026-11-03.** Sixteen proposed slides across 30 minutes, including a five-minute guided inspection. This expands the earlier thirteen-beat outline; the new Section 3 HTML and notebook checkpoint are not implemented. Keep Sections 1–2’s short titles, generous space and illustrative style. Use lettered DNA, aligned channel tracks, a moving window and growing activation stems. A matrix is appropriate when explaining an array; repeated enclosing boxes are unnecessary.
+**Implemented for review — 2026-11-03.** The instructor requested “Section 3 and then Section 4”. The [sixteen Section 3 slides](presentation.html#day-2-s3-section) follow the reviewed 30-minute sequence, including a five-minute interactive inspection in the HTML. They use lettered DNA, aligned channel tracks, a moving window and activation stems. The notebook’s additional guided cells remain proposed. Rebuild with `python tools/build_day2_sequence_slides.py 3`; speaking/pointing/transition text comes from this section. Numerical construction and canonical-source details are in Notes; [QA](../qa.md#day-2-sections-34--2026-11-03) records local checks.
 
 **Teaching thread:** Keep the short sequence `ACCGTCCG` visible as it becomes a 4×8 one-hot array, enters a three-position detector and produces the six-position map `(0, 1, 0, 0, 0, 1)`. The detector assigns weight 1 to C/C/G in its three columns, zero elsewhere, bias −2 and ReLU. This deliberate exact-match construction explains the operation; it is not the primary PPM or a trained course filter. Reuse the familiar weighted-sum → activation calculation rather than introduce convolution as an unrelated black box.
 
-**Scope and delivery:** Explain local feature extraction here. Pooling, flattening and the final sequence classifier remain Section 4; full training remains Section 5. The inspection can be instructor-led with optional follow-along in the existing [Days 2–3 notebook](../../notebooks/03_representations.ipynb). Slides must also carry the complete tiny example if access/setup is slow. No homework, model training or scored exercise is required in this section.
+**Scope and delivery:** Explain local feature extraction here. Pooling, flattening and the final sequence classifier remain Section 4; full training remains Section 5. The implemented HTML carries the complete interactive inspection without setup. The existing [Days 2–3 notebook](../../notebooks/03_representations.ipynb) contains canonical definitions; optional guided notebook follow-along remains planned. No homework, model training or scored exercise is required in this section.
 
 ### S3-01 · Read the sequence in place
 
@@ -531,11 +531,11 @@ The source alignment is [fit_cnn](../../course_code/03_representations.py) for t
 
 **Proposed slide ID:** `day-2-s3-notebook` · **Time:** 85:00–90:00 (5:00)
 
-**What is on slide:** A compact link to the existing notebook and the same lettered sequence, one-hot tracks and map. Change the third base from C to T: `ACCGTCCG → ACTGTCCG`. Highlight the nearby windows and compare the two maps.
+**What is on slide:** The same lettered sequence, one-hot tracks and map, with Change third base and Reset controls. Change C to T: `ACCGTCCG → ACTGTCCG`. Compare the local response before and after; the working notebook is linked from this story for optional code inspection.
 
-**What I want to say:** Proposed five-minute guided cells: inspect the axes, run the constructed detector once, change one base and compare. The original map is `(0,1,0,0,0,1)`; the changed map is `(0,0,0,0,0,1)`. The first CCG response disappears and the second remains. At most three width-three windows can include this changed interior base; not every affected window must change its post-ReLU activation. We have changed one teaching input, not retrained weights or changed the primary dataset. Ask what the audience notices, then stop before the full training workflow.
+**What I want to say:** Use the five-minute inspection in this slide: identify the axes, inspect the constructed detector output, change one base and compare. The original map is `(0,1,0,0,0,1)`; the changed map is `(0,0,0,0,0,1)`. The first CCG response disappears and the second remains. At most three width-three windows can include this changed interior base; not every affected window must change its post-ReLU activation. We have changed one teaching input, not retrained weights or changed the primary dataset. Ask what the audience notices, then stop before the full training workflow. The corresponding guided notebook cells remain planned, so the slide is the complete current activity.
 
-**Point / reveal:** Allow roughly one minute to open/locate the checkpoint, one to run and identify axes, two to change the base and compare, and one to discuss/return. If setup consumes the allocation, use the complete slide example. No participant setup is assumed before class.
+**Point / reveal:** Allow roughly one minute to locate the input/map, one to identify axes, two to change the base and compare, and one to discuss/return. The slide controls require no notebook setup; use Reset to repeat the comparison.
 
 **Transition:** We have local feature maps. Section 4 asks how to turn them into one sequence prediction.
 
@@ -551,7 +551,13 @@ For the one-base change at zero-based position 2, affected starts are 0/1/2. The
 
 **Story question:** How does a set of position-wise responses become one sequence probability?
 
-**Exit understanding:** Distinguish global max pooling from flattening, trace the actual two-branch architecture, and explain what information its head can use.
+**Exit understanding:** Compute global maxima per channel; explain which spatial information flattening preserves; trace the model’s two branches into its dense prediction head; distinguish feature activations, a logit, a probability and a class call.
+
+**Implemented for review — 2026-11-03.** The [fourteen Section 4 slides](presentation.html#day-2-s4-section) follow the reviewed 25-minute sequence, then the separate 115–125 break. Aligned response stems, labeled feature ribbons, circular neurons and staged branch reveals carry forward the illustrated style. Controls compare maxima, flatten channel rows, move a peak through position-specific weights, join both branches and trace the actual architecture. Rebuild after Section 3 with `python tools/build_day2_sequence_slides.py 4`; speaking/pointing/transition text comes from this section. [QA](../qa.md#day-2-sections-34--2026-11-03) records local checks and limits.
+
+**Teaching thread:** Start with Section 3’s `ACCGTCCG` and its constructed CCG map `(0,1,0,0,0,1)`. Add the GTC and TCC tracks only when multiple channels are needed. Compare a strongest-response summary with the complete ordered values, then combine both as the actual course architecture does. The small maps illustrate readout operations; they are not outputs from a fitted course CNN.
+
+**Scope and delivery:** This section explains the architecture and what information reaches the classifier. It does not run a training comparison or add a second notebook activity immediately after Section 3. Implemented controls operate on constructed maps in the slides; full notebook training and actual predictions remain Section 5. Technical shapes belong in Notes or a single staged reveal, not persistent subtitles.
 
 ### S4-01 · Make one prediction from the maps
 
@@ -561,85 +567,171 @@ For the one-base change at zero-based position 2, affected starts are 0/1/2. The
 
 **What I want to say:** Local maps can tell us where detectors respond. Our task still needs one probability per complete sequence.
 
+**Point / reveal:** Resume from Section 3’s final map without reteaching the detector. Hold the section title briefly before the readout question.
+
+**Transition:** We have a response at several positions. What should the classifier receive?
+
 ### S4-02 · Many positions, one output
 
-**Proposed slide ID:** `day-2-s4-readout` · **Time:** 90:15–92:00 (1:45)
+**Proposed slide ID:** `day-2-s4-readout` · **Time:** 90:15–91:30 (1:15)
 
-**What is on slide:** A single feature map spans the DNA; one p(B) box waits at the right.
+**What is on slide:** The six CCG response stems remain aligned with the lettered DNA. A single output circle labeled `p(B)` waits to the right, connected through a question mark.
 
-**What I want to say:** We must decide how to combine positions and channels. This is an architecture choice with consequences for what the final classifier sees. Convolution alone does not specify that choice.
+**What I want to say:** These six numbers are local features, not six class probabilities. With multiple filters we have several such tracks. The prediction head is the part that combines features into the sequence-level output. Choosing what it receives affects the distinctions it can learn; saying “CNN” alone does not specify this step.
+
+**Point / reveal:** Point along the positions, then to the single pending sequence output. Leave the connecting operation unresolved for the next slide.
+
+**Transition:** One option is to keep only the strongest response in a track.
 
 ### S4-03 · Keep the strongest response
 
-**Proposed slide ID:** `day-2-s4-global-max` · **Time:** 92:00–94:30 (2:30)
+**Proposed slide ID:** `day-2-s4-global-max` · **Time:** 91:30–93:30 (2:00)
 
-**What is on slide:** The vector 0,1,0,0,0,1 collapses to its maximum, 1.
+**What is on slide:** Sweep across the six response stems. Highlight both tied peaks, then collect the value `1` in a single output marker labeled “Global max”.
 
-**What I want to say:** Global max pooling gives one number per channel, describing the strongest activation anywhere in that map. This loses the location of that maximum, how many tied peaks occurred and the rest of the spatial pattern. It is not local pooling or an average.
+**What I want to say:** Global max pooling takes the maximum over all positions in one feature map. Here the result is 1, even though two positions reach it. It does not add the responses, count matches or average them. The returned value retains the strongest activation, while its coordinate and the rest of the track are absent from that value. “Global” means the whole position axis of this map.
 
-### S4-04 · Moving a peak can leave the summary unchanged
+**Point / reveal:** Keep both peaks highlighted until the single value appears. Do not draw an argmax coordinate or a count alongside the result unless explicitly discussing what was discarded.
 
-**Proposed slide ID:** `day-2-s4-pooling-limit` · **Time:** 94:30–97:00 (2:30)
+**Transition:** With several filters, which axis do we reduce?
 
-**What is on slide:** Two constructed maps have their 1 at different positions and the same maximum.
+### S4-04 · Keep one maximum for each channel
 
-**What I want to say:** The summary is identical for these maps. A classifier receiving only those pooled values cannot distinguish them. This map-level example does not prove that every convolutional architecture with global pooling is blind to every order relation: sufficiently contextual local features can encode relations before pooling.
+**Proposed slide ID:** `day-2-s4-pool-channels` · **Time:** 93:30–95:00 (1:30)
 
-### S4-05 · Keep the responses in their slots
+**What is on slide:** Reveal the three CCG/GTC/TCC tracks from Section 3. Each track feeds its own maximum; the result is a three-value column `(1,1,1)`, with channel labels attached.
 
-**Proposed slide ID:** `day-2-s4-flatten` · **Time:** 97:00–99:30 (2:30)
+**What I want to say:** Pool across positions separately for each channel. We preserve which detector produced each strongest response; we do not take one maximum across every channel and position together. Three demonstration channels give three values. The actual second convolution has sixteen channels, so its global-max branch gives sixteen values per sequence.
 
-**What is on slide:** A small channel×position map unrolls into a labeled row, preserving order.
+**Point / reveal:** Follow one row to its value, then reveal the other rows. Keep the channel ordering fixed so the pooled column remains interpretable.
 
-**What I want to say:** Flattening changes shape without fitting or pooling. Each channel-position slot gets its own coordinate in the classifier input. This makes location available to the dense head, increases its parameter count, and makes fixed-length positional shortcuts possible.
+**Transition:** What happens if the response moves but its height stays the same?
 
-### S4-06 · Use both summaries in our model
+### S4-05 · Moving a peak can leave the summary unchanged
 
-**Proposed slide ID:** `day-2-s4-two-branches` · **Time:** 99:30–102:30 (3:00)
+**Proposed slide ID:** `day-2-s4-pooling-limit` · **Time:** 95:00–97:00 (2:00)
 
-**What is on slide:** One feature map branches into Flatten and Global max; their output rows concatenate.
+**What is on slide:** Move the first CCG activation from start 1 to start 2: `(0,1,0,0,0,1)` becomes `(0,0,1,0,0,1)`. Its maximum remains 1; the other tracks stay fixed. An optional reveal removes one tied peak and the maximum still remains 1.
 
-**What I want to say:** Our existing model keeps the flattened position-bearing map and a strongest-response summary. It does not choose between two separately trained CNNs. We should explain this specific architecture before using its behavior as evidence about position.
+**What I want to say:** These maps produce the same pooled vector. A deterministic classifier receiving only that identical vector cannot distinguish the two cases. The maximum also does not tell us whether one or several positions reached it. This is a map-level construction, not a claimed DNA mutation experiment. It does not prove that every globally pooled CNN loses every order relation: earlier contextual features, boundaries and padding can already encode some positional or relational cues.
 
-### S4-07 · Trace the complete route
+**Point / reveal:** Let the stem move while the pooled marker remains stationary. Keep the other channel summaries visible but quiet, making their unchanged values clear.
 
-**Proposed slide ID:** `day-2-s4-architecture` · **Time:** 102:30–105:00 (2:30)
+**Transition:** What if we keep the response values in their original slots instead?
 
-**What is on slide:** DNA → one-hot → two convolution/ReLU blocks → two branches → dense/ReLU → output.
+### S4-06 · Keep the responses in their slots
 
-**What I want to say:** Reveal one operation at a time, with technical sizes in notes. The input is 4×160, maps are 16×160, flattening gives 2560 values, pooling gives 16, concatenation gives 2576, the hidden head gives 32, and the output gives one logit. Padding preserves map length. Show the diagram without every shape label at once.
+**Proposed slide ID:** `day-2-s4-flatten` · **Time:** 97:00–99:00 (2:00)
 
-### S4-08 · A logit becomes a probability
+**What is on slide:** The three-by-six map gently unrolls into one feature ribbon. Retain small channel/position labels; reveal one whole channel row at a time, in CCG/GTC/TCC order.
 
-**Proposed slide ID:** `day-2-s4-output-probability` · **Time:** 105:00–107:30 (2:30)
+**What I want to say:** Flattening changes shape, preserving the ordered entries. Our three tracks of six positions become eighteen values. The classifier can give a different weight to each channel-position slot. The array has no printed coordinate feature, but its fixed ordering makes location available. This generally gives the dense head more input weights than a pooled-only readout and can support reliance on fixed coordinates. No convolution or learned transformation happens during the reshape itself.
 
-**What is on slide:** The final scalar z passes through sigmoid to p(B), then a separate threshold box appears.
+**Point / reveal:** Track one activation into its exact ribbon coordinate. Move the earlier peak and show that a different ribbon coordinate now holds the 1. Keep channel labels attached rather than merging all channels without boundaries.
 
-**What I want to say:** The same final operation as Day 1 returns. During training, binary_cross_entropy_with_logits combines sigmoid and cross-entropy numerically; do not sigmoid first and then pass probabilities into that logits-based loss. During inference, apply sigmoid to the output once. Threshold 0.5 turns a score into a class call.
+**Transition:** How could a later neuron use that difference in slot?
 
-### S4-09 · Which parts are learned?
+### S4-07 · A neuron can weight locations differently
 
-**Proposed slide ID:** `day-2-s4-learned-fixed` · **Time:** 107:30–109:30 (2:00)
+**Proposed slide ID:** `day-2-s4-position-weights` · **Time:** 99:00–100:30 (1:30)
 
-**What is on slide:** The same diagram highlights convolution and dense weights; encoding, ReLU, flattening and pooling stay unhighlighted.
+**What is on slide:** Highlight the first track’s six ribbon slots feeding one hidden neuron. The two map cases give different weighted sums and ReLU outputs, while the pooled maximum remains the same.
 
-**What I want to say:** Convolution and dense layers have trainable parameters. One-hot encoding, ReLU, flattening, concatenation and max pooling are fixed operations, although gradients pass through the differentiable computation to earlier weights. Choosing the architecture is separate from fitting its parameters.
+**What I want to say:** The convolution shares its weights over positions; the dense head is free to use different weights for different slots. A useful distinction can therefore survive flattening and affect a hidden feature. This demonstrates what is representable, not what training necessarily learns. For this constructed neuron, use weights `(0,1.2,−0.4,0,0,0.3)` and bias −0.5: the original map gives score 1 and activation 1; the moved map gives score −0.6 and activation 0. These are hidden features, not class probabilities.
 
-### S4-10 · A detector is not automatically a motif
+**Point / reveal:** Highlight the two location-specific coefficients as the stem moves. Put the complete coefficient row and substitution in Notes; reveal the sums only after the positional change is understood.
 
-**Proposed slide ID:** `day-2-s4-motif-connection` · **Time:** 109:30–112:00 (2:30)
+**Transition:** The supplied course model gives its head both the ordered map and the strongest-response summary.
 
-**What is on slide:** A PPM and a learned filter appear separately, connected by a question mark.
+### S4-08 · Use both branches in our model
 
-**What I want to say:** The primary PPM is a normalized probability distribution at each site position; a convolution filter is a set of learned scoring weights. They have different meanings and need not resemble each other directly. Inspection and controlled changes can provide evidence about a fitted detector; a bright map alone is not TF-binding proof.
+**Proposed slide ID:** `day-2-s4-two-branches` · **Time:** 100:30–102:30 (2:00)
 
-### S4-11 · Would you keep the location?
+**What is on slide:** One stack of maps feeds a gently curving fork. The upper ribbon holds all flattened entries; the lower ribbon holds one maximum per channel. Join their ends into a single labeled feature ribbon.
 
-**Proposed slide ID:** `day-2-s4-discussion` · **Time:** 112:00–115:00 (3:00)
+**What I want to say:** This is one model with two readout branches, not two separately trained CNNs. Concatenation appends the maximum values after the flattened entries; it does not average or add the branches. The toy map gives eighteen flattened values plus three maxima, totaling twenty-one. The actual map gives 2560 plus sixteen, totaling 2576. The maxima are already computable from the complete map, so this branch adds an explicit summary rather than recovering information absent from flattening. Whether that choice helps requires evaluation.
+
+**Point / reveal:** Reveal flattening, then pooling, then concatenation. Preserve the same channel colors/labels and the branch boundary in the joined ribbon.
+
+**Transition:** What calculation consumes this joined feature vector?
+
+### S4-09 · The head combines the sequence features
+
+**Proposed slide ID:** `day-2-s4-dense-head` · **Time:** 102:30–104:00 (1:30)
+
+**What is on slide:** The joined ribbon feeds a few representative circular hidden neurons, labeled as a 32-unit layer, followed by one output neuron marked `z`. Keep detailed dimensions in Notes.
+
+**What I want to say:** We return to Section 1’s familiar mechanism: each hidden unit takes a weighted sum and bias, then ReLU. Here the inputs are the learned sequence features, and the supplied model has thirty-two hidden units. A final learned weighted sum produces one logit. Hidden units can combine evidence across distant slots because the flattened features from the whole sequence are available. The convolutional receptive field of eleven bases does not limit the complete classifier to an eleven-base input interval.
+
+**Point / reveal:** Trace one connection into one hidden unit, then reveal the remaining layer and output. Use representative nodes rather than thirty-two densely drawn circles.
+
+**Transition:** We already know how to turn that final score into a class probability.
+
+### S4-10 · A logit becomes a probability
+
+**Proposed slide ID:** `day-2-s4-output-probability` · **Time:** 104:00–105:30 (1:30)
+
+**What is on slide:** Move the final scalar onto the familiar sigmoid curve. Reuse `z=0.3 → p(B)≈0.574`, then reveal a separate 0.5 decision marker and the class call B.
+
+**What I want to say:** The architecture changed how we obtain features, but this final binary conversion is familiar. During inference we apply sigmoid once to the output logit; threshold 0.5 gives the course class call. During training, the logits-based cross-entropy handles the sigmoid relationship internally, so do not sigmoid before supplying its input. The 0.3 example is the earlier teaching construction, not a newly measured CNN prediction. A probability estimate is also distinct from a biological conclusion or guaranteed calibration.
+
+**Point / reveal:** Reveal score, probability and class call in that order. Keep the threshold as a decision marker rather than another trainable network layer.
+
+**Transition:** Now put the complete model together, using only operations we have already explained.
+
+### S4-11 · Trace the complete route
+
+**Proposed slide ID:** `day-2-s4-architecture` · **Time:** 105:30–107:30 (2:00)
+
+**What is on slide:** One progressive illustration: lettered DNA → one-hot tracks → two local filter/map stages → the flatten/global-max fork → joined ribbon → hidden neurons → logit and sigmoid. Keep the already familiar fork and neuron positions stable.
+
+**What I want to say:** Follow one sequence all the way through. Its input is 4×160; each convolution produces 16×160 after ReLU. The two branches give 2560 and sixteen values; concatenation gives 2576; the head gives thirty-two hidden activations and one logit. Include the batch dimension in Notes. The actual convolutions use widths seven and five, padding three and two, stride one; they do not shorten the position axis or include an intervening local-pooling layer.
+
+**Point / reveal:** First trace the route without dimensions. Then reveal one shape at a time beside the active stage, avoiding an all-at-once wall of labels.
+
+**Transition:** Which operations have parameters that training can change?
+
+### S4-12 · Which parts are learned?
+
+**Proposed slide ID:** `day-2-s4-learned-fixed` · **Time:** 107:30–109:00 (1:30)
+
+**What is on slide:** Keep the complete route fixed. Highlight trainable convolution and dense weights/biases using both color and small parameter markers; leave encoding, ReLU, flattening, max pooling, concatenation and sigmoid in the neutral style.
+
+**What I want to say:** Training fits convolution and dense parameters. The other operations follow fixed rules, although gradients flow through the computation to earlier weights. Pooling and flattening do not have their own fitted weights in this model. Choosing the encoding, architecture and training settings remains our responsibility. More trainable parameters do not guarantee a better validation result.
+
+**Point / reveal:** Select each trainable stage in turn, then show them together. Refer back to Section 2’s backward trace rather than repeat its derivation.
+
+**Transition:** What should we infer if one of the learned maps responds strongly to a sequence pattern?
+
+### S4-13 · A detector is not automatically a motif
+
+**Proposed slide ID:** `day-2-s4-motif-connection` · **Time:** 109:00–111:00 (2:00)
+
+**What is on slide:** A probability-motif illustration and a scoring-filter illustration sit separately above a local response map, connected by a question mark. Label them “Base probabilities” and “Scoring weights”; use symbolic weights rather than claim a newly fitted filter.
+
+**What I want to say:** The primary PPM defines base probabilities by site position; a convolution filter contains scoring weights and a bias. They have different meanings, lengths and constraints. Filter values can be negative and need not sum to one. A response map shows part of a fitted computation, not which biological mechanism generated the sequence or the complete contribution to the prediction. Inspect actual fitted responses and controlled changes before making interpretation claims; real TF binding requires biological evidence beyond this simulation.
+
+**Point / reveal:** Compare what the entries mean, not whether two heatmaps look similar. Keep the primary PPM distinct from Section 3’s designed CCG detector.
+
+**Transition:** Whether we retain or summarize position should depend on the question we want the model to answer.
+
+### S4-14 · Would you keep the location?
+
+**Proposed slide ID:** `day-2-s4-discussion` · **Time:** 111:00–115:00 (4:00)
 
 **What is on slide:** Open discussion: “When might a pattern’s location matter? When would you want to ignore it?”
 
-**What I want to say:** Invite biological examples and modeling preferences without a marked answer. Connect them to pooling and flattening. Fixed-coordinate learning can be appropriate in an aligned task but fragile under a changed setup. We now know what we will train and what information it can use.
+**What I want to say:** Invite biological examples, questions or modeling preferences without a marked answer. Discuss whether coordinates are aligned to a meaningful reference, what should survive a shift and how a different sampling setup might change that choice. Pooling emphasizes a strongest response; flattening leaves spatial distinctions available to the head. Neither is an automatic scientific winner. In the primary simulation, planting starts are uniform over valid positions for either class, so do not assume a fixed class-specific coordinate. Any benefit from this head must be evaluated. We now understand the architecture and can ask what it actually learns on the declared data.
+
+**Point / reveal:** Reuse the movable map and two readout ribbons if they help the conversation. Participants can predict what a pooled value or flattened slot would do before any code runs. Keep the entire discussion inside these four minutes; no new notebook startup is required.
+
+**Transition:** Take ten minutes, then run and inspect the actual workflow in Section 5.
+
+**Construction notes for the eventual build:** The three demonstration map rows are CCG `(0,1,0,0,0,1)`, GTC `(0,0,0,1,0,0)` and TCC `(0,0,0,0,1,0)`. Pooling over positions gives `(1,1,1)`. Flatten in channel-major order, keeping all six CCG entries, then GTC, then TCC: eighteen entries. Appending the three maxima gives twenty-one. The moved-map comparison changes only the CCG row to `(0,0,1,0,0,1)` at the map level; no claim is made that a corresponding DNA edit leaves the other learned channels unchanged. Removing one tied maximum also preserves the pooled value.
+
+For the single hidden-neuron illustration, apply weights `(0,1.2,−0.4,0,0,0.3)` to the CCG row and bias −0.5; all other feature coefficients are zero for this construction. The original row gives `1.2+0.3−0.5=1.0 → ReLU=1`; the moved row gives `−0.4+0.3−0.5=−0.6 → ReLU=0`. This demonstrates positional sensitivity in an available feature, not an observed training result or a full toy CNN forward pass. The later `z=0.3 → sigmoid(z)=0.5744425` example reuses the familiar output conversion independently; it is not derived from these six positional weights.
+
+**Source and implementation boundary:** [SequenceCNN.forward and predict_cnn](../../course_code/course_inference.py) define the actual branches and output convention. For batch size N, input `(N,4,160)` becomes `(N,16,160)`, then flatten `(N,2560)` and `amax(dim=2)` `(N,16)`, concatenated along feature dimension 1 as `(N,2576)`. Dense/ReLU gives `(N,32)`; the final linear layer gives `(N,1)` and squeeze gives logits `(N,)`; inference sigmoid gives probabilities `(N,)`. Actual flattening preserves channel-major position order. The two branches share the same convolutional features and training loss. No architecture change, ablation, model fitting, notebook edit or test scoring is part of this spec. If short on time, omit numerical positional-weight substitution and optional dimension labels before cutting the pooling/flattening comparison, actual two-branch route or discussion.
 
 ### Break · 115–125
 
@@ -653,7 +745,9 @@ For the one-base change at zero-based position 2, affected starts are 0/1/2. The
 
 **Story question:** What did this fitted CNN learn on the same classification problem?
 
-**Exit understanding:** Follow a working training run, read its selected epoch and validation predictions, and compare methods on matching data without assuming a winner.
+**Exit understanding:** Connect the supplied training run to its loss history, selected weights and validation predictions; compare methods on matching data without assuming a winner.
+
+**Implemented for review — 2026-11-03:** [fourteen slides](presentation.html#day-2-s5-section), 30 minutes. Rebuild with `python tools/build_day2_evaluation_slides.py`; empirical figures are bound to the [current local run](../../instructor/verification/day2-current.json). The practical includes four minutes for first notebook access/setup and five for computation. These are allocations requiring rehearsal. Use DNA strands, curves, response stems and probability dots rather than a sequence of box diagrams. Only the small configuration excerpt needs code. Plot the current run when available; the current local run is available for the revised primary PPM dataset. Actual Colab execution remains unverified.
 
 ### S5-01 · Train the sequence model
 
@@ -661,79 +755,167 @@ For the one-base change at zero-based position 2, affected starts are 0/1/2. The
 
 **What is on slide:** Only the section title.
 
-**What I want to say:** We have explained the architecture. Now use the working notebook to connect its inputs, training history and predictions.
+**What I want to say:** We have built the mechanism. Now follow a working model from training to a prediction and ask what it achieved.
 
-### S5-02 · Keep the comparison fair
+**Point / reveal:** Pause on the title; no architecture recap panel.
 
-**Proposed slide ID:** `day-2-s5-comparison` · **Time:** 125:15–128:00 (2:45)
+**Transition:** What task are these weights learning?
 
-**What is on slide:** Logistic regression, forest and CNN share the primary training/validation rows; their representations differ.
+### S5-02 · Back to our sequence task
 
-**What I want to say:** Use the same primary PPM dataset and split identities, with ROC-AUC and AP and a fixed 0.5 decision threshold. Baselines in this workflow are refitted on its dataset, not imported from an unidentified run. The model and representation change together; the comparison does not isolate every possible architectural effect.
+**Proposed slide ID:** `day-2-s5-task` · **Time:** 125:15–126:45 (1:30)
 
-### S5-03 · Open the working notebook
+**What is on slide:** Two lettered DNA strands, labels A/B and a small variable-site motif logo; one probability axis labeled p(B).
 
-**Proposed slide ID:** `day-2-s5-open-notebook` · **Time:** 128:00–131:00 (3:00)
+**What I want to say:** Return to the primary simulation: 160-base sequences, independently sampled 15-base PPM sites at random positions, planted with probability 0.95 for B and 0.05 for A. Neither label guarantees site presence or absence. There are 1,200 records; 720 train and 240 validation, with 240 test rows reserved. Today the CNN receives the letters through one-hot encoding. IDs and simulator truth remain metadata.
 
-**What is on slide:** GitHub ipynb → Open in Colab → Day 2 checkpoint, with a compact link or QR.
+**Point / reveal:** Highlight the changing site letters and location, then the target probability.
 
-**What I want to say:** Budget access, setup and selected definitions here, within class time. Use the existing combined notebook rather than a second copy. Its setup can need downloads and a restart; three minutes is a proposed allocation, not a measured promise. Instructor demonstration remains a complete participation route.
+**Transition:** Compare models on these same examples.
 
-### S5-04 · Run the supplied training workflow
+### S5-03 · Keep the comparison fair
 
-**Proposed slide ID:** `day-2-s5-run` · **Time:** 131:00–136:00 (5:00)
+**Proposed slide ID:** `day-2-s5-comparison` · **Time:** 126:45–128:00 (1:15)
 
-**What is on slide:** A minimal run cell beside a live progress/status area; no wall of implementation code.
+**What is on slide:** The same DNA strand feeds count tallies for logistic regression/forest and positional channels for the CNN; all predictions align to one validation-row ruler.
 
-**What I want to say:** The existing stage 03 workflow fits classical baselines and a CNN on both primary and order-control datasets. Run it once; initially reveal only the primary result. Do not claim the notebook currently stops after each lesson: the proposed inspection cells still need to be added. Keep 24 epochs and the declared settings for the comparison, rather than rerun until a preferred result appears.
+**What I want to say:** Stage 03 refits all three methods on the same primary training rows and evaluates the same 240 validation IDs. Each classical vocabulary is learned on training only. Representation and predictor change together, so this is a workflow comparison, not a claim to isolate one architectural ingredient. Use ROC-AUC and AP; any displayed class calls use the declared 0.5 threshold.
 
-### S5-05 · Read what changed during training
+**Point / reveal:** Keep row identities aligned as the two representations appear.
 
-**Proposed slide ID:** `day-2-s5-history` · **Time:** 136:00–140:00 (4:00)
+**Transition:** Open the single working notebook.
 
-**What is on slide:** Actual primary training-loss history and validation-ROC-AUC history in separate panels.
+### S5-04 · Open the working notebook
 
-**What I want to say:** Identify the epochs and what each panel measures. Per-epoch training loss averages minibatch losses during updates; it is not a fixed-weight evaluation of the entire training set. Discuss learning, a plateau or instability using the actual run. Never invent a clean overfitting curve and present it as this run.
+**Proposed slide ID:** `day-2-s5-open-notebook` · **Time:** 128:00–132:00 (4:00)
 
-### S5-06 · Which fitted weights are we using?
+**What is on slide:** One GitHub/Colab link or QR for the [combined notebook](../../notebooks/03_representations.ipynb), with a short route: setup → definitions → Day 2 checkpoint.
 
-**Proposed slide ID:** `day-2-s5-checkpoint` · **Time:** 140:00–143:00 (3:00)
+**What I want to say:** This is our first notebook startup today; Section 3 ran inside the slides. Open the GitHub ipynb in Colab, run setup and the required definitions. Access, downloads and a possible restart belong inside this allocation, not homework. Instructor demonstration is a complete route; following along is optional. The existing notebook contains Days 2–3, so do not use Run all. Guided checkpoints and the explicit Day 2 stop are included in the generated notebook.
 
-**What is on slide:** The best validation epoch is marked and its checkpoint feeds inference.
+**Point / reveal:** Demonstrate the exact selected-cell route, then return attention to the lesson.
 
-**What I want to say:** The code retains the highest validation ROC-AUC epoch, earliest tie. The chosen checkpoint may not be the last epoch. Validation is being used for development, so these results remain development evidence. The protected test remains untouched until the planned Day 3 frozen comparison.
+**Transition:** Check the input, output and settings before starting.
 
-### S5-07 · Compare more than one metric
+### S5-05 · What will this run fit?
 
-**Proposed slide ID:** `day-2-s5-results` · **Time:** 143:00–146:00 (3:00)
+**Proposed slide ID:** `day-2-s5-configuration` · **Time:** 132:00–134:00 (2:00)
 
-**What is on slide:** Primary validation ROC-AUC and AP, revealed separately for the three methods.
+**What is on slide:** A one-hot strand labeled N×4×160 feeds one logit per sequence; alongside it, a compact actual configuration excerpt: Adam 0.002, batch 64, 24 epochs.
 
-**What I want to say:** Populate from the newly rehearsed stage 03 output, not the old fixed-motif chart. Confirm the same 240 validation IDs before comparing. Day 1 has current logistic/forest evidence, but not a new CNN result. Read the observed tradeoffs without promising neural improvement or tuning to a preferred ordering.
+**What I want to say:** A/C/G/T are the four channels. The actual network uses 16 width-seven filters, then 16 width-five filters, both with ReLU and length-preserving padding. Flattened features and global maxima feed the 32-unit head and one logit. Training uses binary cross-entropy with logits; inference applies sigmoid once. This supplied CPU workflow uses two threads. Read the declared settings rather than inviting a parameter search. The run includes both primary and order-control variants; we will inspect the control in Section 6.
 
-### S5-08 · Inspect one sequence prediction
+**Point / reveal:** Trace input to logit, then reveal sigmoid for inference; keep the full architecture in notes.
 
-**Proposed slide ID:** `day-2-s5-one-prediction` · **Time:** 146:00–149:00 (3:00)
+**Transition:** Let the supplied workflow learn the weights.
 
-**What is on slide:** One validation ID, predicted p(B), observed label and its labeled feature map.
+### S5-06 · Run the supplied workflow
 
-**What I want to say:** Use the selected checkpoint on a validation sequence. Change the inspected row, not the trained weights. A map shows model response at positions; it is not by itself a complete attribution or a discovered biological mechanism. This inspection need not open simulation truth as a predictive input.
+**Proposed slide ID:** `day-2-s5-run` · **Time:** 134:00–139:00 (5:00)
 
-### S5-09 · What did the extra computation buy?
+**What is on slide:** One run cell and an honest running/completed status. While waiting, a light animation reconnects forward pass → loss → update.
 
-**Proposed slide ID:** `day-2-s5-tradeoffs` · **Time:** 149:00–152:30 (3:30)
+**What I want to say:** Run stage 03 once in the normal course_output workspace with seed 2026 and 24 epochs. It fits both variants and all three methods; this five-minute allocation covers that complete call. Initially display only primary outputs. The current runner prints both variants even with show_plot=False, so the teaching cell captures its output and reads back the primary result. Do not rerun for a preferred ranking. If setup or computation overruns, switch to a compatible saved run and identify it as previous execution; if none exists, discuss the mechanism and leave the comparison pending.
 
-**What is on slide:** A small comparison of observed validation behavior, measured runtime and representation.
+**Point / reveal:** Identify the current execution state without manufacturing live progress or estimated timings.
 
-**What I want to say:** Discuss whether the evidence justifies this model for this task, including setup, sample size and interpretation. Runtime must name the machine and scope; historical CPU timings do not establish Colab timing for the new generator. If a saved verified run is used, label it as previous execution.
+**Transition:** What changed during those updates?
 
-### S5-10 · What would you investigate next?
+### S5-07 · Read the training loss
 
-**Proposed slide ID:** `day-2-s5-checkpoint-discussion` · **Time:** 152:30–155:00 (2:30)
+**Proposed slide ID:** `day-2-s5-history` · **Time:** 139:00–140:45 (1:45)
 
-**What is on slide:** An open prompt: “What would help you understand this result?”
+**What is on slide:** One large actual training-loss curve, with epoch on the horizontal axis and loss on the vertical axis.
 
-**What I want to say:** Invite ideas such as more training examples, independent development comparisons or a controlled input change. Separate a scientific next experiment from changing settings until the CNN wins. Transition to a construction where we can reason about the representation before looking at any scores.
+**What I want to say:** Load models/simple/cnn_history.csv from this run. Lower loss means better fit to the training targets under this objective. Each epoch value averages minibatch losses measured as weights are updated, not a full-training-set evaluation at one fixed set of weights. Describe the observed curve, whether smooth, noisy or flat; do not insert a textbook overfitting shape as experimental evidence.
+
+**Point / reveal:** Trace the actual first-to-last history; label both axes before discussing its shape.
+
+**Transition:** Does the model also rank unseen validation examples usefully?
+
+### S5-08 · Watch validation separately
+
+**Proposed slide ID:** `day-2-s5-validation-history` · **Time:** 140:45–142:30 (1:45)
+
+**What is on slide:** One actual validation ROC-AUC curve over the same 24 epochs, on its own labeled scale.
+
+**What I want to say:** These labels do not contribute gradients, but their scores guide checkpoint selection. This is a different quantity from loss; there is no reason its numerical values or trajectory should match the training curve. Describe only what this run supports. Training continuing to improve while validation stalls would motivate investigation, but do not diagnose overfitting from an invented shape.
+
+**Point / reveal:** Locate the observed best epoch without yet replacing the model by the final epoch.
+
+**Transition:** Which weights do we retain?
+
+### S5-09 · Keep the selected weights
+
+**Proposed slide ID:** `day-2-s5-checkpoint` · **Time:** 142:30–144:00 (1:30)
+
+**What is on slide:** The same validation curve with its earliest highest point marked; the selected weights feed a single prediction.
+
+**What I want to say:** All 24 epochs run; this is not early stopping. Keep the highest validation ROC-AUC checkpoint, taking the earliest epoch in a tie. The saved cnn.pt holds weights and sequence length, not the selected epoch: derive that epoch from the earliest history maximum and verify that the reloaded model reproduces the saved probabilities. Validation selection makes these development results. Test results never guide this choice; the frozen comparison belongs on Day 3.
+
+**Point / reveal:** Distinguish the final point from the selected point if they differ.
+
+**Transition:** Use those fixed weights on one sequence.
+
+### S5-10 · One sequence, one probability
+
+**Proposed slide ID:** `day-2-s5-one-prediction` · **Time:** 144:00–147:00 (3:00)
+
+**What is on slide:** One validation sequence ID and strand, its actual p(B) on a 0–1 axis, then its observed A/B label. A row selector is the only proposed control.
+
+**What I want to say:** Start with the first validation row in saved order, rather than hand-picking a success. Reload the selected checkpoint, use evaluation/inference mode and apply sigmoid once. Join predictions and labels by sample ID. Reveal the label after the probability and discuss agreement or disagreement. Change the inspected row without refitting. An individual error and an individual success are both examples, not an estimate of general performance; probability output also does not establish calibration.
+
+**Point / reveal:** Sequence → fixed model → probability → observed label; keep the 0.5 class-call marker secondary.
+
+**Transition:** What happens inside the local detector stage for this same row?
+
+### S5-11 · Inspect one response map
+
+**Proposed slide ID:** `day-2-s5-response-map` · **Time:** 147:00–148:45 (1:45)
+
+**What is on slide:** The same strand above one second-convolution post-ReLU channel, shown as activation stems against position. Default channel 0; an optional channel selector.
+
+**What I want to say:** The guided readback helper extracts the 16×160 response map from the reloaded checkpoint. These cells are implemented and locally executed. Peaks show where that channel responds. They are neither a complete attribution nor evidence that the model discovered TF binding. Begin with channel 0 and disclose any changed channel, avoiding a search for a motif-looking success. Keep the same validation row and fitted weights; simulator truth is not an input to this calculation.
+
+**Point / reveal:** Align strand positions with activation stems; describe the response actually observed, including weak or diffuse responses.
+
+**Transition:** Move from one example to the whole validation set.
+
+### S5-12 · Compare validation behavior
+
+**Proposed slide ID:** `day-2-s5-results` · **Time:** 148:45–150:45 (2:00)
+
+**What is on slide:** A single three-method dot plot; toggle ROC-AUC/AP while retaining method order and a labeled scale. Use blue, orange and purple plus method names/marker shapes.
+
+**What I want to say:** Populate from this run's representation_validation.csv and aligned predictions for the primary variant. ROC-AUC asks about ranking across classes; AP emphasizes precision as positives are retrieved. Neither uses the 0.5 threshold. Confirm the same 240 validation IDs before comparing. Current Day 1 classical scores are context, not a substitute for matched stage 03 outputs. The current local CNN ROC-AUC/AP are 0.546528/0.555691; old fixed-motif scores do not enter this chart. A single split and seed do not establish a universal winner or statistical superiority.
+
+**Point / reveal:** Show one metric at a time; let the actual ranking stand even if the CNN trails.
+
+**Transition:** Performance is only one part of choosing a workflow.
+
+### S5-13 · What did the computation buy?
+
+**Proposed slide ID:** `day-2-s5-tradeoffs` · **Time:** 150:45–152:45 (2:00)
+
+**What is on slide:** The three representations illustrated as counts or ordered strands, beside the observed performance and one clearly scoped runtime annotation; no invented per-model speed bars.
+
+**What I want to say:** Consider predictive behavior, setup, computation, label availability and interpretation together. representation_run.json records aggregate elapsed seconds per variant, covering classical and CNN work; it does not measure CNN-only time or each method separately. Name device and scope if displaying it. These CPU observations cannot promise a Colab runtime or measure biological value. The CNN offers learned local features and positional readout, but this evidence decides whether those helped here.
+
+**Point / reveal:** Connect each model to the representation it actually received; show timing only with its scope.
+
+**Transition:** What experiment would make the result easier to understand?
+
+### S5-14 · What would you investigate next?
+
+**Proposed slide ID:** `day-2-s5-checkpoint-discussion` · **Time:** 152:45–155:00 (2:15)
+
+**What is on slide:** One open prompt: “What would help you understand this result?”
+
+**What I want to say:** Invite observations from the actual curves, predictions and comparison, without testing recall. More labeled examples or a controlled representation comparison may help. Separate proposed experiments from observed results and avoid a settings search aimed at making the CNN win. Next we isolate a distinction that no count-based predictor could recover, regardless of fitting effort.
+
+**Point / reveal:** Leave the prompt alone while the audience discusses; keep suggestions in notes.
+
+**Transition:** Same ingredients, different arrangement.
 
 <a id="section-6"></a>
 
@@ -741,7 +923,9 @@ For the one-base change at zero-based position 2, affected starts are 0/1/2. The
 
 **Story question:** Can a more powerful predictor recover information that was discarded?
 
-**Exit understanding:** Explain the equal-bag limit, inspect the position-aware model on paired controls, and connect learned features to Day 3 reuse.
+**Exit understanding:** Explain why paired equal bags force equal predictions, distinguish retained information from successful learning, and connect today's learned features to Day 3 reuse.
+
+**Implemented for review — 2026-11-03:** [fourteen slides](presentation.html#day-2-s6-section), 25 minutes, including a five-minute notebook inspection and an open closing discussion. Carry one paired DNA illustration through swaps, counting, positional maps and predictions. This is a separate controlled variant, not a new interpretation of the primary PPM experiment. Construction gives a mathematical bag-model limit; actual CNN behavior requires current outputs.
 
 ### S6-01 · Same counts, different arrangement
 
@@ -749,105 +933,186 @@ For the one-base change at zero-based position 2, affected starts are 0/1/2. The
 
 **What is on slide:** Only the section title.
 
-**What I want to say:** End with a small controlled problem that isolates the information in the representation.
+**What I want to say:** Use a small controlled experiment to separate what information is available from what a model learns to use.
 
-### S6-02 · Swap the blocks, keep the ingredients
+**Point / reveal:** Pause before showing the constructed pair.
 
-**Proposed slide ID:** `day-2-s6-pair` · **Time:** 155:15–157:30 (2:15)
+**Transition:** Start with two related sequences.
 
-**What is on slide:** One shared DNA background; two highlighted blocks exchange their two fixed positions.
+### S6-02 · Swap the blocks
 
-**What I want to say:** This is a separate deliberately engineered dataset variant. It uses two fixed eight-base strings, TATAAATG and CGGACGTC, with matching flanks, not newly sampled primary PPM sites. Positive and negative partners swap their order. Their label rule and construction are disclosed, and partners stay in the same split.
+**Proposed slide ID:** `day-2-s6-pair` · **Time:** 155:15–157:00 (1:45)
+
+**What is on slide:** Two 160-base DNA ribbons share the same background. Blue TATAAATG and orange CGGACGTC exchange two fixed slots; label B has the first order, A the reverse. Letters and labels distinguish the blocks beyond color.
+
+**What I want to say:** Disclose the rule: B/1 has TATAAATG then CGGACGTC; A/0 has the reverse. These are fixed eight-base strings, deliberately distinct from the primary variable 15-base PPM sites. Each background produces an opposite-label pair. There are 240 groups/480 sequences; group splits are 144/48/48, or 288/96/96 rows. Partners always stay in the same split. Do not imply unrelated real biological classes.
+
+**Point / reveal:** Animate the two blocks exchanging slots while the rest of the background stays fixed.
+
+**Transition:** Will every short-word count really remain unchanged?
 
 ### S6-03 · The boundaries count too
 
-**Proposed slide ID:** `day-2-s6-flanks` · **Time:** 157:30–160:00 (2:30)
+**Proposed slide ID:** `day-2-s6-flanks` · **Time:** 157:00–158:45 (1:45)
 
-**What is on slide:** Each block expands to GGGGGG + motif + CCCCCC; crossing 4-mer windows are highlighted.
+**What is on slide:** Zoom into the matching wrapper GGGGGG + motif + CCCCCC. A four-letter window crosses each internal and outer boundary.
 
-**What I want to say:** Simply swapping motifs need not preserve every overlapping word: boundaries matter. Six-base matching flanks make the boundary words identical in this construction, while each complete block appears once in both partners. Block starts are 32 and 80; motif starts are 38 and 86, all zero-based.
+**What I want to say:** Swapping bare motifs could change boundary-spanning words. Here both blocks use the same six-base left/right flanks, so the outer boundary words remain unchanged. Each complete motif-containing block occurs once in both partners. Block starts are 32 and 80, motif starts 38 and 86, all zero-based; the blocks do not overlap. This construction preserves the entire overlapping 4-mer bag, not just a few selected counts.
 
-### S6-04 · The bag sees exactly the same input
+**Point / reveal:** Slide one window across a motif/flank boundary and another across a block/background boundary.
 
-**Proposed slide ID:** `day-2-s6-equal-bags` · **Time:** 160:00–163:00 (3:00)
+**Transition:** Count all the windows, including these boundaries.
 
-**What is on slide:** Different DNA strings converge to identical complete 4-mer count rows.
+### S6-04 · Different strands, identical bags
 
-**What I want to say:** Prove the representation limit before empirical results. A deterministic predictor given the same feature vector returns the same score. More trees or a neural network trained on that identical count representation cannot separate the partners. With balanced complete opposite-label pairs, the bag-score distribution is identical by class, giving ROC-AUC 0.5.
+**Proposed slide ID:** `day-2-s6-equal-bags` · **Time:** 158:45–160:15 (1:30)
 
-### S6-05 · The positional input is different
+**What is on slide:** The two strands become matching count profiles with a large equality sign. A reveal reads “all 4-mers,” rather than listing 256 columns.
 
-**Proposed slide ID:** `day-2-s6-position-input` · **Time:** 163:00–165:30 (2:30)
+**What I want to say:** A length-160 sequence has 157 overlapping four-base windows. Check equality using complete Counters before a training-fitted vocabulary removes any unseen words. This rules out a hidden count difference outside the few columns displayed on a slide. Both classical models then receive identical feature vectors for the partners.
 
-**What is on slide:** One-hot columns differ at the exchanged blocks; the flattened feature slots are highlighted.
+**Point / reveal:** Align the two profiles; distinguish a full equality check from a three-feature visual excerpt.
 
-**What I want to say:** The position-aware network can use information that counts removed. This establishes an available signal, not guaranteed learning or a universal CNN ranking. Its flattened head matters. Our two-convolution local receptive field is too short to jointly span the distant swapped motifs; a global-max-only head would lose this particular fixed-slot cue.
+**Transition:** What can a fitted model do with identical inputs?
 
-### S6-06 · Read the two experiments together
+### S6-05 · Same input, same prediction
 
-**Proposed slide ID:** `day-2-s6-paired-results` · **Time:** 165:30–168:00 (2:30)
+**Proposed slide ID:** `day-2-s6-same-score` · **Time:** 160:15–161:45 (1:30)
 
-**What is on slide:** Two panels, primary PPM and fixed-position control; methods stay in the same order.
+**What is on slide:** One shared count profile feeds two identical probability markers, one labeled A and one B. One small expression: x₁=x₂ ⇒ f(x₁)=f(x₂).
 
-**What I want to say:** Use current source-bound validation outputs for both. The historical interaction run was solved by this architecture, but that is not a newly executed result. The bag’s chance limit follows from the checked construction; actual CNN scores come from the new run. The two variants ask different questions and have different sample counts.
+**What I want to say:** Any fixed deterministic predictor acting only on this vector must give equal scores. More trees, a nonlinear count-based neural network or more training cannot restore the lost distinction. Across groups, scores may vary; within each opposite-label pair they must match. Sample IDs, labels and group metadata must not become extra predictive features.
 
-### S6-07 · Compare one pair of predictions
+**Point / reveal:** Keep the model unchanged as the partner label changes.
 
-**Proposed slide ID:** `day-2-s6-notebook` · **Time:** 168:00–173:00 (5:00)
+**Transition:** What does this imply for the whole balanced validation set?
 
-**What is on slide:** Notebook checkpoint: partner IDs → equal counts → model probabilities for each partner.
+### S6-06 · Why ranking stays at chance
 
-**What I want to say:** Inspect a validation pair from stage 03 output; join by sample/group identity and verify opposite labels. Confirm complete Counter equality and compare each model’s response. Both bag-model predictions should match within a declared numeric tolerance. Any CNN difference describes this fitted model on this control. Do not expose test rows or launch a model search.
+**Proposed slide ID:** `day-2-s6-chance` · **Time:** 161:45–163:15 (1:30)
 
-### S6-08 · Would it work somewhere else?
+**What is on slide:** A small score-distribution illustration: each A dot has a B partner at the identical probability, then the two class distributions overlay. A single annotation: ROC-AUC = 0.5.
 
-**Proposed slide ID:** `day-2-s6-new-position` · **Time:** 173:00–175:00 (2:00)
+**What I want to say:** Every validation group contributes one label of each class with the same score. Therefore the complete score distributions match and ROC-AUC is exactly 0.5, including ties under the standard definition. This is a consequence of the construction, not a failure to tune enough. The dot illustration explains the argument; it is not a measured CNN output. The conclusion assumes complete opposite-label pairs and a predictor using only the equal bag representation.
 
-**What is on slide:** The same blocks move to unfamiliar slots, with a question mark over the output.
+**Point / reveal:** Reveal one dot's opposite-label partner, then all partners; avoid a second metric lecture.
 
-**What I want to say:** This is a proposed extension, not a result already demonstrated. Fixed-slot success does not establish arbitrary spacing, strand, position or regulatory grammar. A counterfactual outside the training construction can expose reliance on position, but it also changes the input distribution.
+**Transition:** Did the original ordered input also lose the distinction?
 
-### S6-09 · Representation decides what is available
+### S6-07 · Position makes the inputs different
 
-**Proposed slide ID:** `day-2-s6-synthesis` · **Time:** 175:00–177:30 (2:30)
+**Proposed slide ID:** `day-2-s6-position-input` · **Time:** 163:15–165:00 (1:45)
 
-**What is on slide:** Three simple rows: count features, positional one-hot, learned convolution features.
+**What is on slide:** The paired strands become four labeled one-hot tracks, with differences at the two motif slots highlighted.
 
-**What I want to say:** Separate what each representation retains from what the fitted model uses. Counts can be an excellent inexpensive choice; a larger predictor cannot recover an omitted distinction. Convolution learns local features; the head determines how their locations are combined. Evaluation decides whether that helps for the intended task.
+**What I want to say:** Ordered one-hot input retains which bases occupy each position, so the two sequences are distinct inputs. The model has an available signal. That does not guarantee optimization finds a useful rule or that it will generalize beyond this construction. Avoid translating “can distinguish” into an invented performance claim.
 
-### S6-10 · What would you choose for your data?
+**Point / reveal:** Keep position coordinates aligned while toggling between partners.
 
-**Proposed slide ID:** `day-2-s6-discussion` · **Time:** 177:30–179:15 (1:45)
+**Transition:** Which part of our network can use those locations?
 
-**What is on slide:** An open audience discussion prompt, with one quiet reminder of cost and available labels.
+### S6-08 · The prediction head matters
 
-**What I want to say:** Invite participants to relate the day to their own data: useful invariances, available labels, alignment and computational budget. Keep this a discussion rather than a quiz. Questions are included in the section’s allocation.
+**Proposed slide ID:** `day-2-s6-position-head` · **Time:** 165:00–166:30 (1:30)
 
-### S6-11 · Can we borrow features already learned?
+**What is on slide:** Matching local response peaks exchange positions; one view keeps their slots, another retains only each channel's maximum.
+
+**What I want to say:** Reconnect to Section 4. Our width-seven then width-five convolutions have an eleven-base receptive field. They cannot jointly span these distant motifs. With matching wrappers, the local feature multiset is unchanged, so global maxima alone lose this particular fixed-slot cue. The actual network also flattens position-indexed features, allowing its head to use the distinction. This argument concerns this architecture/construction, not every pooled CNN. Response peaks are schematic here; actual maps require inference.
+
+**Point / reveal:** Toggle preserved slots versus maxima; hold filter identities fixed.
+
+**Transition:** Now inspect what the actual fitted methods did.
+
+### S6-09 · Read the two experiments together
+
+**Proposed slide ID:** `day-2-s6-paired-results` · **Time:** 166:30–168:30 (2:00)
+
+**What is on slide:** One matched-method ROC-AUC comparison with a primary/control toggle. Keep method order, labeled markers and scale stable; mark the control's mathematical bag limit at 0.5.
+
+**What I want to say:** Read both variants from the same current stage 03 run, which already fitted the control. The primary validation set has 240 records, the control 96; these are different questions, not a pooled score. Check observed bag scores against the expected chance limit and report the actual CNN score whether strong or weak. This current local run gives bag ROC-AUC/AP 0.5/0.5 and CNN 1.0/1.0 on the control; this remains one engineered fixed-slot experiment. If no compatible current output exists, show the proven bag limit and leave the empirical comparison pending; do not insert the old primary chart or promise a CNN victory.
+
+**Point / reveal:** Reveal the construction-based expectation before the observed control points; distinguish their sources in notes.
+
+**Transition:** Inspect the two predictions behind one of those pairs.
+
+### S6-10 · Compare one pair in the notebook
+
+**Proposed slide ID:** `day-2-s6-notebook` · **Time:** 168:30–173:30 (5:00)
+
+**What is on slide:** One selected validation pair: strands → complete count equality → three methods' paired probabilities. A group selector is the only proposed control.
+
+**What I want to say:** Use the first validation group in artifact order, with an optional different group; no new fitting. The guided cells join models/interaction/controlled_order_changes.csv to validation sequences by sample/group ID, assert two opposite labels, verify complete Counter equality, then display each method's two probabilities. Check bag-model equality with rtol=0 and atol=1e-12 for these saved float64 probabilities. If the check fails, investigate alignment/construction rather than explain it as neural learning. A CNN difference describes this fitted control model; its size or absence is observed evidence. Keep test rows out of the readback. These guided cells are implemented and locally executed; cross-file float32 CNN probabilities are checked at atol=1e-6, while bag equality remains atol=1e-12.
+
+**Point / reveal:** Confirm the pair and equality before revealing predictions. Stop here rather than running stage 04 embeddings.
+
+**Transition:** What if the blocks move beyond the two familiar slots?
+
+### S6-11 · Would it work somewhere else?
+
+**Proposed slide ID:** `day-2-s6-new-position` · **Time:** 173:30–175:00 (1:30)
+
+**What is on slide:** Ghost marks show the old slots while the blocks move to unfamiliar positions; the output is a question mark.
+
+**What I want to say:** This is a hypothetical next experiment, not another run promised today. Fixed-slot success does not establish arbitrary order, spacing, strand or regulatory grammar. Moving the blocks changes the data distribution and can expose positional reliance. Decide what invariances the intended biological task needs before changing construction or claiming generalization.
+
+**Point / reveal:** Move the blocks without assigning a probability or success/failure label.
+
+**Transition:** Representation choices express what distinctions we retain.
+
+### S6-12 · Available information, learned use
+
+**Proposed slide ID:** `day-2-s6-synthesis` · **Time:** 175:00–176:30 (1:30)
+
+**What is on slide:** One DNA strand becomes count tallies, ordered base tracks and learned activation stems; a small eye marker highlights what each retains.
+
+**What I want to say:** Counts retain short-word composition; positional inputs retain locations; learned local features transform the input, and their readout can retain or discard locations. A representation makes information available, fitting determines how it is used, and evaluation measures whether that helped for the task. Counts remain a useful inexpensive choice when the discarded distinctions are unnecessary. Greater model complexity cannot recover an absent distinction.
+
+**Point / reveal:** Reveal the three representations one at a time; keep the biological task constant.
+
+**Transition:** Which distinctions matter for the audience's own data?
+
+### S6-13 · What would you keep for your data?
+
+**Proposed slide ID:** `day-2-s6-discussion` · **Time:** 176:30–179:15 (2:45)
+
+**What is on slide:** One audience prompt: “What information would you want your model to keep?”
+
+**What I want to say:** Invite examples involving composition, location, alignment or interactions. Ask how labels, sample size and computational budget affect a useful representation. This is a conversation about participants' problems, not a test or submission. Keep suggested next experiments separate from today's demonstrated findings, and use this allocation for closing questions.
+
+**Point / reveal:** Leave the prompt on screen; no answer list or busy takeaway panel.
+
+**Transition:** Today we fitted features from our own labeled examples. Must we always start there?
+
+### S6-14 · Can we borrow learned features?
 
 **Proposed slide ID:** `day-2-s6-tomorrow` · **Time:** 179:15–180:00 (0:45)
 
-**What is on slide:** Train features from scratch → reuse a pretrained encoder, with Day 3 highlighted.
+**What is on slide:** A learned feature pattern moves from a larger collection of sequences onto our small task; Day 3 is highlighted.
 
-**What I want to say:** Today’s features were learned from our labeled training examples. Tomorrow we ask what happens if a model has already learned from many sequences before our task. Introduce pretraining and reuse without starting the transformer lesson here.
+**What I want to say:** Tomorrow we use a pretrained sequence model as a feature source and evaluate those features on our task. Pretraining can change what a representation captures; it does not guarantee improvement. Keep attention, contextual embeddings and the frozen test comparison for Day 3. End Day 2 before stage 04 in the combined notebook.
+
+**Point / reveal:** Transfer the feature pattern; avoid starting a transformer architecture diagram.
+
+**Transition:** Day 3: reuse representations, then assess the frozen workflows.
 
 <a id="notebook-plan"></a>
 
 ## Notebook plan
 
-Use the existing [03_representations.ipynb](../../notebooks/03_representations.ipynb), which also carries Day 3 stages. The [notebook guide](../../notebooks/README.md) owns access, setup and saved-work instructions. Do not add another overlapping notebook. Proposed Day 2 teaching cells should be maintained in the notebook-generation source, following Day 1’s stop-and-inspect pattern.
+Use the existing [03_representations.ipynb](../../notebooks/03_representations.ipynb), which also carries Day 3 stages. The [notebook guide](../../notebooks/README.md) owns access, setup and saved-work instructions. Do not add another overlapping notebook. Day 2 teaching cells are maintained in [day2_teaching.py](../../tools/day2_teaching.py), generated by [build_course.py](../../tools/build_course.py), and source/hash checked by [check_notebooks.py](../../tools/check_notebooks.py).
 
 | Checkpoint | Student/instructor action | Current state |
 | --- | --- | --- |
 | Section 2 | Trace one weight change, distinguish minibatch/epoch, then follow the five-statement forward/loss/backward/update excerpt. | Implemented as slide illustrations and an interactive code highlight; canonical training code exists. No setup or training run required here. |
-| Section 3 | Inspect one-hot axes and the constructed CCG map; change the third base from C to T and compare local responses. | One-hot definitions exist; guided detector/mutation cells and a lesson stop are proposed, with a complete slide-based route if setup is slow. |
-| Section 5 | Setup, run stage 03 once, inspect primary history, selected checkpoint and matched validation predictions. | Complete stage 03 workflow exists; lesson-specific readback and stop cells are proposed. |
-| Section 6 | Verify a validation pair’s complete count equality and inspect paired probabilities. | Generator, equality assertion and controlled prediction artifact exist; guided readback cells are proposed. |
-| End of Day 2 | Stop before stage 04 embeddings and stage 05 freeze. | The combined notebook needs an explicit teaching stop; “Run all” crosses day boundaries. |
+| Section 3 | Inspect one-hot axes and the constructed CCG map; change the third base from C to T and compare local responses. | Complete interactive slide activity implemented; one-hot notebook definitions exist, while additional guided detector/mutation cells and a lesson stop remain planned. |
+| Section 4 | Compare pooling/flattening on the same constructed maps; trace both branches into the sequence head. | Slide controls and discussion implemented; no additional notebook startup or training activity. |
+| Section 5 | Four-minute access/setup, inspect settings, run stage 03 once, then read primary loss/validation curves, selected checkpoint, one prediction/map and matched method metrics. | Implemented and locally executed: output capture, compatible-run reuse, identity/row checks, history/checkpoint readback, row/channel inspection and metrics. |
+| Section 6 | Five-minute inspection of the first validation pair: verify identities/opposite labels and complete count equality, then reveal all three methods’ paired probabilities. | Implemented and locally executed: all 48 validation pairs checked, then the selected pair displayed without refitting. |
+| End of Day 2 | Stop before stage 04 embeddings and stage 05 freeze. | Explicit stop added before stage 04; “Run all” still crosses day boundaries, so follow selected cells. |
 
-**Opening and compute:** Section 3’s five-minute checkpoint includes opening/setup if it is the first live notebook visit. Section 5’s three-minute opening allocation is then a return/check; if Section 3 is demonstrated statically, Section 5 becomes the first startup. Neither route assumes setup homework. Rehearse setup in the actual Colab runtime: installs, restarts and model training can overrun their allocations. Optional follow-along may become instructor demonstration without removing the conceptual walkthrough.
+**Opening and compute:** The current Section 3 checkpoint runs directly in the slides. Section 5 therefore includes the first notebook startup in its proposed four-minute opening allocation. A later guided notebook version of Section 3 would need to budget first access/setup within its activity and make Section 5 a return/check. No route assumes setup homework. Rehearse setup in the actual Colab runtime: installs, restarts and model training can overrun their allocations. Optional follow-along may become instructor demonstration without removing the conceptual walkthrough.
 
-**Execution boundary:** The existing `run_representations()` call fits both variants and all three methods, and writes all their development results at once. Section 5 initially displays primary outputs; Section 6 reads the already-produced paired control. Splitting their *presentation* does not imply separate completed runs. Keep one normal artifact directory for continuity into Day 3. No new runner, artifact copy or configuration search is needed merely to teach this sequence.
+**Execution boundary:** The existing `run_representations()` call fits both variants and all three methods, and writes all their development results at once. Section 5 initially displays primary outputs; Section 6 reads the already-produced paired control. The runner prints both variants even with show_plot=False; the teaching cell captures that output before revealing only the primary artifacts. A compatible completed run is read again without refitting; incomplete or mismatched existing artifacts are rejected. Splitting their *presentation* does not imply separate completed runs. Keep one normal artifact directory for continuity into Day 3. No new runner, artifact copy or configuration search is needed merely to teach this sequence.
 
 **Fallback:** Use one clearly identified, source-bound current run if live training fails or is slow. Display the dataset/settings identity and validation split, and distinguish previous execution from activity in the current classroom. The existing historical fixed-motif output is not a valid fallback for the new primary PPM comparison. If no compatible current CNN run exists, show the mechanism and report that the comparison is pending; do not fabricate a result. Shorten optional parameter-count details, extra base changes and architecture explorations before cutting the core inference/evaluation discussion.
 
@@ -870,8 +1135,21 @@ Use the existing [03_representations.ipynb](../../notebooks/03_representations.i
 - [Representation verification](../../instructor/verification/representations.md): documents the construction, architecture and earlier runs. Its primary 0.802/0.907/0.564 ROC-AUC values belong to the old fixed-motif generator and must not populate this revised primary chart. Its times and interaction scores are historical observations, not new classroom measurements.
 - [Current Day 1 record](../../instructor/verification/day1-current.json): validation logistic ROC-AUC/AP 0.608333/0.607054 and forest 0.611875/0.597040 on the revised PPM dataset. This is current classical evidence, not a current CNN run or a substitute for matched stage 03 identities and artifacts.
 
-### Before implementation is called verified
+### Implemented notebook readback contract for Sections 5–6
 
-Rehearse stage 03 with the current generator and record source/configuration identities, training history, selected epoch, row alignment, paired-bag equality, validation metrics and computation scope. No tuning should be performed merely to obtain a preferred ranking. Add guided notebook cells and explicit stops, then check the generated notebook against canonical source. Verify the hand calculations, shape labels and eventual interactive controls offline, plus the normal slide navigation, notes/export/print behavior. Hosted Colab execution, timed classroom pacing and projector readability require their own checks.
+Keep lesson helpers in the existing notebook-generation source and regenerate the same combined notebook; do not copy scientific implementations or create a second practical. Read representation_run.json and generation.json identities before displaying results. Join saved validation predictions by variant/method/sample ID, checking exactly the matching validation rows and labels. Use the normal course_output directory for continuity into Day 3.
 
-**Sections 1–2 are implemented for review.** Sections 3–6 remain proposed; their new slide IDs do not resolve in the retained later HTML scenes. The Section 2 build preserves Section 1’s twelve records and ten later legacy records, replacing the old loss/optimization scenes and putting the new 50–60 break before the retained one-hot scene. Other-day decks, notebooks, scientific code, original annotations, glossary and ADRs are preserved. No training, protected test scoring, commit or push was performed for this slide build.
+- **Primary history and checkpoint:** read models/simple/cnn_history.csv; derive the earliest maximum-validation epoch. Reload cnn.pt using the canonical architecture and check inference against representation_validation_predictions.csv with an explicitly documented float32 tolerance (rtol=0, atol=1e-6). The checkpoint itself does not store the epoch. Extract post-ReLU second-layer maps in evaluation/inference mode without refitting; defaults are the first validation row and channel 0.
+- **Metrics and runtime:** read representation_validation.csv and reproduce ROC-AUC/AP from aligned probabilities. Record runtime as aggregate per variant from representation_run.json, not per method. No new measured neural ranking or runtime is established by this specification.
+- **Paired inspection:** read models/interaction/controlled_order_changes.csv and join only validation sequences. Check complete overlapping 4-mer Counters, pair membership, opposite labels and within-pair bag-probability equality (rtol=0, atol=1e-12). Explain the exact ROC-AUC 0.5 consequence independently of the CNN result. Select alternate groups without training again.
+- **Teaching boundary:** initially capture the full stage 03 output, display primary first, then read the already-generated control. Include the conspicuous end-Day-2 stop before stage 04/05; do not reveal or score test results. The notebook is generated and locally verified; publication and actual Colab execution remain pending.
+
+### Verification and remaining rehearsal
+
+Stage 03 was locally executed with the current generator, without a parameter search. The current record binds source/configuration identities, training history, selected epochs, aligned validation predictions, paired-bag equality, metrics and aggregate runtime. Guided cells and the Day 2 stop are generated and checked against their source; offline slide layout, interactions, navigation, notes, export and printing are verified in QA. Hosted Colab execution, timed classroom pacing and projector readability still require their own checks.
+
+**All six sections are implemented for review.** The final build preserves the first 58 records (Sections 1–4 and both breaks) exactly and replaces six legacy scenes with the 28 reviewed Section 5–6 slides. All current anchors resolve; old source hashes redirect to corresponding concepts. Other-day HTML, scientific source, original annotations, glossary and ADRs are preserved. The generated Day 2 notebook was locally executed using training/validation only; no protected test scoring, commit or push occurred.
+
+**Sections 5–6 specification update — 2026-11-03:** expanded to fourteen proposed slides each, retaining 30/25 minutes and the full-day 160 teaching + 20 break minutes. Every new beat specifies visible content, speaking notes, a pointing/reveal cue and a transition. This update changes planning only; HTML, notebook/source bytes, Sections 1–4 slide specifications and other-day stories are preserved. No training, notebook execution, protected test scoring, commit or push is part of this update.
+
+**Sections 5–6 implementation — 2026-11-03:** notebook inspection cells and all 28 slides are built. The [current run](../../instructor/verification/day2-current.json) records seed2026/CPU2threads/24epochs, selected epochs 2 (primary) and 1 (control), complete validation-pair checks and source/artifact fingerprints. Primary logistic/forest/CNN ROC-AUC is 0.608333/0.611875/0.546528; control 0.5/0.5/1.0. The comparison was not tuned to change that ordering. Setup, hosted Colab behavior, timed pacing and projector review remain unverified; see [QA](../qa.md#day-2-sections-56--2026-11-03). This supersedes the earlier specification-only status above.

@@ -6,6 +6,7 @@ import json
 
 from build_course import DESTINATION, ROOT, SOURCE, section3_cells, without_local_imports, cell as make_cell
 from day1_teaching import before_workflow, after_workflow
+import day2_teaching
 
 
 def check() -> None:
@@ -24,6 +25,16 @@ def check() -> None:
             assert notebook["cells"][start - 1]["id"] == "definitions-01", path
             assert notebook["cells"][start + len(teaching)]["id"] == "run-01", path
             assert notebook["cells"][start + len(teaching) + 1:] == after_workflow(make_cell), path
+        if path.name == "03_representations.ipynb":
+            for name, expected_hash in notebook["metadata"]["course_teaching_sources"].items():
+                assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == expected_hash, (path, name)
+            start = next(i for i, c in enumerate(notebook["cells"]) if c["id"] == "day2-section-5")
+            expected = (day2_teaching.before_workflow(make_cell, notebook["metadata"]["course_sources"])
+                        + [make_cell("code", day2_teaching.RUN_SOURCE, "run-03")]
+                        + day2_teaching.after_workflow(make_cell))
+            assert notebook["cells"][start:start+len(expected)] == expected, "Day 2 teaching cells differ"
+            assert notebook["cells"][start-1]["id"] == "definitions-03"
+            assert notebook["cells"][start+len(expected)]["id"] == "stage-04"
         sources = notebook["metadata"]["course_sources"]
         embedded = []
         for name, expected_hash in sources.items():
@@ -45,7 +56,7 @@ def check() -> None:
             if "definitions" in cell["id"]:
                 definitions.append(code)
         assert sorted(definitions) == sorted(embedded), f"Embedded source differs: {path}"
-    print("Four notebooks: syntax, hashes, exact source/Day 1 teaching cells, empty outputs and no reveal calls passed")
+    print("Four notebooks: syntax, hashes, exact source/Day 1–2 teaching cells, empty outputs and no reveal calls passed")
 
 
 if __name__ == "__main__":
