@@ -3,8 +3,8 @@
   "date": "2026-11-03",
   "execution": "Locally executed generated Day 2 notebook, training/validation only; Colab and classroom timing unverified.",
   "source_sha256": {
-    "notebooks/03_representations.ipynb": "a7b9170c708214f0f3c8a9b1eda69ad8399dc9e15d3360c560405ac817ad4729",
-    "tools/build_course.py": "f1beed2c4a40ffd4954fa6f60e31b065c88c0631730c4c2ddf51c8046ac6bf7f",
+    "notebooks/03_representations.ipynb": "41ac2505081b317baa9051482d75a31e3a456a6897296019a2e0fb08a92cad2d",
+    "tools/build_course.py": "c8eed42dfd98818dbe431282c4b6a10a803d41a1d1f4ecb613b238a53bba9056",
     "tools/day2_teaching.py": "79265caf6089e49e854577138a1f852afad167c70ddce90665a95ccc8eb49b85",
     "tools/rehearse_day2.py": "34aea99e304d6ee99f08ead174554ae437ae247cef983dab0a67af952fcdda4d",
     "course_code/course_core.py": "ece9dac6edebf6296e0ba3fae6d6c665ceb8a26b35f517c11591924b7f40c7b0",
@@ -9628,10 +9628,15 @@
     }
   ],
   "artifact_sha256": {
+    "embedding_run.json": "9204c664565ab9a20f362c24baa95c00aa30cfebf61ed4e5af023e5a2840acdf",
     "day2_teaching_identity.json": "35e036018dd6d92a62cf6dbeb6a8bed36adfaa2092acaa13481792a0c843aa3d",
+    "simple_live_example.json": "79ab8359e506235f9e7adf535ba3ffd5d73813107ec2e715d42f290a96f704dd",
     "representation_run.json": "eabe9b78dea885db017f9d18f00842fe43d7eea2e6736803bd9521aaff3916e4",
     "representation_validation.csv": "6bee24799f9c4658d93fc5a020eb3eb71f6ea24ab11a457515218717755743a8",
+    "embedding_validation.csv": "c3e5b1e6c6d9615fa737b02c60482db71a8d9e3494443fe7fc584b9ba510c5b8",
+    "day3_teaching_identity.json": "73983ab1109f437e5214c30d0cd92e08a7e3c6db810a9b2626ea63eae70bd288",
     "representation_validation_predictions.csv": "e3ef4ae6e39f67889ea2d25e3c644c08200b767d9042deaaecbb4b9cb1be0756",
+    "interaction_live_example.json": "718d9bbe7bf384120194c4cfbda89571f6b029f687f4bb7e278b69e48ba89a09",
     "datasets/simple/protected_test.csv": "f91ffc20653cb8dcbb402fffc6b1a7d60c710e82b931fe0efe574aaa08b6ffc4",
     "datasets/simple/split_manifest.csv": "63d3672a0d88ce185b243472242cf4b3b1ce1b2727c30537ed271f5f266a1d5a",
     "datasets/simple/validation.csv": "4a6a7bfca79ce11eeaf54704f3c97452a7bcc2e697b36b2808829adfe926748f",
@@ -9644,17 +9649,36 @@
     "datasets/interaction/generation.json": "0933dc1d3bfa92caa97dec8b8fe29db1b31339f11c52e5e7470bdbed149d6de1",
     "datasets/interaction/simulation_truth.csv": "409d6a60860a351a4e588257d0eb74e67c716d93b471fb2b64701d7d5fdb513e",
     "datasets/interaction/train.csv": "8d7ed116b1ca07e7341a3be6e32afbf212d82b31deeaaf66d4c35a484aec1898",
+    "models/simple/foundation_validation_predictions.csv": "6c6c5ca7b287f246d25f57228a06a5cd62efe370bd36f8461dbf0846c1a42281",
     "models/simple/random_forest.joblib": "ee9e73ba656c6dedf848e00742c9becc5aab70da878b9fd15fcc8ca58104593e",
     "models/simple/logistic_regression.joblib": "312c7117a879ada43e9fb60906f61a86467cf2fc76268791e7c46b1da1c3500b",
+    "models/simple/foundation.joblib": "98916b87f3ce62f1ea3dc1e6713bef60a54f166b9ac37015451d58020cd3bf77",
     "models/simple/cnn_history.csv": "fb862912fc9d8800c1f465527690f0a7df5958cef63e9ca782b1e8bb28e5a26b",
     "models/simple/cnn.pt": "246fba088430b07e8f4e2998c382dfb040db05fd6c83ae382f123b41051e62aa",
+    "models/interaction/foundation_validation_predictions.csv": "0efedaf4ab7b2fbe723e962800622aee7ae802c419f26e0738cea26b55e19ddc",
     "models/interaction/random_forest.joblib": "c1c953f235d150440a7ed2c824d3fb8f556fb96576c5ad3286860f5ef23d6324",
     "models/interaction/controlled_order_changes.csv": "7bbd8ce21bc21618bfc8061860aeab06b0b55a409f3c85f21a73b520b175389e",
     "models/interaction/logistic_regression.joblib": "067f48f1cc5d9847839d5a211d34bd19e60de7a3834631fc04a16faf5e840f1c",
+    "models/interaction/foundation.joblib": "4c0728bba9a6e69f865544ded81daebcea97e43458c357c5a0c9d561599a6864",
     "models/interaction/cnn_history.csv": "264bd57bf3b3bb11ca03ebf1df92d56df4c577fb768085970e4e264d14025477",
     "models/interaction/cnn.pt": "7befe712bc2c9fbc1c910031f4a3056aaaf24f5b2231a460748bc47e599cb0d8"
   },
-  "rehearsal_wall_seconds": 4.101237054999729,
+  "rehearsal_wall_seconds": 3.4521254290002616,
   "training_run_reused": true,
-  "workspace": "/tmp/ml-day2-sections56/rehearsal"
+  "workspace": "/tmp/ml-day2-sections56/rehearsal",
+  "day4_builder_revalidation_2026_11_03": {
+    "reason": "Day 4 integration changes the shared notebook builder. Complete Day 1 and Days 2–3 cell records, all scientific source bindings and other teaching source bindings were compared to pre-Day-4 snapshots and are identical. Only the shared builder metadata changes those existing notebooks. No refitting, extraction, freeze or result changes.",
+    "changed_fingerprints": {
+      "notebooks/03_representations.ipynb": {
+        "previous_sha256": "e1b5642b8606c0a6824581b11a1d6731bfcc4fc29f8a47b65ec467afcac08eaf",
+        "current_sha256": "41ac2505081b317baa9051482d75a31e3a456a6897296019a2e0fb08a92cad2d"
+      },
+      "tools/build_course.py": {
+        "previous_sha256": "c715f5a532a2c13b3227cca84064592bb93cdb082773f5c9115aa0c366016a09",
+        "current_sha256": "c8eed42dfd98818dbe431282c4b6a10a803d41a1d1f4ecb613b238a53bba9056"
+      }
+    },
+    "existing_notebook_cells_identical": true,
+    "scientific_sources_identical": true
+  }
 }

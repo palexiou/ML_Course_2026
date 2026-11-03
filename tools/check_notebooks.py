@@ -7,6 +7,8 @@ import json
 from build_course import DESTINATION, ROOT, SOURCE, section3_cells, without_local_imports, cell as make_cell
 from day1_teaching import before_workflow, after_workflow
 import day2_teaching
+import day3_teaching
+import day4_teaching
 
 
 def check() -> None:
@@ -35,6 +37,18 @@ def check() -> None:
             assert notebook["cells"][start:start+len(expected)] == expected, "Day 2 teaching cells differ"
             assert notebook["cells"][start-1]["id"] == "definitions-03"
             assert notebook["cells"][start+len(expected)]["id"] == "stage-04"
+            start = next(i for i, c in enumerate(notebook["cells"]) if c["id"] == "day3-start")
+            expected = (day3_teaching.before_workflow(make_cell, notebook["metadata"]["course_sources"])
+                        + [make_cell("code", day3_teaching.RUN_SOURCE, "run-04")]
+                        + day3_teaching.after_workflow(make_cell))
+            assert notebook["cells"][start:start+len(expected)] == expected, "Day 3 teaching cells differ"
+            assert notebook["cells"][start-1]["id"] == "definitions-04"
+            assert notebook["cells"][start+len(expected)]["id"] == "stage-05"
+        if path.name == "06_scientific_audit.ipynb":
+            for name, sha in notebook["metadata"]["course_teaching_sources"].items():
+                assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == sha, (path, name)
+            start = next(i for i, c in enumerate(notebook["cells"]) if c["id"] == "day4-start")
+            assert notebook["cells"][start:] == day4_teaching.teaching_cells(make_cell), "Day 4 teaching cells differ"
         sources = notebook["metadata"]["course_sources"]
         embedded = []
         for name, expected_hash in sources.items():
@@ -56,7 +70,7 @@ def check() -> None:
             if "definitions" in cell["id"]:
                 definitions.append(code)
         assert sorted(definitions) == sorted(embedded), f"Embedded source differs: {path}"
-    print("Four notebooks: syntax, hashes, exact source/Day 1–2 teaching cells, empty outputs and no reveal calls passed")
+    print("Four notebooks: syntax, hashes, exact source/Day 1–4 teaching cells, empty outputs and no reveal calls passed")
 
 
 if __name__ == "__main__":

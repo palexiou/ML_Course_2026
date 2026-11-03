@@ -107,10 +107,10 @@ Outcome: specify an analysis and scientifically audit its evidence with or witho
 | 110–125 | Complete Day 4 audit code and one-page checklist. | Detect group overlap and prediction misalignment independently. |
 | 125–140 | Compare claims with code, manual workflow, and known simulation construction. | Separate observed evidence from assertions and absent provenance. |
 | 140–150 | Discuss repair plan, remaining uncertainty, and the test boundary. | Do not tune agents against the revealed Day 3 test. |
-| 150–170 | Reserved instructor-led Agentomics demonstration: question (3 min), actual workflow/evidence (10 min), audit (7 min). | Actual access/materials and recording are pending instructor; no product behavior is asserted here. |
+| 150–170 | Reserved Agentomics slot: instructor-selected audit-discussion fallback. Use the platform evidence questions and discussion canvas. | Actual demonstration remains pending; no product behavior is asserted. |
 | 170–180 | Final discussion: what must remain human scientific responsibility? Which evidence would change your conclusion? | Preserve the full 10 minutes. |
 
-For Agentomics, obtain actual materials before teaching. Select a real example that exposes input/split choices, experiment tracking, and supporting evidence, then ask which of those can actually be inspected. If access fails, use a genuine labeled recording if supplied. If neither exists, keep the 20-minute slot for discussing what evidence an automation demonstration would need, explicitly mark the demonstration not delivered, and retain the final 10-minute discussion. This is an honest contingency, not completion of the Agentomics requirement.
+**Current Day 4 delivery (2026-11-03):** the instructor chose “Keep the fallback for now.” Use the [implemented story and timings](../Slides/Day_4/story.md) as the slide-level guide and the [completed notebook route](../notebooks/README.md#day-4-guided-audit) for the practical. Minutes 150–170 discuss which split, execution and prediction artifacts would be needed to audit an automated workflow. No product capability is inferred. The actual Agentomics demonstration remains pending; replacing the fallback later needs a real inspected example or genuine recording. Preserve synthesis at 170–180. This choice supersedes the earlier demonstration-first contingency wording; it does not claim a product rehearsal.
 
 ## Cut priorities and recovery
 

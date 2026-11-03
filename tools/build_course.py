@@ -7,6 +7,8 @@ from pathlib import Path
 from textwrap import dedent
 from day1_teaching import before_workflow, after_workflow
 import day2_teaching
+import day3_teaching
+import day4_teaching
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "course_code"
@@ -394,10 +396,16 @@ def build() -> None:
                 cells.extend(day2_teaching.before_workflow(cell, hashes))
                 cells.append(cell("code", day2_teaching.RUN_SOURCE, "run-03"))
                 cells.extend(day2_teaching.after_workflow(cell))
+            elif number == "03" and stage == "04":
+                cells.extend(day3_teaching.before_workflow(cell, hashes))
+                cells.append(cell("code", day3_teaching.RUN_SOURCE, "run-04"))
+                cells.extend(day3_teaching.after_workflow(cell))
             else:
                 cells.append(cell("code", actions[stage], f"run-{stage}"))
             if number == "01":
                 cells.extend(after_workflow(cell))
+            if number == "06":
+                cells.extend(day4_teaching.teaching_cells(cell))
         notebook: dict = {
             "cells": cells,
             "metadata": {
@@ -416,7 +424,12 @@ def build() -> None:
         if number == "03":
             notebook["metadata"]["course_teaching_sources"] = {
                 name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                for name in ("tools/build_course.py", "tools/day2_teaching.py")
+                for name in ("tools/build_course.py", "tools/day2_teaching.py", "tools/day3_teaching.py", "instructor/completed/day3_alignment.py")
+            }
+        if number == "06":
+            notebook["metadata"]["course_teaching_sources"] = {
+                name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+                for name in ("tools/build_course.py", "tools/day4_teaching.py", "agent_workshop/flawed_analysis.py")
             }
         (DESTINATION / (script.stem + ".ipynb")).write_text(
             json.dumps(notebook, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

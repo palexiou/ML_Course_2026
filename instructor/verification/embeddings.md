@@ -40,3 +40,22 @@ These are actual validation results, not a promised ranking. No protected course
 The card states that plants and viruses were excluded from this checkpoint's pretraining genomes. That is particularly relevant to a plant-motivated teaching example. We have not audited pretraining overlap, and we do not claim none exists. Neither successful transfer on artificial motif order nor failure on a small noisy motif task establishes real promoter utility. Fine-tuning is a conceptual contrast, not a required practical.
 
 **Actual Colab execution, Colab setup/extraction costs, classroom network behavior, and instructor full-session rehearsal are not run.** The user will paste and arrange code manually in Colab. Local success is not a claim that those checks passed. A cached practical is a separately labeled contingency, not evidence of a fresh live extraction.
+
+## Current PPM lesson verification — 2026-11-03
+
+The [current source-bound record](day3-current.json) supersedes the October 26 primary fixed-motif values **for current slide comparisons**. The earlier run remains historical evidence. The generated combined notebook's Day 3 path executed locally using the compatible, already-fitted current stage 03 outputs; no configuration search or retuning followed.
+
+| Variant | Frozen NT + logistic validation ROC-AUC | Average precision |
+| --- | ---: | ---: |
+| Current primary 15-position PPM | 0.496597 | 0.545287 |
+| Fixed-slot paired order control | 0.800347 | 0.757830 |
+
+The record includes all four matched workflows, scientific/notebook/teaching source hashes, dataset generation identities, artifact hashes, exact package versions and actual training-vector excerpts. The downloaded weight SHA-256 matched the expected value above. The pinned config confirms 12 layers, 16 heads, hidden width 512 and rotary position encoding. Model and code revisions remain pinned; custom-code source hashes were inspected against the pinned snapshot. No scientific defaults changed.
+
+A separate small live checkpoint extracts the first two training sequences of each variant, verifies 31 tokens and finite `(2, 512)` outputs, and pauses. The canonical full-cache call then extracts or reuses every row; absent caches cause extraction even with `live_example=False`. Its initial current local extraction/cache-check times were **36.078 s** for 1,200 primary rows and **14.105 s** for 480 control rows; classifier fits were **0.091 s** and **0.020 s**. These wall times include the canonical internal consistency example and cache checks; they are not raw forward-only throughput or Colab estimates. First weight download/setup are separate. Later notebook readbacks reused the completed run without refitting, so the initial extraction timings remain in `embedding_run.json`.
+
+Readback verified training-only scaler means (float64 accumulation), matching validation sample IDs/groups/labels, saved/recomputed probabilities and ROC-AUC/AP, and agreement between live and batched vectors. Synthetic alignment checks accept reordered rows and reject missing/duplicate IDs. A separate copy of the development workspace successfully ran the notebook's freeze, captured all 32 artifacts and source/package identities, and refused a second freeze. **The reveal was never called; no protected course test results were calculated.** The development workspace itself remains unfrozen.
+
+Reproduce locally with `MPLBACKEND=Agg python tools/rehearse_day3.py --workspace /path/to/compatible/day2-workspace`. Dependencies and pinned weights must be available; the script expects the complete Day 2 workspace. It writes the source-bound record and tests freeze in a separate temporary copy. The [67-scene deck](../../Slides/Day_3/presentation.html) builds from this record with `python tools/build_day3_slides.py`. [Slide QA](../../Slides/qa.md#day-3-implementation--2026-11-03) covers the offline lesson controls and empty test-result defaults.
+
+**Hosted Colab execution, setup/download cost on the classroom network, projector readability, measured teaching pace and the authorised classroom test reveal remain unverified.** Main-branch Colab links include the new teaching cells only after publication.

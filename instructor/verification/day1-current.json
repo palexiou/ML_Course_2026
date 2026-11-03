@@ -579,12 +579,28 @@
   "source_sha256": {
     "course_code/course_core.py": "ece9dac6edebf6296e0ba3fae6d6c665ceb8a26b35f517c11591924b7f40c7b0",
     "course_code/01_simple_signal.py": "81c61986859f7b665660bb47828bafdbda25a3386ff99c6cb00492653a787682",
-    "tools/build_course.py": "f1beed2c4a40ffd4954fa6f60e31b065c88c0631730c4c2ddf51c8046ac6bf7f",
+    "tools/build_course.py": "c8eed42dfd98818dbe431282c4b6a10a803d41a1d1f4ecb613b238a53bba9056",
     "tools/day1_teaching.py": "bca9f00ad56ea2b6587ac205297ca0f706f59b2ab0eb90cd658bf5b290959e68"
   },
   "builder_revalidation_2026_11_03": {
     "reason": "Day 2 teaching integration changed the shared builder. Day 1 generated cells and scientific source hashes were independently verified identical to the recorded notebook; only builder metadata changed. No Day 1 refitting or result changes.",
     "previous_builder_sha256": "4eba91e966693f0e4b6c375fa7e88804d2cc7c018861f3e27121aa4df3dced88",
     "current_builder_sha256": "f1beed2c4a40ffd4954fa6f60e31b065c88c0631730c4c2ddf51c8046ac6bf7f"
+  },
+  "day3_builder_revalidation_2026_11_03": {
+    "reason": "Day 3 checkpoints extend the shared builder. Day 1 notebook cells and scientific sources verified byte-identical; only builder metadata changed. No refitting or result changes.",
+    "previous_builder_sha256": "f1beed2c4a40ffd4954fa6f60e31b065c88c0631730c4c2ddf51c8046ac6bf7f",
+    "current_builder_sha256": "c715f5a532a2c13b3227cca84064592bb93cdb082773f5c9115aa0c366016a09"
+  },
+  "day4_builder_revalidation_2026_11_03": {
+    "reason": "Day 4 integration changes the shared notebook builder. Complete Day 1 and Days 2–3 cell records, all scientific source bindings and other teaching source bindings were compared to pre-Day-4 snapshots and are identical. Only the shared builder metadata changes those existing notebooks. No refitting, extraction, freeze or result changes.",
+    "changed_fingerprints": {
+      "tools/build_course.py": {
+        "previous_sha256": "c715f5a532a2c13b3227cca84064592bb93cdb082773f5c9115aa0c366016a09",
+        "current_sha256": "c8eed42dfd98818dbe431282c4b6a10a803d41a1d1f4ecb613b238a53bba9056"
+      }
+    },
+    "existing_notebook_cells_identical": true,
+    "scientific_sources_identical": true
   }
 }

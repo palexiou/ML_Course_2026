@@ -50,3 +50,12 @@ Drafted the complete [Day 4 story specification](../../../Slides/Day_4/story.md)
 ### November 2, 2026 · story-driven presentation revision
 
 Rewrote the four-day HTML deck around questions, predictions, experiments, and evidence. Visible teaching text is approximately 52% shorter; detailed teaching content remains in expandable Notes references. Timings and scientific boundaries are preserved. All 60 scenes passed local Chrome layout checks at three viewport sizes, navigation, notes, local links, editing/export, and 60-page printing. See [presentation QA](../../../Slides/qa.md) for evidence and limits. The original bundled slide acceptance criterion is not claimed fully complete: the named frontend-slides skill was unavailable, classroom-output alignment remains an instructor check, and the actual Agentomics materials remain pending. Overall ticket status stays ready-for-human.
+
+
+### November 3, 2026 · Day 4 implementation and selected fallback
+
+Implemented the [Day 4 deck](../../../Slides/Day_4/presentation.html): 53 content scenes plus two breaks, with matching [story and instructor cues](../../../Slides/Day_4/story.md). Added completed checkpoints to the existing GitHub/Colab audit notebook: authored fixture, exact ID join, negative prediction probes and independent readback of genuine October 26 development predictions. No new agent run, classifier training or protected course test read/scoring. Historical input line-ending identities are explicitly documented; archive bytes are unchanged. [Current evidence](../../../instructor/verification/day4-current.json) binds scientific and teaching sources.
+
+The instructor explicitly selected “Keep the fallback for now.” The Agentomics slot at 150–170 therefore uses the structured audit-evidence discussion; a real product demonstration remains pending and is not an acceptance blocker for implementing the selected fallback. Final synthesis is preserved at 170–180. This supersedes earlier demo-first and paste-ready handoff wording; completed GitHub notebooks are the current classroom route.
+
+Local Chrome checks, notebook execution and remaining limitations are in [QA](../../../Slides/qa.md#day-4-implementation--2026-11-03). Status remains **ready-for-human** for instructor review, actual Colab execution, projector readability and measured classroom pacing; no product rehearsal is claimed. Nothing committed or pushed.

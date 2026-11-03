@@ -1,6 +1,6 @@
 # Day 3 story
 
-**Section-by-section breakdown for instructor review — 2026-11-03.** All six sections are specified slide by slide. Each slide has an ID, a timing, the slide content, speaking notes, pointing/reveal guidance and a transition, following the [Day 2 story](../Day_2/story.md) format. These are discussion beats, not implemented slides. The [current Day 3 deck](presentation.html) still holds its 15 earlier scenes. Titles, emphasis and pacing remain editable.
+**Implemented for instructor review — 2026-11-03.** All six sections are specified slide by slide. Each slide has an ID, a timing, the slide content, speaking notes, pointing/reveal guidance and a transition, following the [Day 2 story](../Day_2/story.md) format. The [Day 3 deck](presentation.html) implements these 65 content beats and two breaks, with instructor notes and guided notebook checkpoints. Local verification is recorded in [QA](../qa.md#day-3-implementation--2026-11-03). Titles, emphasis and pacing remain editable.
 
 **Working title:** Borrowing learned representations, then opening the sealed test.
 
@@ -35,7 +35,7 @@
 
 **Story question:** Can useful sequence features be learned before seeing our course labels?
 
-**Exit understanding:** Connect Day 2's trained filters to transfer learning. Define an embedding as learned, compact and semantic. Explain self-supervised masking and how its objective differs from ours. Distinguish frozen extraction from fine-tuning. Keep the evaluation rules unchanged.
+**Exit understanding:** Connect Day 2's trained filters to transfer learning. Define an embedding as a learned numerical representation; dimensionality and useful similarity depend on the model and objective. Explain self-supervised masking and how its objective differs from ours. Distinguish frozen extraction from fine-tuning. Keep the evaluation rules unchanged.
 
 **Teaching thread:** Start from Day 2's final question, "Can we borrow features already learned?". Build the ideas in order: embedding → transfer → self-supervision → masking → objective mismatch → frozen versus fine-tuned. The Dog/Cat/Bird clusters from the reference deck give an intuitive picture of an embedding before any DNA model appears.
 
@@ -69,9 +69,9 @@
 
 **Proposed slide ID:** `day-3-s1-what-is-embedding` · **Time:** 3:30–5:30 (2:00)
 
-**What is on slide:** Reference-deck idea rebuilt natively: Dog, Cat and Bird images → a short vector strip of numbers → a 2-D scatter with three labelled clusters. Three labels underneath: **Learned** from data; **Compact** — many inputs, one fixed-length vector; **Semantic** — similar inputs land close together.
+**What is on slide:** Reference-deck idea rebuilt natively: Dog, Cat and Bird images → a short vector strip of numbers → a 2-D scatter with three labelled clusters. Three labels underneath: **Learned** from data; **Fixed length** — our pooling gives one vector per sequence; **Task-dependent similarity** — useful proximity is learned, not guaranteed.
 
-**What I want to say:** An embedding is a list of numbers that a model learned to produce for each input. Nobody wrote the rules: training arranged the space so that similar inputs end up near each other. Count features were coordinates we designed; embedding coordinates are learned, so a single dimension rarely has a human name.
+**What I want to say:** An embedding is a list of numbers that a model learned to produce for each input. Nobody wrote the rules: training can arrange useful relationships in the space, but closeness depends on the training objective and representation. Count features were coordinates we designed; embedding coordinates are learned, so a single dimension rarely has a human name.
 
 **Point / reveal:** Show the inputs, then the vector, then the clusters. Point out that the axes are labelled only "Dim 1 / Dim 2".
 
@@ -83,7 +83,7 @@
 
 **What is on slide:** The reference deck's two-row transfer diagram, rebuilt natively. Orange top row: broad DNA → generic data → pretrained network → generic task. A dashed arrow passes the network down. Blue bottom row: our sequences → pretrained backbone + small task head → Class A / Class B.
 
-**What I want to say:** Transfer learning trains a large network once on broad data, then reuses that backbone for a specific task. Only a small head needs our labels. In biology, labelled data is scarce and sequences are plentiful, which is why this pattern is so attractive.
+**What I want to say:** Transfer learning trains a large network once on broad data, then reuses that backbone for a specific task. In our frozen workflow, a small head uses our labels; transfer can also fine-tune the backbone. In biology, labelled data is scarce and sequences are plentiful, which is why this pattern is so attractive.
 
 **Point / reveal:** Reveal the top row, then the dashed transfer arrow, then the head. Orange marks borrowed parts; blue marks what our labels train.
 
@@ -95,7 +95,7 @@
 
 **What is on slide:** Two cards with sequence illustrations. Supervised: sequence + label B → loss. Self-supervised: sequence alone → part hidden → the hidden part becomes the target.
 
-**What I want to say:** Supervised learning needs a label from outside the sequence, like our A/B classes. Self-supervised learning builds its target from the input itself, so any sequence can be used. Pretraining therefore needs no promoter assays and no course labels.
+**What I want to say:** Supervised learning needs a label from outside the sequence, like our A/B classes. Self-supervised learning builds its target from the input itself, so any sequence can be used. This masking objective needs neither external assay labels nor our course labels.
 
 **Point / reveal:** Show supervised first. Then animate one piece of the sequence moving out of the right card to become the target.
 
@@ -161,15 +161,15 @@
 
 **Transition:** One final check before we open the encoder.
 
-### S1-11 · Do we still need a test set?
+### S1-11 · What changes when features are borrowed?
 
 **Proposed slide ID:** `day-3-s1-check-question` · **Time:** 23:30–25:00 (1:30)
 
-**What is on slide:** Question: "The encoder read billions of bases. Do we still need protected test data for our classifier?" Options: A) No — it has already generalised; B) Yes — our classifier learns from our labels and must be judged on unseen samples.
+**What is on slide:** Open discussion: "What does pretraining change? Which evaluation responsibilities stay with us?"
 
 **What I want to say:** Pretraining changes where the features come from. It does not change the rules of evaluation. The classifier is fitted on our training rows, so validation and the protected test keep exactly the roles they had on Days 1–2.
 
-**Point / reveal:** Take a show of hands, then reveal B.
+**Point / reveal:** Invite contributions; connect them to training, validation and the protected test. No scored choice.
 
 **Transition:** So how does a transformer actually turn our DNA into a vector?
 
@@ -201,7 +201,7 @@
 
 **Proposed slide ID:** `day-3-s2-tokenization-progression` · **Time:** 27:00–29:30 (2:30)
 
-**What is on slide:** The reference deck's progression: characters `A T G C T A A G C T` → k-mers `ATG CTA AGC` → learned tokens `ATGC TAA GCT`. Arrow above: "larger tokens → shorter sequences".
+**What is on slide:** The reference deck's progression: characters `A T G C T A A G C T` → k-mers `ATG CTA AGC T` → learned tokens `ATGC TAA GCT`. Arrow above: "larger tokens → shorter sequences".
 
 **What I want to say:** A transformer works on tokens. Single bases give long sequences. Fixed k-mers or learned subword tokens give fewer, larger tokens. Shorter token sequences make attention much cheaper, because every token interacts with every other token. Different DNA models make different choices.
 
@@ -225,11 +225,11 @@
 
 **Proposed slide ID:** `day-3-s2-atg-context-example` · **Time:** 31:00–34:00 (3:00)
 
-**What is on slide:** The reference deck's example. `CCA GGC TCC [ATG] GCT GAA CTG TAA`, bracketed as "5′ UTR tokens" and "coding context". Step 1: `ATG` with a "generic embedding" strip. Step 2: attention arcs from `ATG` to its neighbours. Step 3: a "contextualised embedding" strip with the tick "start codon".
+**What is on slide:** A conceptual token sequence `CCA [ATG] GCT TAA`. Step 1: `ATG` with a "generic embedding" strip. Step 2: attention arcs from `ATG` to its neighbours. Step 3: a "contextualised embedding" strip with a different contextual vector. Do not infer start-codon recognition from this schematic.
 
 **What I want to say:** On its own, the input vector for `ATG` is the same wherever `ATG` appears. After attention it also contains information from its context, so an `ATG` followed by an open reading frame can be represented differently from an `ATG` elsewhere. This is a conceptual illustration with codon-sized tokens and invented numbers. It shows the idea of contextual vectors, not an inspected neuron in our checkpoint.
 
-**Point / reveal:** Use three steps: generic vector, arcs, contextual vector. Keep the numbers small and labelled "illustrative".
+**Point / reveal:** Use three steps: generic vector, arcs, contextual vector. Keep the numbers small; identify conceptual numbers in notes, with no extra slide label.
 
 **Transition:** How are those arcs turned into a new vector?
 
@@ -311,7 +311,7 @@
 
 **What is on slide:** DNA → padlocked encoder → 512-number strip → standardise → logistic regression → P(B). The last two steps are marked "fitted on training rows only".
 
-**What I want to say:** Only the scaling and the logistic regression learn from labels. Like Day 1's pipeline, both are fitted on training rows, and validation is transformed using the training statistics. The code uses `StandardScaler` and `LogisticRegression(C=1.0, max_iter=2000)`.
+**What I want to say:** Scaling learns means and variances from training inputs only; logistic regression learns using training inputs and labels. Like Day 1's pipeline, both are fitted on training rows, and validation is transformed using the training statistics. The code uses `StandardScaler` and `LogisticRegression(C=1.0, max_iter=2000)`.
 
 **Point / reveal:** Show the padlock first, then highlight the two trainable steps in blue.
 
@@ -347,7 +347,7 @@
 
 **Teaching thread:** "Run two, reuse the rest." A live extraction makes the vectors concrete. A provenance-checked cache keeps the session manageable.
 
-**Scope and delivery:** The instructor demonstrates; students may follow along in the [Days 2–3 notebook](../../notebooks/03_representations.ipynb). First use downloads roughly 224 MB of weights and needs internet. **Caches are not in Git:** if no compatible cache is restored, `run_foundation()` extracts every row. If extraction cannot run, label the route as cached-only (`run_foundation(live_example=False)`), not live.
+**Scope and delivery:** The instructor demonstrates; students may follow along in the [Days 2–3 notebook](../../notebooks/03_representations.ipynb). First use downloads roughly 224 MB of weights and needs internet. **Caches are not in Git:** if no compatible cache is restored, `run_foundation()` extracts every row. If extraction cannot run, a cached-only route requires a restored, compatible full cache. `live_example=False` alone does not prevent extraction when the cache is absent.
 
 ### S3-01 · Run two, reuse the rest
 
@@ -355,7 +355,7 @@
 
 **What is on slide:** Two lanes. Live: two training sequences → encoder → two 512-number strips. Cache: all rows → stored vectors with sample IDs and hashes → classifier.
 
-**What I want to say:** We first watch the encoder process two sequences, so the vectors are real rather than abstract. Then we use a stored, checked set of vectors for every row, keeping extraction separate from classification.
+**What I want to say:** We first watch the encoder process two sequences, so the vectors are real rather than abstract. Then the canonical workflow extracts or reuses a checked full cache, keeping extraction separate from classification. A fresh runtime has no cache.
 
 **Point / reveal:** Reveal the live lane, then the cache lane.
 
@@ -365,7 +365,7 @@
 
 **Proposed slide ID:** `day-3-s3-notebook-open` · **Time:** 61:30–64:00 (2:30)
 
-**What is on slide:** The notebook's stage 04 heading and the `run_foundation()` call. Callouts: two CPU threads, batch size 32, and "rerun stage 03 first on a recycled runtime".
+**What is on slide:** The notebook's stage 04 heading and Day 3 identity/live checkpoint cells. Callouts: two CPU threads, batch size 32, and "rerun stage 03 first on a recycled runtime".
 
 **What I want to say:** Stage 04 sits in the same notebook as yesterday's CNN, because it reuses the same datasets and split identities. On a fresh Colab runtime, stage 03 must run first or its artifacts must be restored. Local CPU execution is the rehearsed baseline; hosted Colab execution has not yet been checked.
 
@@ -391,7 +391,7 @@
 
 **What is on slide:** Licence card: weights CC-BY-NC-SA-4.0, with icons for attribution, non-commercial and share-alike. Footnote: the custom code files carry their own Apache-2.0 notices.
 
-**What I want to say:** These weights are licensed for non-commercial use with attribution and share-alike terms. That suits this course, but check the licence before any other use. Reading the licence is part of choosing a representation.
+**What I want to say:** These weights are licensed for non-commercial use with attribution and share-alike terms. Check the licence for the intended use; the weight terms and custom-code notices are distinct. Reading the licence is part of choosing a representation.
 
 **Point / reveal:** Reveal the three icons.
 
@@ -401,9 +401,9 @@
 
 **Proposed slide ID:** `day-3-s3-live-forward` · **Time:** 68:30–71:30 (3:00)
 
-**What is on slide:** An empty output panel that is filled live by the notebook: encoder load time and "two-sequence extraction (2, 512)" for each variant. A side note gives the October 26 local reference: load 2.60 s; extraction 0.226 s and 0.187 s, excluding download.
+**What is on slide:** Two sequence/vector illustrations and output shape `(2, 512)`. The notebook prints its actual load and two-training-row extraction times for each variant; classroom times are not prefilled.
 
-**What I want to say:** The cell takes the first two *training* sequences, tokenises them, runs the frozen encoder without gradients, pools, and prints the shape and time. The October 26 times come from one local CPU run; today's Colab times will differ.
+**What I want to say:** The cell takes the first two *training* sequences, tokenises them, runs the frozen encoder without gradients, pools, and prints the shape and time. The current local timings are in `day3-current.json`; classroom timings will differ. Loading may include a first download, whereas forward-pass timing does not.
 
 **Point / reveal:** Run the cell and read the printed shape. Do not prefill classroom timings.
 
@@ -413,7 +413,7 @@
 
 **Proposed slide ID:** `day-3-s3-inspect-vectors` · **Time:** 71:30–73:30 (2:00)
 
-**What is on slide:** The first few components of the two live vectors, printed from the notebook as a short heat strip. Checklist: shape (2, 512), all finite.
+**What is on slide:** The first eight components of two actual local training vectors as a short heat strip; the notebook prints its own live vectors. Checklist: shape (2, 512), all finite.
 
 **What I want to say:** These are dense, continuous numbers. Unlike a count column, no single dimension means "contains TATA". We judge them by what a classifier can do with them, not by reading individual coordinates.
 
@@ -425,7 +425,7 @@
 
 **Proposed slide ID:** `day-3-s3-compute-scaling` · **Time:** 73:30–76:00 (2:30)
 
-**What is on slide:** Two bars from the October 26 local CPU run: full extraction plus validation 77.62 s for 1,200 rows and 31.76 s for 480 interaction rows. Classifier fit time is shown from today's printed record. Footnote: "one local run; Colab and classroom network not measured".
+**What is on slide:** Current local CPU bars: full-cache extraction/checks 36.08 s for 1,200 primary rows and 14.10 s for 480 control rows; head fitting 0.091 s and 0.020 s on the same seconds scale. Values come from the saved original extraction record, not a later cache read. Classroom/network/setup costs remain unmeasured.
 
 **What I want to say:** Extraction is the expensive step and scales with the number of sequences. Fitting a logistic regression on 512 numbers per row is comparatively cheap. That asymmetry is why we compute vectors once, store them and check them, rather than re-extracting for every experiment.
 
@@ -481,11 +481,11 @@
 
 **Transition:** What does that do to a model?
 
-### S4-02 · Two rows, swapped
+### S4-02 · Shuffled rows
 
 **Proposed slide ID:** `day-3-s4-two-row-example` · **Time:** 82:00–84:30 (2:30)
 
-**What is on slide:** Requested order A (label A), B (label B); cache order B, A. The positional join gives A the vector for B and vice versa. Two consequences follow: training learns from mismatched pairs, and evaluation scores the wrong samples.
+**What is on slide:** Requested order A, B, C; cache order C, A, B. A positional join gives every sample another sample's vector. The button repairs correspondence by ID. Two consequences follow: training learns from mismatched pairs, and evaluation scores the wrong samples.
 
 **What I want to say:** If training rows are mismatched, the classifier learns from pairs that do not exist. If validation rows are mismatched, every reported score refers to the wrong samples. Reordering itself is fine: shuffled rows are harmless when we align by ID. Silent positional pairing is the problem.
 
@@ -613,9 +613,9 @@
 
 **Proposed slide ID:** `day-3-s5-interaction-results` · **Time:** 117:00–120:00 (3:00)
 
-**What is on slide:** Validation ROC-AUC on the paired order variant. Historical October 26 local runs: counts + logistic 0.500, counts + forest 0.500, CNN 1.000, frozen embedding 0.800. Label: "historical runs — confirm with the current matched run before presenting them as today's evidence".
+**What is on slide:** Validation ROC-AUC on the paired order variant. Use the current matched local validation record for all four workflows; historical runs are retained only in the verification history.
 
-**What I want to say:** Paired sequences have identical 4-mer counts, so any count-based model is at chance by construction. The position-keeping CNN separated them in that run. The frozen embeddings, though averaged, still carried useful order information in that run, short of the CNN. That fits Section 2's question about averaging: pooling compressed the context but did not erase it here.
+**What I want to say:** Paired sequences have identical 4-mer counts, so any count-based model is at chance by construction. The current position-keeping CNN separates the fixed-slot control on validation. Inspect whether the current frozen embeddings carry useful order information; read the current record rather than assuming a historical ranking. That fits Section 2's question about averaging: pooling compressed the context but did not erase it here.
 
 **Point / reveal:** Reveal the count bars first, then the CNN, then the embeddings.
 
@@ -673,7 +673,7 @@
 
 **Proposed slide ID:** `day-3-s5-alphagenome-horizon` · **Time:** 130:30–134:00 (3:30)
 
-**What is on slide:** From the reference deck: AlphaGenome takes 1 Mb of input and predicts many functional tracks (RNA-seq, CAGE, DNase/ATAC, histone marks, TF binding, splicing, contact maps), with variant effects scored as alternative minus reference. Citation: *Advancing regulatory variant effect prediction with AlphaGenome*.
+**What is on slide:** From the reference deck: AlphaGenome takes 1 Mb of input and predicts many functional tracks (RNA-seq, CAGE, DNase/ATAC, histone marks, TF binding, splicing, contact maps), with variant effects scored as alternative minus reference. Citation: Avsec et al., *Advancing regulatory variant effect prediction with AlphaGenome*, Nature 649 (2026), doi:10.1038/s41586-025-10014-0; official [model documentation](https://www.alphagenomedocs.com/) and [source overview](https://github.com/google-deepmind/alphagenome).
 
 **What I want to say:** At the frontier, sequence models read much longer windows and predict many measured genomic tracks, then score variants by comparing predictions for the reference and alternative sequences. These are the authors' reported results on real data. They are not something we reproduce today. The questions we practised still apply: what were the training and evaluation splits, what was held out, and what independent evidence supports a variant claim?
 
@@ -805,7 +805,7 @@
 
 **Proposed slide ID:** `day-3-s6-test-results-table` · **Time:** 153:00–158:00 (5:00)
 
-**What is on slide:** An empty eight-row table (2 variants × 4 methods; ROC-AUC, AP), filled from the printed output. Nothing is prefilled.
+**What is on slide:** An empty eight-row table (2 variants × 4 methods; ROC-AUC, AP). After the authorised classroom reveal, the instructor may load its saved `test_results.json` to fill this table and the next chart. Nothing is prefilled; importing executes no model and is not independent manifest verification.
 
 **What I want to say:** Read each row against your written prediction. Which surprised you? Name the observation first; explanations come next.
 
@@ -903,11 +903,13 @@
 
 | Checkpoint | Student/instructor action | Current state |
 | --- | --- | --- |
-| Section 3 | Run `run_foundation()`: live two-training-sequence extraction, shape (2, 512), printed timings. | Stage 04 code exists in the [Days 2–3 notebook](../../notebooks/03_representations.ipynb); verified locally on October 26. A lesson-specific stop after the live example is proposed. |
-| Section 3 contingency | `run_foundation(live_example=False)` with a restored, compatible cache. | Exists; must be labelled cached-only, not live. |
-| Section 4 | Synthetic alignment practical, then cache-backed classifier with printed validation metrics. | [`day3_alignment.py`](../../instructor/completed/day3_alignment.py) and its scaffold exist; the classifier is part of `run_foundation()`. |
-| Section 5 | Read matched validation results for four workflows on both variants. | Requires a current stages 03–04 run on the revised generator; a readback cell is proposed. |
-| Section 6 | Stage 05 `freeze_workflows()`; separate instructor `reveal_test(...)`. | Freeze exists in the notebook; the reveal is deliberately not a notebook cell. |
+| Section 3 | Run Day 3 identity and live cells: two training sequences per variant, shape (2, 512), token count and printed timings; pause before the full workflow. | Implemented and executed locally in the [Days 2–3 notebook](../../notebooks/03_representations.ipynb); current source-bound record is [day3-current.json](../../instructor/verification/day3-current.json). |
+| Section 3 contingency | `run_foundation(live_example=False)` with a restored, compatible cache. | Requires a restored compatible full cache and a separately labelled route. The normal guided route includes its own live checkpoint. |
+| Section 4 | Synthetic alignment practical, then cache-backed classifier with printed validation metrics. | Completed alignment example and failure checks are embedded in the notebook; canonical classifier run and cache/prediction readback are separate checkpoints. |
+| Section 5 | Read matched validation results for four workflows on both variants. | Implemented current matched comparison readback; local validation checked, without tuning or protected test scores. |
+| Section 6 | Stage 05 `freeze_workflows()`; separate instructor `reveal_test(...)`. | Freeze remains an explicit stage 05 cell. It passed in a separate copied local workspace; the reveal is deliberately absent from executable cells and remains unrun. |
+
+**Local verification:** [Current evidence](../../instructor/verification/day3-current.json) records all four matched methods on the current generator: primary embedding ROC-AUC 0.496597 / AP 0.545287; order-control embedding ROC-AUC 0.800347 / AP 0.757830. No tuning followed. This is local computational verification, not classroom pacing or hosted Colab execution.
 
 **Cache availability:** caches, models and outputs are not in Git or the notebooks. A fresh Colab runtime has no cache, so `run_foundation()` extracts every row (77.62 s + 31.76 s locally on October 26; Colab not measured). Before class, either rehearse that cost or restore a provenance-checked `course_output/` explicitly and label it as previous execution.
 
@@ -929,6 +931,6 @@
 - Test values: none exist yet. Never prefill them.
 - Reference-deck figures (AlphaGenome, DNABERT, Zeiler & Fergus) report the authors' results, with citations; they are not course evidence.
 
-### Before implementation is called verified
+### Verification boundary
 
-Run stages 03–04 with the current generator and record source and configuration identities, then build the Section 5 charts from that record. Check the layer count and other architecture details for S2-08 against the pinned `config.json` before stating them on a slide. Rehearse extraction cost and cache restoration in the actual Colab runtime. Verify the slide interactions offline, plus navigation, notes, export and print. Hosted Colab execution, timed pacing and the actual reveal need their own checks.
+The current matched stage 03–04 validation path was checked locally and Section 5 charts are built from its source-bound record. The pinned config has been checked: 12 layers, 16 attention heads, hidden size 512, rotary positions. Rehearse extraction cost and cache restoration in the actual Colab runtime. Offline rendering, interactions, navigation, notes, export and printing are recorded in [QA](../qa.md#day-3-implementation--2026-11-03). Hosted Colab execution, timed pacing and the actual reveal need their own checks.
