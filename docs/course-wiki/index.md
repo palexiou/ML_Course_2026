@@ -14,6 +14,7 @@ The earlier [pilot report](../../.scratch/ml-bioinformatics-course/style-alignme
 
 ## Evidence and proposed practice
 
+- [Day 2 story](../../Slides/Day_2/story.md) — 2026-11-03 discussion draft requested after Day 1 review: six sections with proposed slide content, speaking notes and GitHub/Colab checkpoints. Timings and detailed content remain proposals; HTML and notebook implementation have not changed.
 - [Reference materials](reference-materials.md) — 2026-11-03 source-review findings, useful teaching precedents, and reuse limits.
 - [Slide revision workflow](slide-revision-workflow.md) — 2026-11-03 proposed application of instructor feedback, review boundaries, and handoff checks.
 - [Day 1 story](../../Slides/Day_1/story.md) — 2026-11-03 Section 1 implemented for review; Sections 2–6 retain proposed beats. Includes current opening titles/anchors and rationale.
@@ -72,3 +73,11 @@ On 2026-11-03, the instructor replaced the primary fixed-word generator with ind
 ## Full Day 1 review build — 2026-11-03
 
 The instructor authorized Section 6 specification and the remaining Day 1 slide build. See the [implemented 112-slide deck](../../Slides/Day_1/presentation.html), [complete story](../../Slides/Day_1/story.md), [notebook path](../../notebooks/README.md#day-1-sections-46-continue-in-the-same-notebook), [authorization/teaching scope](teaching-preferences.md#remaining-day-1-build-authorized-and-implemented--2026-11-03) and [current QA](../../Slides/qa.md#full-day-1-implementation--2026-11-03). This supersedes prior pending implementation statuses for Day 1; earlier entries retain their historical meaning. Days 2–4 remain at their earlier design. Publication, actual Colab execution and classroom timing remain separate from local verification.
+
+## Day 2 illustrated opening — 2026-11-03
+
+The instructor authorized the twelve-slide Day 2 Section 1 build and requested more illustrations, with less reliance on box diagrams. See the [implemented opening](../../Slides/Day_2/presentation.html#day-2-s1-welcome), [editable story](../../Slides/Day_2/story.md#section-1), [instructor direction](teaching-preferences.md#day-2-section-1-more-illustrations--2026-11-03) and [QA](../../Slides/qa.md#day-2-section-1--2026-11-03). This supersedes the preceding earlier-design status for the Day 2 opening. Its later thirteen scenes retain their earlier content and timings; Sections 2–6 remain discussion drafts.
+
+## Day 2 learning section implemented — 2026-11-03
+
+The instructor authorized the reviewed Section 2 spec. The [learning section](../../Slides/Day_2/presentation.html#day-2-s2-section) now has fourteen illustrated slides and the first ten-minute break, alongside the preserved twelve-slide opening and ten later records (37 scenes). See [teaching direction](teaching-preferences.md#day-2-section-2-build-authorized--2026-11-03), [story](../../Slides/Day_2/story.md#section-2) and [QA](../../Slides/qa.md#day-2-section-2--2026-11-03). This supersedes Section 2’s proposal-only status; Sections 3–6 and later timing/result alignment remain pending.

@@ -169,3 +169,33 @@ The checks found and corrected note-keyboard navigation and transitions affectin
 The frontend-slides skill named in the original tickets was not available in this session; this revision uses the established deck and the user's requested editorial direction. No skill-based visual approval is claimed.
 
 Projector readability, actual printer settings, full-session pacing, and actual Colab outputs still need instructor verification. The Day 3 reveal remains gated and has no prefilled results. The Agentomics scene remains a reserved slot with preparation explicitly pending, because access, actual example, materials, and rehearsal have not been supplied. A genuine agent screen recording remains pending. These limits do not prevent reviewing the rewritten presentation.
+
+## Day 2 Section 1 — 2026-11-03
+
+Implemented the authorized twelve-slide opening, using native SVG DNA, count tallies, weighted connections, circular neurons and function curves. The HTML now has 25 scenes: the twelve new slides replace the original first two; the thirteen later scene records are preserved exactly. Sections 2–6 retain their earlier content, timing and historical results; this is a partial review build. The [story](Day_2/story.md#section-1) describes the new opening and retains the proposed full-day structure separately.
+
+Local Chrome checks used offline `file:` loading at 1280×720 and 390×844, with reduced motion; keyboard checks also used normal motion. The twelve opening slides passed bounds, title/content separation, SVG text overlap, toolbar separation and active-slide isolation checks at both sizes. A rendered twelve-slide contact sheet and notes screenshots were visually inspected. Curve/caption spacing and visibility inheritance in the new notes were corrected before the final checks.
+
+- No page script errors or HTTP(S) requests during the offline run.
+- ReLU presets and keyboard slider input produce the expected positive and zero activations; hidden-unit selection updates its path, weights, bias and activation; the three-step forward pass and reset work.
+- New and legacy deep links, Arrow/Home/End navigation, N/Escape notes, all twelve SAY/POINT/TRANSITION note records, preserved later edit keys and isolation from old opening autosaves were checked.
+- A title edit survived Save HTML and reopening the export; the exported ReLU control also worked.
+- Print produced 25 pages at 1440×810 PDF points, with notes excluded and the forward-pass figure at full contrast.
+- The builder is deterministic and idempotent. Later scene records, other-day HTML and the annotated outline match their prior versions. The 21-base example’s eighteen overlapping four-base windows independently give TATA=2, AATG=1 and CGCG=3. Hidden/output arithmetic is a disclosed teaching construction, with no fitted-model claims.
+
+Rebuild with `python tools/build_day2_section1.py`; interaction source is `tools/day2_section1_interactions.js`. Temporary screenshots, contact sheet, PDF, export and check output are under `/tmp/ml-day2-section1/` and are not presentation dependencies. No models or notebooks were executed for this slide build. Classroom pacing, projector readability and the remaining Day 2 redesign are still pending; no commit or push was requested.
+
+## Day 2 Section 2 — 2026-11-03
+
+Implemented the authorized fourteen-slide learning section plus the 50–60 break. The deck has 37 scenes: twelve preserved opening records, fourteen new learning slides, the new break and ten preserved later records. The previous loss/optimization scenes and first break are replaced; the retained one-hot scene follows the new break. Its original timing and the later legacy timings/results remain pending Sections 3–6 redesign. The [story](Day_2/story.md#section-2) owns editable speaking, pointing/reveal and transition notes.
+
+Local Chrome verification used offline `file:` loading at 1280×720 and 390×844. All 27 implemented slides/break passed bounds, SVG text overlap, title/content separation (allowing the centered section splash), toolbar separation and active-slide isolation checks at both sizes. Rendered contact sheets and selected interaction states were visually inspected. The training return-arrow/caption separation was corrected during review. No page script errors or HTTP(S) requests occurred in the final runs.
+
+- Loss presets reproduce 0.223/1.609/0.554; the selected-weight plot gives 0.598/0.554/0.513 at weights 1.1/1.2/1.3. Keyboard slider input stays on the slide and its tangent stays within the plotted domain at both endpoints.
+- Parameter/bias selection, label reveal, three-stage backward tracing/reset, one-weight descent/reset, six-step small/large-rate paths and code highlighting were checked. The descent produces v₁≈1.243, p≈0.585 and loss≈0.536, matching independent arithmetic.
+- The epoch diagram reaches 704 examples after eleven updates and 720 after twelve, then starts a new pass with a changed illustrative row permutation. These are schematic row positions, not real sample identities. Validation selection marks epoch 8 and distinguishes it from the last epoch 24.
+- All new note records, N/Escape, Home/End/arrows, new and old deep links, old retained edit keys, isolation from obsolete loss autosaves and opening ReLU/hidden-unit controls passed checks. Selected controls were also clicked at phone size.
+- A Section 2 title edit survived Save HTML, clearing browser storage and reopening the export; the exported weight-step control worked. Print produced 37 pages at 1440×810 PDF points, with notes excluded and completed descent/checkpoint/backward figures. Interactive state restored after printing.
+- The Section 2 builder is idempotent. Rebuilding Sections 1 and 2 in sequence preserves their records. Section 1’s twelve records and the ten retained legacy records match the pre-build snapshot exactly. Other-day decks, the annotated outline, canonical training code and combined notebook remain unchanged. Documentation file links, source syntax and continuous 25-minute Section 2 timing were checked.
+
+Rebuild with `python tools/build_day2_section2.py`; inline interaction source is `tools/day2_section2_interactions.js`. Temporary screenshots, contact sheets, PDF, exported HTML and check output are under `/tmp/ml-day2-section2/` and are not delivery dependencies. All new plotted numbers are constructed teaching examples with source/provenance in Notes. No model fitting, notebook execution, current CNN benchmark, protected test scoring, commit or push is claimed. Actual Colab execution, full-session timing and projector readability remain separate checks.
