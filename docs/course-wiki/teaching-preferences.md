@@ -34,3 +34,21 @@ On 2026-11-03, the instructor reported a design agent revising the pilot separat
 On 2026-11-03, the proposed application was to retain the evolving logistic-regression explanation, simplify its visible hierarchy using the latest preference above, and place detailed speaking cues in notes. This was a proposal, not a record of a completed deck change.
 
 On 2026-11-03, the [revision workflow](slide-revision-workflow.md) captured how to review that proposal against the outline and explicit teaching points before expanding it to other sections.
+
+## Style approved — 2026-11-03
+
+On 2026-11-03, after the cleaner [seven-slide logistic pilot](../../slides/pilots/day1-logistic-story.html), the instructor said:
+
+> OK good, let's lock in the style (and for the real presentation, we will lose the Illustrative example part of course)
+
+Source: exact latest instructor message supplied in the 2026-11-03 checkpoint request. This approval supersedes the earlier entries above that recorded visual revision as pending or unaccepted. It approves the clean style and progressive explanatory sequence, not a completed rewrite of the main deck.
+
+On 2026-11-03, the locked production preference was **one short title, one focal explanatory visual, generous whitespace, minimal chrome, and detailed speaker notes**. Keep the example and visual positions stable where they help a progression, revealing one meaningful operation at a time. Production slides should omit repetitive visible “Illustrative example” labels. Keep numerical provenance, invented weights/counts and simulation limitations in notes and teaching source; invented values never become claimed empirical results. The pilot may retain its disclosure as a documented example.
+
+On 2026-11-03, the instructor requested an editable Day 1 story in 20–30-minute sections before revising the actual slides section by section. The [story draft](../../slides/day1-story.md) supplies that proposal; it carries no fixed slide-count requirement. The annotated outline remains the source of instructor intent.
+
+On 2026-11-03, the instructor questioned whether students must run live hands-on/Colab activities and asked whether GitHub notebooks can open directly in Colab. This reopened delivery discussion; it did not withdraw the earlier agreement to provide scaffolded and completed notebooks. Instructor demonstration with optional follow-along was the agent's recommendation, pending discussion. The [delivery note](../../README.md#github-notebooks-and-colab) records the official support and repository-specific gaps.
+
+## Retrospective applied — 2026-11-03
+
+On 2026-11-03, reviewing the earlier “too busy” correction and the [pilot report's appended revision](../../.scratch/ml-bioinformatics-course/style-alignment-pilot.md#2026-11-03--instructor-feedback-more-breathing-space) identified repeated headers, breadcrumb rails and takeaways as competing with the explanation. The worthwhile lesson was to review the focal teaching operation before propagating the style. This checkpoint applied it through one style source, one active story and a short [slides README](../../slides/README.md); historical guides and source reports were retained. Visual hierarchy requires instructor judgment, so no new framework, mechanical style rule or retrospective document was introduced.

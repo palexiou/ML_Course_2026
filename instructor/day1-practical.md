@@ -1,5 +1,7 @@
 # Day 1: notebook instructions
 
+2026-11-03 navigation note: these retained cells and slide numbers support the earlier deck. The [proposed Day 1 story](../slides/day1-story.md) offers instructor demonstrations with optional follow-along; compulsory student execution remains undecided. Nothing here has been removed or newly verified in Colab. See the [GitHub/Colab delivery note](../README.md#github-notebooks-and-colab) for the missing notebook packaging and runtime requirements.
+
 Keep this guide beside a Colab notebook. The presentation tells you when to switch here. Python runs in the notebook; the slide itself is a visual explanation or activity prompt.
 
 ## Setup — slides 1–4

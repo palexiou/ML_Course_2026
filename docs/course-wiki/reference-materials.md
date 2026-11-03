@@ -28,3 +28,9 @@ On 2026-11-03, the [source review](../../.scratch/ml-bioinformatics-course/malta
 ## Proposed use — 2026-11-03
 
 On 2026-11-03, the agent proposed keeping a stable example, revealing one operation at a time, explaining the concept before a complex research figure, and giving an explicit practical transition. This inference connects the reference findings to the [revision workflow](slide-revision-workflow.md); it was not recorded as a completed change or an instructor-approved slide specification.
+
+## Later approval and delivery evidence — 2026-11-03
+
+On 2026-11-03, the instructor subsequently approved the clean pilot style and progressive sequence; [the dated preference entry](teaching-preferences.md#style-approved--2026-11-03) supersedes the approval uncertainty above. Historical sources remained pedagogical evidence rather than blanket curriculum approval, and their reports were retained unedited.
+
+On 2026-11-03, Google's [official GitHub integration notebook](https://colab.research.google.com/github/googlecolab/colabtools/blob/main/notebooks/colab-github-demo.ipynb) and [Colab FAQ](https://research.google.com/colaboratory/faq.html) documented direct GitHub notebook links, private-repository authorization, saving copies and temporary runtimes. The [README delivery note](../../README.md#github-notebooks-and-colab) holds the repository-specific inventory and recommendation. This verified documentation support, not end-to-end course execution or a decision to eliminate practicals.

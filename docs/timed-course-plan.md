@@ -2,6 +2,8 @@
 
 Status: teaching structure and in-class setup policy accepted. All times are elapsed minutes within a three-hour session. The exact simulation and model configurations remain to be verified experimentally before expanding teaching materials.
 
+2026-11-03 scope note: retain this accepted timetable as historical context. Plan further Day 1 discussion in [slides/day1-story.md](../slides/day1-story.md); its six-section arrangement, later second break and opening delivery changes are proposed, pending discussion. Days 2–4 below are outside that revision. The earlier technical-verification wording records the planning stage; consult [verification evidence](../instructor/verification.md) for subsequent local work.
+
 ## Day 1: Define and evaluate the experiment
 
 | Minutes | Activity |

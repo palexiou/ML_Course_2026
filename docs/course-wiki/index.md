@@ -10,11 +10,14 @@ The earlier [pilot report](../../.scratch/ml-bioinformatics-course/style-alignme
 ## Instructor decisions
 
 - [Teaching preferences](teaching-preferences.md) — 2026-11-03 instructor identity, teaching intent, and the correction requesting more breathing space.
+- [Approved pilot style](teaching-preferences.md#style-approved--2026-11-03) — later 2026-11-03 approval, production labels, and reopened notebook-delivery discussion; supersedes the earlier pending-approval entries.
 
 ## Evidence and proposed practice
 
 - [Reference materials](reference-materials.md) — 2026-11-03 source-review findings, useful teaching precedents, and reuse limits.
 - [Slide revision workflow](slide-revision-workflow.md) — 2026-11-03 proposed application of instructor feedback, review boundaries, and handoff checks.
+- [Day 1 story](../../slides/day1-story.md) — 2026-11-03 active discussion draft: six 20–30-minute sections before section-by-section slide revision.
+- [GitHub/Colab delivery findings](../../README.md#github-notebooks-and-colab) — 2026-11-03 official support, missing course notebook files, private access and optional-follow-along recommendation.
 
 ## Reading and authority
 
@@ -39,3 +42,9 @@ On 2026-11-03, the following were **uncommitted working-tree observations**, not
 On 2026-11-03, instructor-message citations used the statements supplied in this wiki task, including its complete summary of the latest parent feedback. The supplied parent locator was <t3-thread://v2/3fe04ecf-3c4b-47ac-9bfe-e4a729538c86/9b6accf1-4606-42a8-addb-6619edbf6c34>; the transcript was not independently retrieved.
 
 On 2026-11-03, the instructor limited this task to wiki Markdown: preserve annotations, ADRs, reports, and decks; leave the separately changing pilot outside inspection and editing. No revision completion was established here.
+
+## Later checkpoint — 2026-11-03
+
+On 2026-11-03, the instructor authorized consolidation, commit and push, superseding the earlier wiki-only task scope above. The approved style and latest delivery uncertainty were ingested into the linked preference, workflow and reference pages. The existing course work was checkpointed at `palexiou/ML_Course_2026@2b242e2`; the source-snapshot hashes above still identify the earlier observations and were not rewritten as later approvals.
+
+On 2026-11-03, active planning was reduced to the linked Day 1 story, teaching preferences and compact [slides README](../../slides/README.md). The earlier expanded guide was marked historical in place; the annotated outline and source reports were preserved. The story's changed timing and demonstration-first delivery remained proposals pending discussion. No full-deck rewrite, notebook removal or execution-protocol change was authorized by this checkpoint's scope.

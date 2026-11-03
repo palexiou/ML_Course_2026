@@ -1,5 +1,7 @@
 # Day 1: expanded teaching guide
 
+**Historical deck reference — marked 2026-11-03.** Superseded as the active narrative-planning entry by [day1-story.md](day1-story.md), whose six-section timing is proposed pending discussion. The cues below document the earlier deck implementation and remain useful when inspecting it; they are not a fixed slide count or the new production style. Retained in place to preserve source-report and deck links. Follow the [approved style](../docs/course-wiki/teaching-preferences.md#style-approved--2026-11-03) for future revisions.
+
 Built from your Day 1 comments in [teaching-outline.md](teaching-outline.md). That annotated document is preserved. This guide matches the rebuilt Day 1 section of [index.html](index.html#day-1).
 
 There are 62 slides across 180 minutes. Most explanations use several slides over a ten-minute block; practical and break slides stay up while the activity takes place. Timings are flexible teaching allocations, not an automatic advance or a completed rehearsal. Use **N / Notes** for the same speaking cues inside the presentation, or use the slide selector to jump to a topic.

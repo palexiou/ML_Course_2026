@@ -1,5 +1,17 @@
 # Presentation verification
 
+## 2026-11-03 documentation and repository checkpoint
+
+Checkpointed previously authorized course work at `2b242e2`, then consolidated navigation and drafted [day1-story.md](day1-story.md). The story is proposed pending discussion; this checkpoint does not claim a main-deck style conversion or classroom readiness.
+
+- All repository Markdown local file links and Markdown heading anchors passed the checkpoint check, including retained source reports and corrected issue links. The unchanged main deck's 22 distinct local resource/asset targets exist.
+- The annotated outline retained SHA-256 `651f5eed4cfdaff0607cfc60764bbc6e1cd4693124106e2eca0b31614c824f12`. The main deck and both scratch source reviews retained their starting bytes. The earlier teaching-guide body was retained except for one trailing space, with a historical-status notice prepended.
+- The pilot's only file change removed one trailing space from its embedded font-license text; figures, notes, styling and scripts were unchanged. Inline JavaScript syntax checks passed for the main deck and pilot. Earlier rendering/interaction checks below and in the pilot report were not rerun or recast as new evidence.
+- Checked six teaching allocations total 160 minutes, plus 20 minutes of breaks; independently checked the short sequence's selected counts, score/sigmoid calculation and shared confusion-matrix arithmetic. These checks establish consistency, not teaching pace.
+- Read Google's official GitHub integration notebook and FAQ, inspected the existing scripts/practical cells, and confirmed private repository metadata. The [README](../README.md#github-notebooks-and-colab) records direct-opening support, absent course `.ipynb` files and concrete setup gaps. No model training, expensive downloads, Colab execution or protected-test scoring was performed.
+
+Staged review includes whitespace and secret/artifact-pattern checks. No new datasets, notebook outputs, external reference attachments, screenshots, model files or temporary QA artifacts belong to this checkpoint. Projector readability, execution/setup timing and the final live-participation choice remain open.
+
 ## Current edition: expanded Day 1
 
 November 2, 2026. Rebuilt Day 1 from the instructor's annotated outline into 62 shorter slides; the complete deck now has 106 slides. The supplied instructor identification is Panagiotis Alexiou, ERA Chair, University of Malta. The original annotated `teaching-outline.md` is byte-for-byte preserved. The new `day1-teaching-guide.md` maps every new slide to its original outline section and provides matching speaker cues.
