@@ -4,36 +4,24 @@ Four English-language sessions for 10–15 master's students, taught by one inst
 
 ## Start here
 
-- [Scaffolded practicals](exercises.md): short selected-code tasks, one per day, with interpretation questions.
+- [Scaffolded practicals](practicals.md): short selected-code tasks, one per day, with interpretation questions.
 - [Completed answers](answers.md): explanations and links to separate, pasteable Python scripts.
 - [One-page scientific-audit checklist](audit-checklist.html): open in a browser and print A4 portrait at 100%, with browser headers and footers disabled.
 - [Day 4 kit](../agent_workshop/README.md): vague prompt, precise specification, example project instructions, scientific skill, deliberately flawed fixture, audit answers, and observation route.
-- [Verification record](verification.md): distinguishes local checks from outstanding classroom verification.
-- Existing model implementations: [simple signal](../course_code/01_simple_signal.py), [separate leakage investigation](../course_code/02_split_leakage.py), [representations](../course_code/03_representations.py). Use generated [paste-ready code](../paste_ready/README.md) for one-cell copying. Local verification is recorded separately; it does not establish Colab compatibility.
+- [Verification record](verification/README.md): distinguishes local checks from outstanding classroom verification.
+- Existing model implementations: [simple signal](../course_code/01_simple_signal.py), [separate leakage investigation](../course_code/02_split_leakage.py), [representations](../course_code/03_representations.py). Use the [completed notebooks](../notebooks/README.md) for Colab. Local verification is recorded separately; it does not establish Colab compatibility.
 
-The current handoff is standalone code for the instructor to paste into Colab. It is not notebook UI work. Each completed exercise runs as one cell without repository imports. The instructor arranges the cells manually; actual Colab execution is explicitly deferred. The short exercises supplement the model practicals; a successful exercise is not evidence that the full model or embedding workflow has been rehearsed.
+Notebook delivery is agreed: use the completed GitHub notebooks through Colab, with hands-on depth still open. The [notebook guide](../notebooks/README.md) is the canonical setup, source, output and evaluation-contract reference. It replaces manually arranging paste-ready scripts; actual Colab/classroom rehearsal remains pending.
 
-## Scientific contract and current integration issues
-
-The course dataset is simulated DNA for binary sequence classification, motivated by promoter prediction. It is not evidence of real promoter recognition. Use the terms course dataset, dataset variant, scaffolded practical, and scientific audit consistently.
-
-Dataset interface: `sample_id,group_id,sequence,label,split`. IDs are unique; labels are 0 or 1; split is `train`, `validation`, or `test`; related sequences stay in one split. Prediction interface: `sample_id,probability`, with probability referring to label 1. Join predictions by sample ID, never by incidental row order. IDs, groups, split, and simulation truth are audit metadata, not model features.
-
-Training fits learned transformations and model parameters. Validation guides development. Primary comparison metric is ROC-AUC; report average precision, class balance, and threshold-0.5 confusion matrices as supporting views. Average precision is not trapezoidal PR-AUC. The existing separate leakage investigation uses balanced accuracy as its primary metric; disclose this and do not mix it into the main representation ranking.
-
-Keep protected test labels, scores, predictions, and outcome plots out of model development. Generation creates all labels before exporting partitions. Development readers omit the protected label column. A frozen, label-independent encoder may compute embeddings for test input sequences without fitting on those sequences; this is not a test-score reveal. Simulation-truth inspection during development must be restricted to training and validation IDs. The planned Day 3 reveal is the only scoring step. File separation and hashes are accident guards, not adversarial access security.
-
-The integrated leakage outputs use `group_id`, `split` (`train`/`validation`), and `probability`. Its comparison-table `split` field names the flawed/corrected strategy; its per-sample manifest records train/validation membership. Do not merge this isolated dataset into the main representation comparison.
-
-The interaction dataset variant is a deliberately engineered **fixed-position motif-order control**. It swaps `TATAAATG` and `CGGACGTC` between blocks starting at zero-based positions 32 and 80. Each block has six G bases before the motif and six C bases after it. Paired sequences share background and have identical 4-mer counts, opposite labels, and the same group ID. The matching flanks preserve the bag of 4-mers. Motif starts are 38 and 86, not 32 and 80. The CNN concatenates flattened convolution features with global maximum features, retaining position. Global pooling alone can discard this cue. This does not establish general regulatory grammar, position-invariant order learning, or universal CNN superiority.
+The [course design history](../docs/course-design.md), [glossary](../GLOSSARY.md) and [accepted ADRs](../docs/adr/) retain the agreed simulation and evaluation boundaries. Teach concepts and interpretation explicitly; use those boundaries where they clarify the example.
 
 ## Before teaching: instructor preparation, not student homework
 
 1. Assemble only development CSVs, code, dependency instructions, and labeled saved development outputs in the student folder. Keep protected test material separately. Check projector, local copies, and printing. Never ask students to obtain accounts before class.
 2. Rehearse the locally verified model workflows in the intended classroom environment. Record measured setup, training, extraction, and discussion times separately. Timetable arithmetic is not a rehearsal.
-3. Keep a local copy of these four completed exercise scripts. Their minimal packages are NumPy, pandas, and scikit-learn; Days 2 and 3 need only NumPy and pandas. Try imports first; install missing packages in class with `%pip install numpy pandas scikit-learn`, then restart if requested. Record actual versions; do not assert compatibility from an unrun environment.
+3. Keep a local copy of the four completed miniature exercise scripts. Follow the single setup reference in the notebook guide; record actual versions and allow runtime restarts during class.
 4. Prepare provenance-labeled previous-run model outputs only if actual artifacts exist. The representation outputs under `course_output/` are locally verified validation artifacts, not a completed Colab or classroom rehearsal. Verify their run and dataset correspondence before projection.
-5. Obtain the actual pretrained model/extraction handoff, immutable revision, tokenizer, pooling, sequence handling, package versions, cache alignment, and measured small extraction. The pinned checkpoint and real full aligned caches are locally verified; see [embedding verification](../docs/foundation-embedding-verification.md). Colab costs remain unmeasured. The Day 3 miniature cache exercise is explicitly synthetic, not pretrained DNA output.
+5. Obtain the actual pretrained model/extraction handoff, immutable revision, tokenizer, pooling, sequence handling, package versions, cache alignment, and measured small extraction. The pinned checkpoint and real full aligned caches are locally verified; see [embedding verification](verification/embeddings.md). Colab costs remain unmeasured. The Day 3 miniature cache exercise is explicitly synthetic, not pretrained DNA output.
 6. Review the [two actual agent runs and parent audit](../agent_workshop/actual_runs/2026-10-26/README.md). Obtain instructor agent access if a live rerun is desired, a short screen recording, and actual Agentomics demonstration access/materials. The recording and Agentomics inputs remain pending. Do not advertise the hand-authored fixture as a recorded agent run. See the Day 4 kit's evidence ledger.
 
 ## Teaching alone
@@ -42,29 +30,13 @@ Project the task and stopping point before circulating. Use pairs for discussion
 
 Give two minutes to predict before running code and two minutes to explain the output afterward. Display the completed code at the checkpoint so syntax trouble does not consume interpretation time. Faster students take the optional extension in class; it is never homework. Read sample/group overlap aloud rather than accepting a high score as proof of correctness.
 
-Keep a visible clock. At minutes 45, 95, and 145 announce five minutes to the checkpoint. Breaks remain at 50–60 and 100–110. Stop slow external requests after five minutes and label the failure. Use verified previous-run evidence if available; otherwise use the labeled conceptual exercise and record that the model step was not completed.
+Keep a visible clock. At minutes 45, 95, and 145 announce five minutes to the checkpoint. Days 2–4 retain breaks at 50–60 and 100–110; use the separately discussed Day 1 story for its proposed timing. Stop slow external requests after five minutes and label the failure. Use verified previous-run evidence if available; otherwise use the labeled conceptual exercise and record that the model step was not completed.
 
-## Day 1 — Define and evaluate the experiment
+## Day 1 — Course introduction to explainability
 
-Outcome: explain and apply the classical workflow using validation for development.
+The instructor agreed the topic sequence on 2026-11-03: general course/ML introduction; first DNA working example; logistic regression on k-mer counts; metrics; trees/forests; explainability. Refine the [active Day 1 story](../Slides/Day_1/story.md), then revise slides section by section. Detailed minutes remain a proposal: 25+25+30+25+30+25 teaching minutes, with breaks at 50–60 and 115–125. Earlier accepted allocations used a startup block and a second break at 100–110; these remain in the [historical deck cues](../Slides/Day_1/previous-teaching-guide.md) and course-design history.
 
-| Minutes | Instructor and student actions | Checkpoint / transition |
-| --- | --- | --- |
-| 0–10 | Check Colab access in class, paste startup imports, run a tiny cell. Offer local code or projector observation immediately for access failures. | Everyone has an execution or observation route; no pre-course setup assumed. |
-| 10–20 | Ask: what is a sample, label, feature, and prediction? What would a probability of 0.8 mean? Motivate promoter prediction while naming the simulation. | A prediction is for a sequence; 0.8 is a model score, not proof of function. |
-| 20–35 | Contrast classification with continuous regression. Map supervised labels, unsupervised structure, and self-supervised prediction from input. Inspect development sequences and noisy motif planting. | The simple signal is probabilistic, not a perfect motif rule. |
-| 35–50 | Count overlapping 4-mers; discuss lost position. Begin Day 1 selected-code exercise. | Features are counts; fit the vocabulary on training only. |
-| 50–60 | Break. | |
-| 60–80 | Establish fixed sample/group split identities. Fit logistic regression from the working model code after integration checks. | Ask why validation cannot be training data and why test stays unread. |
-| 80–100 | Finish Day 1 exercise; interpret probability, threshold, confusion matrix, ROC-AUC and average precision. Use ROC and precision-recall curves from verified model outputs if available. | Change threshold conceptually, without selecting it on test. |
-| 100–110 | Break. | |
-| 110–125 | Explain one tree split and forest averaging; provide working random forest code. | No implementation of a forest from scratch. |
-| 125–150 | Compare validation results on identical IDs; inspect feature importance versus development simulation truth. | Correlated k-mers can share importance; importance is not causal evidence. |
-| 150–165 | Separate leakage investigation: show row-disjoint but group-overlapping evaluation; students identify the flaw before the correction. | Keep its dataset and outputs out of the main comparison. |
-| 165–175 | Show corrected group split and measured outputs; discuss independent-group generalization. | The score need not fall by a promised amount. |
-| 175–180 | Recap and buffer: representation, split, evidence. | “Tomorrow we change the representation, not the evaluation boundary.” |
-
-Leakage short route if delayed: 150–154 inspect overlap, 154–160 propose group split, 160–168 inspect corrected overlap and existing outputs, 168–175 discuss why the old claim fails, 175–180 recap. Do not cut the investigation itself. If upstream outputs are unavailable, the Day 4 fixture's overlap table supplies an explicitly hand-authored diagnosis example, not a completed leakage experiment.
+The DNA example first appears in section 2. Explainability is section 6's focus: local contributions, signed coefficients, forest importance and overlapping motif features. Generalization and shortcuts qualify those explanations; they do not replace the section with an audit lesson. The separate leakage investigation remains available in the notebooks/practicals. Student execution depth and the final in-class setup allocation remain open.
 
 ## Day 2 — Learn the representation
 

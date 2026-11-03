@@ -16,12 +16,12 @@ The earlier [pilot report](../../.scratch/ml-bioinformatics-course/style-alignme
 
 - [Reference materials](reference-materials.md) — 2026-11-03 source-review findings, useful teaching precedents, and reuse limits.
 - [Slide revision workflow](slide-revision-workflow.md) — 2026-11-03 proposed application of instructor feedback, review boundaries, and handoff checks.
-- [Day 1 story](../../slides/day1-story.md) — 2026-11-03 active discussion draft: six 20–30-minute sections before section-by-section slide revision.
+- [Day 1 story](../../Slides/Day_1/story.md) — 2026-11-03 active discussion draft: six 20–30-minute sections before section-by-section slide revision.
 - [GitHub/Colab delivery findings](../../README.md#github-notebooks-and-colab) — 2026-11-03 official support, missing course notebook files, private access and optional-follow-along recommendation.
 
 ## Reading and authority
 
-- On 2026-11-03, the instructor designated the annotated [teaching outline](../../slides/teaching-outline.md) as authority for teaching intent; reference presentations supply pedagogical examples, not automatic curriculum changes.
+- On 2026-11-03, the instructor designated the annotated [teaching outline](../../Slides/teaching-outline.md) as authority for teaching intent; reference presentations supply pedagogical examples, not automatic curriculum changes.
 - On 2026-11-03, this wiki was scoped as dated history. Later sessions should read the relevant page and its sources before deciding, and append dated corrections while marking earlier claims superseded.
 - On 2026-11-03, [GLOSSARY.md](../../GLOSSARY.md), [course design](../course-design.md), [ADR 0001](../adr/0001-controlled-sequence-classification.md), and [ADR 0002](../adr/0002-validation-for-development-protected-test-comparison.md) matched `palexiou/ML_Course_2026@f76752e91e6ac6ef1d836f7938ba248236dff79c`. The ADRs record accepted project decisions; wiki proposals do not override them.
 - On 2026-11-03, the instructor clarified that ADR constraints need not dominate teaching framing: explain the ML concepts and use the constraints where relevant.
@@ -32,8 +32,8 @@ On 2026-11-03, the following were **uncommitted working-tree observations**, not
 
 | Evidence source | SHA-256 observed on 2026-11-03 |
 | --- | --- |
-| [Annotated outline](../../slides/teaching-outline.md) | `651f5eed4cfdaff0607cfc60764bbc6e1cd4693124106e2eca0b31614c824f12` |
-| [Day 1 teaching guide](../../slides/day1-teaching-guide.md) | `6567fc377f1dc7671e472ef7489f9ee35c0f8064e2c589483949d86f0df55415` |
+| [Annotated outline](../../Slides/teaching-outline.md) | `651f5eed4cfdaff0607cfc60764bbc6e1cd4693124106e2eca0b31614c824f12` |
+| [Day 1 teaching guide](../../Slides/Day_1/previous-teaching-guide.md) | `6567fc377f1dc7671e472ef7489f9ee35c0f8064e2c589483949d86f0df55415` |
 | [Style-alignment pilot report](../../.scratch/ml-bioinformatics-course/style-alignment-pilot.md) | `b8e1b796c569dfd7df8bc592308e3b0514ede679b7cae09e60a5fc00379dac9f` |
 | [MALTAomics source review](../../.scratch/ml-bioinformatics-course/maltaomics-source-review.md) | `3bafcbc004dbdea6436675bf2909c26c09c03367ceefabc74fe0767e30fe39b4` |
 | [Day 1 readiness issue 05](../../.scratch/ml-bioinformatics-course/issues/05-make-day-1-classroom-ready.md) | `ea6009853cda155c0dccd1a2e52062dd9bb0af0999fb6c052de094698ac38c45` |
@@ -47,4 +47,10 @@ On 2026-11-03, the instructor limited this task to wiki Markdown: preserve annot
 
 On 2026-11-03, the instructor authorized consolidation, commit and push, superseding the earlier wiki-only task scope above. The approved style and latest delivery uncertainty were ingested into the linked preference, workflow and reference pages. The existing course work was checkpointed at `palexiou/ML_Course_2026@2b242e2`; the source-snapshot hashes above still identify the earlier observations and were not rewritten as later approvals.
 
-On 2026-11-03, active planning was reduced to the linked Day 1 story, teaching preferences and compact [slides README](../../slides/README.md). The earlier expanded guide was marked historical in place; the annotated outline and source reports were preserved. The story's changed timing and demonstration-first delivery remained proposals pending discussion. No full-deck rewrite, notebook removal or execution-protocol change was authorized by this checkpoint's scope.
+On 2026-11-03, active planning was reduced to the linked Day 1 story, teaching preferences and compact [slides README](../../Slides/README.md). The earlier expanded guide was marked historical in place; the annotated outline and source reports were preserved. The story's changed timing and demonstration-first delivery remained proposals pending discussion. No full-deck rewrite, notebook removal or execution-protocol change was authorized by this checkpoint's scope.
+
+## Expanded cleanup and confirmed story — 2026-11-03
+
+On 2026-11-03, the instructor confirmed general introduction → first DNA example → logistic regression → metrics → trees → explainability; see the [superseding preference entry](teaching-preferences.md#later-instructor-clarification-and-packaging--2026-11-03). GitHub notebooks opening in Colab were agreed, with hands-on depth open. This supersedes the earlier absence/uncertainty as a delivery plan, not the historical file inventory.
+
+On 2026-11-03, the requested layout was implemented as [four independent day decks](../../Slides/index.html), [one active story](../../Slides/Day_1/story.md), and [four completed notebooks covering six stages](../../notebooks/README.md). Dependent representation/embedding/freeze stages share one notebook workspace. The [cleanup map](../../README.md#cleanup-map--2026-11-03) is the canonical path map; [QA](../../Slides/qa.md) and [verification](../../instructor/verification/README.md) record checks and limits. The wiki, local tracker and source evidence were retained; no new planning hierarchy was created.

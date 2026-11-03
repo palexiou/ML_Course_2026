@@ -1,29 +1,33 @@
 # Machine learning for bioinformatics
 
-Four in-person English sessions for master's students: Monday-Thursday, 180 minutes each including breaks. All required work and setup happen during contact time; no homework, grades, or submissions.
+Four in-person English sessions for master's students, 180 minutes each including breaks. All required work and setup happen during contact time; no homework, grades or submissions.
 
-## Start here
+- **Presentations:** [Slides/index.html](Slides/index.html) links the four independent offline day decks.
+- **Plan Day 1:** [editable story](Slides/Day_1/story.md); [approved style and preferences](docs/course-wiki/teaching-preferences.md#style-approved--2026-11-03). Discuss the detailed story, then revise slides section by section.
+- **Run the workflows:** [completed GitHub notebooks and Colab links](notebooks/README.md). Four notebooks cover six stages; [course_code/](course_code/) is the canonical Python source.
+- **Teach and practice:** [instructor guide](instructor/guide.md), [scaffolded practicals](instructor/practicals.md), [separate answers](instructor/answers.md), and [printable audit checklist](instructor/audit-checklist.html).
+- **Evidence and decisions:** [verification](instructor/verification/README.md), [course design history](docs/course-design.md), [dated wiki](docs/course-wiki/index.md), [glossary](GLOSSARY.md), and [ADRs](docs/adr/).
+- **Day 4:** [agent workshop](agent_workshop/README.md), retained with genuine run evidence distinct from authored fixtures.
 
-- **Code to paste into Colab:** [paste_ready/README.md](paste_ready/README.md). Six complete scripts; arrange cells manually as preferred.
-- **Teaching and timing:** [instructor/guide.md](instructor/guide.md), [exercises](instructor/exercises.md), and [completed answers](instructor/answers.md).
-- **Slides:** [slides/index.html](slides/index.html). Open the self-contained HTML file in a browser.
-- **Plan the Day 1 story:** [six-section discussion draft](slides/day1-story.md); [approved style and instructor preferences](docs/course-wiki/teaching-preferences.md#style-approved--2026-11-03). Revise slides section by section after discussing the story.
-- **Scientific audit:** [one-page printable checklist](instructor/audit-checklist.html) and [Day 4 agent kit](agent_workshop/README.md).
-- **What actually passed:** [instructor/verification.md](instructor/verification.md). Local runs are distinguished from pending Colab, classroom live-agent, Agentomics, and classroom checks.
-- **Canonical source and dependencies:** [course_code/README.md](course_code/README.md). Generated datasets, saved outputs, model checkpoints, and real embedding caches are in local ignored output directories, not inside the scripts.
-
-The narrative moves from 4-mer logistic regression and random forest, through one-hot CNNs and frozen pretrained DNA embeddings, to specifying and auditing agent-assisted analyses. These are controlled simulated sequence-classification examples, not real promoter discovery or a promised model ranking. Test scores stay protected during development; Day 3 freeze and reveal are separate explicit actions.
-
-Actual Colab verification and notebook presentation are the instructor's manual handoff. Actual agent run recordings and Agentomics access/materials must be supplied before claiming those demonstrations have been rehearsed. No authored fixture is represented as a recorded run.
+The course moves from k-mer classical models through CNNs and frozen DNA embeddings to agent-assisted analyses. Examples use simulated sequence classification; they do not establish real promoter prediction or a universal model ranking. Development uses validation; the Day 3 freeze and explicitly authorized test reveal are separate actions.
 
 ## GitHub notebooks and Colab
 
-Yes: completed `.ipynb` notebooks versioned in GitHub can open directly in Colab. Google's [GitHub integration example](https://colab.research.google.com/github/googlecolab/colabtools/blob/main/notebooks/colab-github-demo.ipynb) documents the URL and badge; its [FAQ](https://research.google.com/colaboratory/faq.html) explains storage and temporary runtimes. Checked 2026-11-03. Use `https://colab.research.google.com/github/OWNER/REPO/blob/BRANCH/path.ipynb`, encoding spaces and other special characters in each path component (retain directory slashes).
+Yes—this delivery is agreed. Open the real notebook links/badges in [notebooks/README.md](notebooks/README.md); that is the single setup/runtime/access reference. The repo is private: students need access and Colab authorization. Live hands-on depth remains open; instructor demonstration with optional follow-along is a recommendation. The full runnable workflow and scaffolded exercises remain available. Actual Colab execution, full-session timing, genuine agent recording and the Agentomics demonstration remain unverified or pending as detailed in the verification record.
 
-This checkout and tracked tree contain **no `.ipynb` files** as of the 2026-11-03 inventory, so there is no course notebook launch link to add yet. Existing completed workflows are [01_simple_signal.py](paste_ready/01_simple_signal.py), [02_split_leakage.py](paste_ready/02_split_leakage.py), and the [remaining paste-ready scripts](paste_ready/README.md). A `.py` URL is not a notebook launch URL. Recommended eventual delivery: completed GitHub notebooks with a Colab badge, alongside the retained scaffolded exercises. Notebook packaging and compulsory live follow-along remain undecided; the new proposal is instructor demonstration first, with optional follow-along.
+## Cleanup map · 2026-11-03
 
-Opening a GitHub notebook creates an editable view without overwriting its source. Run the setup and data-loading cells; save a copy in Drive to retain edits, or explicitly save to GitHub with write authorization. The execution VM and its local files are temporary. Opening a notebook does not clone its repository or provide adjacent data files: relative paths need an explicit download/clone/upload or generation step and a known working directory.
+| Earlier location | Canonical home / treatment |
+| --- | --- |
+| `slides/index.html` | `Slides/index.html` navigation plus `Slides/Day_1/presentation.html` through `Day_4/presentation.html`; each contains only its own day. |
+| `slides/day1-story.md` | `Slides/Day_1/story.md`, the active story; annotated `slides/teaching-outline.md` moved to `Slides/teaching-outline.md` with identical bytes. |
+| `slides/day1-teaching-guide.md`, `slides/pilots/…` | `Slides/Day_1/previous-teaching-guide.md` (historical), `logistic-style-reference.html` (approved reference, not the full Day 1 deck). |
+| `slides/qa.md`, `slides/assets/` | `Slides/qa.md`; the existing font is subset and embedded in each day HTML, with license retained in the HTML and `Slides/font-license.txt`. |
+| `paste_ready/01…06.py`, its README/manifest | Replaced by four generated `notebooks/*.ipynb` and their metadata source hashes. Dependent stages 03–05 share one notebook; duplicate generated Python copies removed. |
+| `course_code/README.md` | Consolidated into `notebooks/README.md`; the eight canonical Python modules and requirement files remain. |
+| `instructor/exercises.md`, `instructor/day1-practical.md` | Merged into `instructor/practicals.md`; separate answers and four completed miniature scripts retained. |
+| `docs/timed-course-plan.md` | Consolidated into `instructor/guide.md`; course-design interview history and detailed historical Day 1 cues retained. |
+| `docs/*verification.md`, `docs/leakage-exercise.md`, `instructor/verification.md` | Grouped in `instructor/verification/`, with `README.md` as evidence index; unique reports retained. |
+| `Initial_Chat_Log.txt` | `.scratch/ml-bioinformatics-course/initial-chat-log.txt`, preserved source history. |
 
-Concrete setup gaps from reading the existing scripts and [practical cells](instructor/day1-practical.md): Day 1 code 01 generates `simple_signal_output/` and fits both models before the later inspection cells can run; code 02 writes the separate `course_output/leakage/` experiment. Days 2–3 reuse `course_output/`, with generated datasets/models/caches ignored by Git. The first Day 3 encoder load downloads roughly 224 MB of weights plus dependencies; package compatibility and runtime persistence need rehearsal. Steps 3–5 must retain their shared files, and step 05 freezes before any separately authorized test reveal. No expensive workflow or test scoring was run for this documentation check.
-
-The configured repository is `palexiou/ML_Course_2026`, branch `main`; authenticated GitHub metadata on 2026-11-03 reports it as **private**. Students need repository access and must authorize Colab to include private repositories, as Google's example explains. No repository visibility change is implied. Direct opening support is verified from documentation; end-to-end course execution in Colab is untested.
+The prior layout is also preserved in commit `ea59dd8`. Required agent rules, local issues, source reviews, glossary, accepted ADRs and wiki remain. The unrelated `agent_workshop/` data/code/history remain; only its functional links change if needed. No new archive hierarchy or parallel planning framework was added.

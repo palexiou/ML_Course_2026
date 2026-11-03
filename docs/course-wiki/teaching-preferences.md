@@ -4,9 +4,9 @@ Recorded on 2026-11-03. [Index and source provenance](index.md).
 
 ## Explicit instructor history
 
-- On 2026-11-03, the instructor supplied **Panagiotis Alexiou, ERA Chair, University of Malta**. Use that introduction; add research biography only from further instructor-supplied facts. Source: instructor statements supplied in the wiki task; corroborated by the [Day 1 guide](../../slides/day1-teaching-guide.md).
-- On 2026-11-03, the instructor described live teaching with several focused slides per roughly ten-minute explanation. Each slide should spell out the conceptual points the instructor wants to hit; ten minutes on one dense slide was not the desired pattern. Source: supplied instructor history and [outline, Day 1 closing annotation](../../slides/teaching-outline.md).
-- On 2026-11-03, the instructor retained the edited outline as authority for intent. Preserve its annotations and distinguish accepted comments from the surrounding agent-written drafts. Source: supplied instructor history and [outline introduction](../../slides/teaching-outline.md).
+- On 2026-11-03, the instructor supplied **Panagiotis Alexiou, ERA Chair, University of Malta**. Use that introduction; add research biography only from further instructor-supplied facts. Source: instructor statements supplied in the wiki task; corroborated by the [Day 1 guide](../../Slides/Day_1/previous-teaching-guide.md).
+- On 2026-11-03, the instructor described live teaching with several focused slides per roughly ten-minute explanation. Each slide should spell out the conceptual points the instructor wants to hit; ten minutes on one dense slide was not the desired pattern. Source: supplied instructor history and [outline, Day 1 closing annotation](../../Slides/teaching-outline.md).
+- On 2026-11-03, the instructor retained the edited outline as authority for intent. Preserve its annotations and distinguish accepted comments from the surrounding agent-written drafts. Source: supplied instructor history and [outline introduction](../../Slides/teaching-outline.md).
 - On 2026-11-03, the instructor treated reference presentations as visual and pedagogical references, rather than permission to change the curriculum. Source: supplied instructor history; see [reference findings](reference-materials.md).
 
 ## Latest visual correction — 2026-11-03
@@ -37,7 +37,7 @@ On 2026-11-03, the [revision workflow](slide-revision-workflow.md) captured how 
 
 ## Style approved — 2026-11-03
 
-On 2026-11-03, after the cleaner [seven-slide logistic pilot](../../slides/pilots/day1-logistic-story.html), the instructor said:
+On 2026-11-03, after the cleaner [seven-slide logistic pilot](../../Slides/Day_1/logistic-style-reference.html), the instructor said:
 
 > OK good, let's lock in the style (and for the real presentation, we will lose the Illustrative example part of course)
 
@@ -45,10 +45,18 @@ Source: exact latest instructor message supplied in the 2026-11-03 checkpoint re
 
 On 2026-11-03, the locked production preference was **one short title, one focal explanatory visual, generous whitespace, minimal chrome, and detailed speaker notes**. Keep the example and visual positions stable where they help a progression, revealing one meaningful operation at a time. Production slides should omit repetitive visible “Illustrative example” labels. Keep numerical provenance, invented weights/counts and simulation limitations in notes and teaching source; invented values never become claimed empirical results. The pilot may retain its disclosure as a documented example.
 
-On 2026-11-03, the instructor requested an editable Day 1 story in 20–30-minute sections before revising the actual slides section by section. The [story draft](../../slides/day1-story.md) supplies that proposal; it carries no fixed slide-count requirement. The annotated outline remains the source of instructor intent.
+On 2026-11-03, the instructor requested an editable Day 1 story in 20–30-minute sections before revising the actual slides section by section. The [story draft](../../Slides/Day_1/story.md) supplies that proposal; it carries no fixed slide-count requirement. The annotated outline remains the source of instructor intent.
 
 On 2026-11-03, the instructor questioned whether students must run live hands-on/Colab activities and asked whether GitHub notebooks can open directly in Colab. This reopened delivery discussion; it did not withdraw the earlier agreement to provide scaffolded and completed notebooks. Instructor demonstration with optional follow-along was the agent's recommendation, pending discussion. The [delivery note](../../README.md#github-notebooks-and-colab) records the official support and repository-specific gaps.
 
 ## Retrospective applied — 2026-11-03
 
-On 2026-11-03, reviewing the earlier “too busy” correction and the [pilot report's appended revision](../../.scratch/ml-bioinformatics-course/style-alignment-pilot.md#2026-11-03--instructor-feedback-more-breathing-space) identified repeated headers, breadcrumb rails and takeaways as competing with the explanation. The worthwhile lesson was to review the focal teaching operation before propagating the style. This checkpoint applied it through one style source, one active story and a short [slides README](../../slides/README.md); historical guides and source reports were retained. Visual hierarchy requires instructor judgment, so no new framework, mechanical style rule or retrospective document was introduced.
+On 2026-11-03, reviewing the earlier “too busy” correction and the [pilot report's appended revision](../../.scratch/ml-bioinformatics-course/style-alignment-pilot.md#2026-11-03--instructor-feedback-more-breathing-space) identified repeated headers, breadcrumb rails and takeaways as competing with the explanation. The worthwhile lesson was to review the focal teaching operation before propagating the style. This checkpoint applied it through one style source, one active story and a short [slides README](../../Slides/README.md); historical guides and source reports were retained. Visual hierarchy requires instructor judgment, so no new framework, mechanical style rule or retrospective document was introduced.
+
+## Later instructor clarification and packaging — 2026-11-03
+
+On 2026-11-03, the instructor explicitly agreed the six-section order: (1) course/ML introduction, (2) **first introduction of the DNA working example**, (3) logistic regression on k-mer counts, (4) metrics, (5) trees/forests, (6) **explainability**. This supersedes the earlier proposal to introduce the DNA problem in section 1 and the leakage-heavy section 6. Local contributions, coefficients, forest importance and motif interpretation are section 6's main teaching; a generalization/shortcut example qualifies that explanation.
+
+On 2026-11-03, the instructor agreed on completed notebooks versioned in GitHub and opening via Colab. This supersedes earlier uncertainty about that delivery mechanism; hands-on depth remains open. The [notebook guide](../../notebooks/README.md) owns setup and access instructions. The workflow remains available for demonstration or student follow-along.
+
+On 2026-11-03, the instructor expanded cleanup to the whole course structure and required `Slides/index.html` plus `Slides/Day_1/presentation.html` through `Slides/Day_4/presentation.html`, with exact capitalization. The later packaging split the existing deck by day, preserving its teaching design pending section-by-section style application; the [approved reference](../../Slides/Day_1/logistic-style-reference.html) remains distinct. The [root cleanup map](../../README.md#cleanup-map--2026-11-03) records moves and consolidations. Earlier in-place-only cleanup and absence-of-notebooks observations remain history as of `palexiou/ML_Course_2026@ea59dd8`, superseded by this expanded work. The annotated outline bytes and canonical scientific modules were preserved; source-report edits were limited to link maintenance.

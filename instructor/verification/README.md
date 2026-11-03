@@ -1,5 +1,7 @@
 # Local rehearsal and instructor handoff
 
+2026-11-03 navigation: [simple signal](simple-signal.md), [separate leakage](leakage.md), [representations](representations.md), [frozen embeddings](embeddings.md), and [presentation checks](../../Slides/qa.md). These retain historical run evidence; the notebook packaging checks below are separate.
+
 Date: October 26, 2026. This is a **locally executed development handoff, not a classroom-ready certification**. The user requested all development now, with manual Colab arrangement and checks later. Unperformed checks below remain unperformed; downstream implementation does not imply that its original manual gates passed.
 
 ## Passed local checks
@@ -67,3 +69,15 @@ For expensive steps, open saved validation tables/plots and provenance first, la
 Initial independent Standards review found three actionable issues: incomplete freeze inventory/source binding, stale standalone-entrypoint documentation, and missing verification links. Initial independent Spec review found two: cached runs skipped the small live example, and the audit rejected masked protected labels. All five have implementation/documentation corrections and focused local checks. Final independent re-review is pending; do not read this ledger as a passed final review until updated.
 
 No commits or pushes were created by this implementation.
+
+## Packaging checks — 2026-11-03
+
+The [cleanup map](../../README.md#cleanup-map--2026-11-03) supersedes the earlier paste-only delivery paths without rewriting the dated evidence above. Four generated [completed notebooks](../../notebooks/README.md) cover the same six workflow stages; stages 03–05 share one notebook to preserve their workspace. No canonical scientific Python module, requirement file or miniature solution changed from `palexiou/ML_Course_2026@ea59dd8`.
+
+- `python -m mypy course_code tools instructor/completed --ignore-missing-imports --check-untyped-defs`: all 13 source files passed.
+- All notebook code cells compiled; source-module hashes matched; generation was deterministic; cells contain no saved outputs, execution counters or executable `reveal_test` call. No local repository imports remain in the delivered definition cells.
+- In fresh temporary working directories, the actual notebook definition/workflow cells for 01, 02 and 06 executed successfully without repository imports. Day 1 generated its development artifacts; its metadata confirmed no protected-test evaluation. The separate leakage metadata confirmed no course test data. The audit notebook loaded definitions. Setup cells were not run: existing local packages were used, without installation/downloads.
+- All four distinct completed miniature exercises executed successfully. The combined 03–05 notebook passed syntax/source-binding checks; heavy CNN/pretrained workflows and actual freeze execution were not rerun. Their scientific source is unchanged, and their earlier execution evidence above remains separately dated.
+- [Per-day deck checks](../../Slides/qa.md#later-2026-11-03-restructure-verification) passed offline layout/navigation/notes/interaction/export/print checks. Repository Markdown links and heading anchors passed; annotated outline and initial interview bytes were preserved.
+
+No actual Colab execution, Google/GitHub sign-in, classroom timing or model-download rehearsal is claimed. Private-repository access remains required. No protected course test outcomes were scored or displayed. Screenshots, datasets from local checks, execution logs, PDFs and temporary tooling remain outside Git under `/tmp/ml-course-restructure/`; no new course data or model artifacts were added.

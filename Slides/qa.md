@@ -1,8 +1,28 @@
 # Presentation verification
 
+## Later 2026-11-03 restructure verification
+
+The instructor expanded cleanup after `ea59dd8`. [Slides/index.html](index.html) links four genuinely separate offline decks, retaining only each day's data and necessary scripts. The font is embedded; the [approved pilot](Day_1/logistic-style-reference.html) remains a distinct reference. This packages the existing design; section-by-section redesign is still ahead. The [root cleanup map](../README.md#cleanup-map--2026-11-03) records canonical paths.
+
+Local Chrome 143 through Playwright opened `file:` URLs with network offline:
+
+| Day | Slides / printed PDF pages | Layouts checked |
+| --- | --- | --- |
+| 1 | 62 / 62 | 1280×720 and 390×844 |
+| 2 | 15 / 15 | 1280×720 and 390×844 |
+| 3 | 15 / 15 | 1280×720 and 390×844 |
+| 4 | 14 / 14 | 1280×720 and 390×844 |
+
+- All 212 slide/viewport combinations passed content/footer, stage and control bounds checks. Screenshots were reviewed in eight contact sheets after waiting for stable rendered frames. Phone views intentionally letterbox the full slide, not a phone reading layout.
+- Day-local arrows/Home/End/select/hash navigation, cross-day selector/numeric keys, earlier index hashes, notes/Escape, editing/autosave and exported HTML reopened with cleared storage passed. Exports retain only their own day. Day 1 sigmoid, threshold extremes and all three tree paths/reset passed.
+- All rendered local links exist. Embedded font loading passed; no page errors or external requests occurred. Printing hides notes and controls and produces exactly the page counts above. Packaging checks caught and corrected a trailing blank-page rule and an inherited reduced-motion stage transition; capture assertions wait for rendered state.
+- Exact original slide-record comparison passed after the reviewed relative-link and notebook-delivery wording transformations. The annotated outline retained SHA-256 `651f5eed4cfdaff0607cfc60764bbc6e1cd4693124106e2eca0b31614c824f12`. Source reviews changed only link targets; original chat history, scientific Python modules, requirements, miniature solutions and unrelated agent-workshop bytes were preserved.
+
+Notebook/code checks are recorded in [course verification](../instructor/verification/README.md#packaging-checks--2026-11-03). Markdown local-link/heading checks, staged whitespace and artifact/secret-pattern review complement the rendering checks. Temporary screenshots, PDFs, export copies and machine-readable results stayed under `/tmp/ml-course-restructure/` (transient export files beside decks were removed). Actual Colab execution, projector readability and measured teaching pace remain unverified; protected test outcomes were not calculated.
+
 ## 2026-11-03 documentation and repository checkpoint
 
-Checkpointed previously authorized course work at `2b242e2`, then consolidated navigation and drafted [day1-story.md](day1-story.md). The story is proposed pending discussion; this checkpoint does not claim a main-deck style conversion or classroom readiness.
+Checkpointed previously authorized course work at `2b242e2`, then consolidated navigation and drafted [day1-story.md](Day_1/story.md). The story is proposed pending discussion; this checkpoint does not claim a main-deck style conversion or classroom readiness.
 
 - All repository Markdown local file links and Markdown heading anchors passed the checkpoint check, including retained source reports and corrected issue links. The unchanged main deck's 22 distinct local resource/asset targets exist.
 - The annotated outline retained SHA-256 `651f5eed4cfdaff0607cfc60764bbc6e1cd4693124106e2eca0b31614c824f12`. The main deck and both scratch source reviews retained their starting bytes. The earlier teaching-guide body was retained except for one trailing space, with a historical-status notice prepended.

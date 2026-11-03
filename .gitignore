@@ -2,3 +2,5 @@ __pycache__/
 .mypy_cache/
 simple_signal_output/
 course_output/
+
+.ipynb_checkpoints/
