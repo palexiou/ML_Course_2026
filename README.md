@@ -1,9 +1,7 @@
 # Machine learning for bioinformatics
 
-Four in-person English sessions for master's students, 180 minutes each including breaks. All required work and setup happen during contact time; no homework, grades or submissions.
+The course now focuses only on hands-on exercises. Presentations and slide-generation tools were removed on 2026-11-08. New exercise code will be written only from the instructor's explicit specifications; earlier teaching plans are historical, not authorization for new implementation.
 
-- **Presentations:** [Slides/index.html](Slides/index.html) links the four independent offline day decks.
-- **Plan Day 1:** [editable story](Slides/Day_1/story.md); [approved style and preferences](docs/course-wiki/teaching-preferences.md#style-approved--2026-11-03). Discuss the detailed story, then revise slides section by section.
 - **Run the workflows:** [completed GitHub notebooks and Colab links](notebooks/README.md). Four notebooks cover six stages; [course_code/](course_code/) is the canonical Python source.
 - **Teach and practice:** [instructor guide](instructor/guide.md), [scaffolded practicals](instructor/practicals.md), [separate answers](instructor/answers.md), and [printable audit checklist](instructor/audit-checklist.html).
 - **Evidence and decisions:** [verification](instructor/verification/README.md), [course design history](docs/course-design.md), [dated wiki](docs/course-wiki/index.md), [glossary](GLOSSARY.md), and [ADRs](docs/adr/).
@@ -19,10 +17,6 @@ Yes—this delivery is agreed. Open the real notebook links/badges in [notebooks
 
 | Earlier location | Canonical home / treatment |
 | --- | --- |
-| `slides/index.html` | `Slides/index.html` navigation plus `Slides/Day_1/presentation.html` through `Day_4/presentation.html`; each contains only its own day. |
-| `slides/day1-story.md` | `Slides/Day_1/story.md`, the active story; annotated `slides/teaching-outline.md` moved to `Slides/teaching-outline.md` with identical bytes. |
-| `slides/day1-teaching-guide.md`, `slides/pilots/…` | `Slides/Day_1/previous-teaching-guide.md` (historical), `logistic-style-reference.html` (approved reference, not the full Day 1 deck). |
-| `slides/qa.md`, `slides/assets/` | `Slides/qa.md`; the existing font is subset and embedded in each day HTML, with license retained in the HTML and `Slides/font-license.txt`. |
 | `paste_ready/01…06.py`, its README/manifest | Replaced by four generated `notebooks/*.ipynb` and their metadata source hashes. Dependent stages 03–05 share one notebook; duplicate generated Python copies removed. |
 | `course_code/README.md` | Consolidated into `notebooks/README.md`; the eight canonical Python modules and requirement files remain. |
 | `instructor/exercises.md`, `instructor/day1-practical.md` | Merged into `instructor/practicals.md`; separate answers and four completed miniature scripts retained. |

@@ -1,5 +1,9 @@
 # Course memory index
 
+## Current scope - 2026-11-08
+
+The instructor removed the presentations and chose to focus only on hands-on exercises. New exercise code requires the instructor's explicit specifications. Earlier presentation decisions and links below are historical; the referenced `Slides/` files and slide-generation tools have been deleted.
+
 On 2026-11-03, the instructor explicitly chose `docs/course-wiki/` for durable chief-of-staff memory.
 The earlier [pilot report](../../.scratch/ml-bioinformatics-course/style-alignment-pilot.md) recorded finding no shared wiki; its unresolved location question was superseded by that choice.
 

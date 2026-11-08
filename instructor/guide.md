@@ -1,5 +1,7 @@
 # Instructor guide
 
+Current scope (2026-11-08): only hands-on exercises. Presentations and slide-generation tools have been deleted. Earlier session plans and presentation links below are historical. New exercise code requires the instructor's explicit specifications.
+
 Four English-language sessions for 10–15 master's students, taught by one instructor. Each session is 180 minutes including breaks. All required learning and setup happen in class. There is no homework, exam, grading, or required submission. Questions below are ungraded discussion prompts.
 
 ## Start here
