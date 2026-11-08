@@ -2,6 +2,8 @@
 
 The course now focuses only on hands-on exercises. Presentations and slide-generation tools were removed on 2026-11-08. New exercise code will be written only from the instructor's explicit specifications; earlier teaching plans are historical, not authorization for new implementation.
 
+- **New Exercise 1:** [artificial TFBS dataset](docs/exercise-1.md), using the first 10 PFM positions, 10,000 positives and 10,000 negatives of 100 nt each.
+
 - **Run the workflows:** [completed GitHub notebooks and Colab links](notebooks/README.md). Four notebooks cover six stages; [course_code/](course_code/) is the canonical Python source.
 - **Teach and practice:** [instructor guide](instructor/guide.md), [scaffolded practicals](instructor/practicals.md), [separate answers](instructor/answers.md), and [printable audit checklist](instructor/audit-checklist.html).
 - **Evidence and decisions:** [verification](instructor/verification/README.md), [course design history](docs/course-design.md), [dated wiki](docs/course-wiki/index.md), [glossary](GLOSSARY.md), and [ADRs](docs/adr/).
