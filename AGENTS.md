@@ -5,5 +5,4 @@
 - Use short, manually written notebooks when notebooks are requested.
 - Do not add generators, course frameworks, or elaborate abstractions.
 - Keep Exercise 1's `--ofile` command working.
-- For coding tasks, load and follow the `coding` skill.
 - Commit or push only when explicitly requested.
