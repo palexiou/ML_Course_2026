@@ -1,7 +1,7 @@
 # Machine learning for bioinformatics
 
 Simple hands-on exercises, with code that is easy to read and teach.
-Exercises 1, 2, and 3 are implemented as simple, self-contained notebooks.
+Exercises 1 through 4 are available as simple, self-contained notebooks.
 
 ## Open the exercises in Google Colab
 
@@ -10,10 +10,12 @@ Exercises 1, 2, and 3 are implemented as simple, self-contained notebooks.
 | [Exercise 1](exercise_1.ipynb) | Create an artificial TFBS dataset | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_1.ipynb) |
 | [Exercise 2](exercise_2.ipynb) | Logistic regression with a bag of k-mers | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_2.ipynb) |
 | [Exercise 3](exercise_3.ipynb) | Logistic regression on real human non-TATA promoter sequences | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_3.ipynb) |
+| [Exercise 4](exercise_4.ipynb) | Decision tree and random forest on artificial TFBS data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_4.ipynb) |
 
 Start with Exercise 1 and download its CSV. Then open Exercise 2, upload the CSV
 using the Colab Files sidebar, and set `ifile` to the uploaded filename.
 Exercise 3 downloads its own public benchmark data; no CSV upload is needed.
+Exercise 4 uses the same Exercise 1 CSV as Exercise 2; upload it and set `ifile` in the same way.
 
 The buttons open the versions on GitHub's `main` branch, not local changes.
 If the repository is private, you need repository access and must authorize Colab
@@ -88,6 +90,22 @@ The first code cell installs `pyarrow`, the Parquet reader used by pandas.
 
 This is benchmark evaluation, not a claim of chromosome-held-out evaluation or
 proof that the model has learned a biological promoter mechanism.
+
+## Exercise 4: decision tree and random forest
+
+Open `exercise_4.ipynb` with its **Open In Colab** button and set `ifile` to the
+Exercise 1 CSV path. In Colab, upload the CSV and set `ifile` to its filename.
+
+- Train a decision tree and a random forest with 100 trees on the artificial data.
+- Use the same 70% training / 20% validation / 10% test split as Exercise 2.
+- Walk through both models at k=4, then compare k=1 through 10 separately; no mixed k-mers.
+- Show the same metrics, ROC/precision-recall curves, and confusion matrices as Exercise 2.
+- Select k separately for each model using validation ROC-AUC.
+- Evaluate the two selected models on test data only in the final cell.
+  **Run all includes test evaluation.**
+
+The random forest uses sparse counts and available CPU cores, but larger k can
+be slower to train. Full Exercise 4 training has not yet been timed or validated.
 
 ## Tests
 
