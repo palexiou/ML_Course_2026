@@ -1,7 +1,7 @@
 # Machine learning for bioinformatics
 
 Simple hands-on exercises, with code that is easy to read and teach.
-Only Exercise 1 is implemented for now.
+Exercises 1 and 2 are implemented as simple, self-contained notebooks.
 
 ## Setup
 
@@ -35,6 +35,22 @@ Parent directories are created automatically.
 - Negatives have no planted motif; chance motif matches are not filtered out.
 - CSV columns: `sequence`, `label` (1 = positive, 0 = negative).
 - Random seed: 42. No data splits or models.
+
+## Exercise 2: logistic regression with a bag of k-mers
+
+Open `exercise_2.ipynb` and set `ifile` to the Exercise 1 CSV path.
+In Colab, upload the CSV with the Files sidebar and set `ifile` to its filename.
+
+- Count overlapping k-mers with a moving window, for k = 1 through 10.
+- Walk through one k=4 model and all its validation results before the comparison loop.
+- Use the same stratified 70% training / 20% validation / 10% test split for every k.
+- Fit vocabulary and logistic regression on training sequences only.
+- Compare validation accuracy, balanced accuracy, precision, recall, F1,
+  ROC-AUC, average precision, and log loss, plus ROC/precision-recall curves
+  and confusion matrices for every k.
+- Select k by validation ROC-AUC, then evaluate only that model on the test set.
+- The final cell reveals test results: stop before it during validation discussion.
+  **Run all includes the test evaluation.**
 
 ## Tests
 
