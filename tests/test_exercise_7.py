@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy.sparse import issparse
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import Perceptron
 from sklearn.metrics import log_loss, roc_auc_score
@@ -79,10 +80,12 @@ class Exercise7Tests(unittest.TestCase):
         vocabulary_fits = []
         transformed_sequences = []
         perceptron_fits = []
+        forest_fits = []
         mlp_fits = []
         original_vocabulary_fit = CountVectorizer.fit_transform
         original_transform = CountVectorizer.transform
         original_perceptron_fit = Perceptron.fit
+        original_forest_fit = RandomForestClassifier.fit
         original_mlp_fit = MLPClassifier.partial_fit
 
         def record_vocabulary_fit(vectorizer, sequences, *args, **kwargs):
@@ -102,11 +105,16 @@ class Exercise7Tests(unittest.TestCase):
             mlp_fits.append((id(counts), tuple(labels.index)))
             return original_mlp_fit(model, counts, labels, *args, **kwargs)
 
+        def record_forest_fit(model, counts, labels, *args, **kwargs):
+            forest_fits.append((id(counts), tuple(labels.index)))
+            return original_forest_fit(model, counts, labels, *args, **kwargs)
+
         with TemporaryDirectory() as directory, chdir(directory), redirect_stdout(StringIO()), \
                 threadpool_limits(limits=1), \
                 patch.object(CountVectorizer, "fit_transform", record_vocabulary_fit), \
                 patch.object(CountVectorizer, "transform", record_transform), \
                 patch.object(Perceptron, "fit", record_perceptron_fit), \
+                patch.object(RandomForestClassifier, "fit", record_forest_fit), \
                 patch.object(MLPClassifier, "partial_fit", record_mlp_fit), \
                 patch.object(plt, "show", side_effect=lambda: plt.close("all")):
             for cell in notebook["cells"]:
@@ -117,6 +125,11 @@ class Exercise7Tests(unittest.TestCase):
                         self.assertNotIn("test_scores", namespace)
                         self.assertNotIn("test_results", namespace)
                     exec(compile("".join(cell["source"]), str(path), "exec"), namespace)
+                    if cell["id"] == "fit-forest":
+                        self.assertNotIn("mlp", namespace)
+                        self.assertNotIn("two_relu_units", namespace["truth_table"])
+                        self.assertEqual(list(namespace["baseline_validation_results"].index),
+                                         ["Perceptron", "Random forest"])
 
         train = namespace["train_data"]
         validation = namespace["validation_data"]
@@ -132,6 +145,7 @@ class Exercise7Tests(unittest.TestCase):
         self.assertEqual(transformed_sequences, [tuple(validation.sequence), tuple(test.sequence)])
         expected_fit = (id(namespace["x_train"]), tuple(train.index))
         self.assertEqual(perceptron_fits, [expected_fit])
+        self.assertEqual(forest_fits, [expected_fit])
         self.assertEqual(mlp_fits, [expected_fit] * namespace["max_epochs"])
         self.assertEqual(namespace["x_train"].shape, (14_000, 4_096))
         np.testing.assert_array_equal(np.asarray(namespace["x_train"].sum(axis=1)).ravel(), 95)
@@ -145,14 +159,16 @@ class Exercise7Tests(unittest.TestCase):
         )
         for split in ("validation", "test"):
             results = namespace[f"{split}_results"]
-            self.assertEqual(list(results.index), ["Perceptron", "MLP"])
+            self.assertEqual(list(results.index), ["Perceptron", "Random forest", "MLP"])
             self.assertTrue(np.isfinite(results.to_numpy()).all())
             self.assertNotIn("log_loss", results.columns)
             self.assertLessEqual(results.loc["Perceptron", "accuracy"], 0.75)
             self.assertGreater(results.loc["MLP", "accuracy"], 0.97)
+            self.assertGreater(results.loc["Random forest", "accuracy"], 0.97)
             by_case = namespace[f"{split}_case_results"].groupby(["has_a", "has_b"]).mean()
             self.assertTrue(by_case["MLP"].gt(0.95).all())
-            for name in ("Perceptron", "MLP"):
+            self.assertTrue(by_case["Random forest"].gt(0.95).all())
+            for name in ("Perceptron", "Random forest", "MLP"):
                 self.assertAlmostEqual(
                     results.loc[name, "roc_auc"],
                     roc_auc_score(namespace[f"y_{split}"], namespace[f"{split}_scores"][name]),

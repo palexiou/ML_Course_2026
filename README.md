@@ -13,7 +13,7 @@ Exercises 1 through 7 are available as simple, self-contained notebooks.
 | [Exercise 4](exercise_4.ipynb) | Decision tree and random forest on artificial TFBS data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_4.ipynb) |
 | [Exercise 5](exercise_5.ipynb) | Gradient boosting on artificial TFBS data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_5.ipynb) |
 | [Exercise 6](exercise_6.ipynb) | Compare logistic regression, random forest, and gradient boosting on real non-TATA promoters | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_6.ipynb) |
-| [Exercise 7](exercise_7.ipynb) | Motif XOR: create a dataset and compare a perceptron with an MLP | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_7.ipynb) |
+| [Exercise 7](exercise_7.ipynb) | Motif XOR: perceptron and random forest, then a ReLU MLP | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_7.ipynb) |
 
 Start with Exercise 1 and download its CSV. Then open Exercise 2, upload the CSV
 using the Colab Files sidebar, and set `ifile` to the uploaded filename.
@@ -143,7 +143,7 @@ No CSV upload or earlier notebook is required.
 This is a fixed-setting benchmark comparison, not an equally tuned competition or
 chromosome-held-out evaluation. Gradient boosting may take longer to train.
 
-## Exercise 7: motif XOR, perceptron, and MLP
+## Exercise 7: motif XOR, perceptron, random forest, and MLP
 
 Open `exercise_7.ipynb` and run cells in order. No earlier notebook is required.
 Stop after the dataset-saving cell if you only want the new CSV.
@@ -158,14 +158,17 @@ Stop after the dataset-saving cell if you only want the new CSV.
   and background ID. Change `ofile` in the first code cell to choose the path.
 - Keep each background's four variants together in a 70% training / 20% validation / 10% test
   split. This avoids sharing nearly identical backgrounds across splits.
-- Demonstrate XOR using motif-presence indicators and a hand-written two-ReLU network.
-- Give a classic perceptron and an MLP identical training-fitted, sparse bag-of-6-mers counts.
-  Presence flags and background IDs are never inputs to these models.
+- Demonstrate the perceptron's XOR limitation using motif-presence indicators.
+- Compare a classic perceptron with a 100-tree random forest first, inspecting validation
+  accuracy overall and for each XOR case before introducing the MLP.
+- Then demonstrate a hand-written two-ReLU network and train the ReLU MLP.
+- Give all three models identical training-fitted, sparse bag-of-6-mers counts.
+  Presence flags and background IDs are never inputs to the k-mer models.
 - Train an MLP with 16 ReLU hidden units for up to 60 epochs using Adam. Select the saved
   epoch with the lowest validation log loss, without refitting on validation data.
 - Compare classification and ranking metrics, confusion matrices, and accuracy for each
   XOR case. Perceptron scores are not probabilities, so no perceptron log loss is reported.
-- Evaluate both fitted models on the reserved test backgrounds only in the final code cell.
+- Evaluate all three fitted models on the reserved test backgrounds only in the final code cell.
   **Run all includes test evaluation.**
 
 For every matched quartet, the k-mer vectors satisfy
