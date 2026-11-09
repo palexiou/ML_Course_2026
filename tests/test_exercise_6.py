@@ -18,7 +18,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import log_loss, roc_auc_score
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "course_code"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from exercise_1 import generate_dataset
 
 

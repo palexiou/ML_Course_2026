@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import log_loss
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "course_code"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from exercise_1 import generate_dataset
 
 
