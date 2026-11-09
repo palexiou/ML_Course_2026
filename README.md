@@ -1,7 +1,7 @@
 # Machine learning for bioinformatics
 
 Simple hands-on exercises, with code that is easy to read and teach.
-Exercises 1 and 2 are implemented as simple, self-contained notebooks.
+Exercises 1, 2, and 3 are implemented as simple, self-contained notebooks.
 
 ## Open the exercises in Google Colab
 
@@ -9,9 +9,11 @@ Exercises 1 and 2 are implemented as simple, self-contained notebooks.
 | --- | --- | --- |
 | [Exercise 1](exercise_1.ipynb) | Create an artificial TFBS dataset | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_1.ipynb) |
 | [Exercise 2](exercise_2.ipynb) | Logistic regression with a bag of k-mers | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_2.ipynb) |
+| [Exercise 3](exercise_3.ipynb) | Logistic regression on real human non-TATA promoter sequences | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_3.ipynb) |
 
 Start with Exercise 1 and download its CSV. Then open Exercise 2, upload the CSV
 using the Colab Files sidebar, and set `ifile` to the uploaded filename.
+Exercise 3 downloads its own public benchmark data; no CSV upload is needed.
 
 The buttons open the versions on GitHub's `main` branch, not local changes.
 If the repository is private, you need repository access and must authorize Colab
@@ -58,6 +60,8 @@ In Colab, upload the CSV with the Files sidebar and set `ifile` to its filename.
 - Count overlapping k-mers with a moving window, for k = 1 through 10.
 - Walk through one k=4 model and all its validation results before the comparison loop.
 - Use the same stratified 70% training / 20% validation / 10% test split for every k.
+- Select test and validation sequences randomly per label, then use the remaining
+  sequences for training. Both counts are calculated from the original class size.
 - Fit vocabulary and logistic regression on training sequences only.
 - Compare validation accuracy, balanced accuracy, precision, recall, F1,
   ROC-AUC, average precision, and log loss, plus ROC/precision-recall curves
@@ -65,6 +69,25 @@ In Colab, upload the CSV with the Files sidebar and set `ifile` to its filename.
 - Select k by validation ROC-AUC, then evaluate only that model on the test set.
 - The final cell reveals test results: stop before it during validation discussion.
   **Run all includes the test evaluation.**
+
+## Exercise 3: real human non-TATA promoters
+
+Open `exercise_3.ipynb` with its **Open In Colab** button and run the cells in order.
+The first code cell installs `pyarrow`, the Parquet reader used by pandas.
+
+- Download `human_nontata_promoters` from the Genomic Benchmarks maintainers'
+  Hugging Face repository, using a fixed dataset revision.
+- Use real 251-nt sequences: label 1 is a non-TATA promoter, label 0 a non-promoter.
+- Keep the official 9,034-sequence test set unchanged.
+- Reserve 20% per label from the official 27,097-sequence training set for validation:
+  21,678 training sequences and 5,419 validation sequences.
+- Keep the original class proportions and retain sequences containing unknown bases (`N`).
+- Walk through k=4, then compare k=1 through 10 with the same metrics and plots as Exercise 2.
+- Select k by validation ROC-AUC; fit vocabulary and model on training sequences only.
+- Stop before the final cell until selection is complete. **Run all includes test evaluation.**
+
+This is benchmark evaluation, not a claim of chromosome-held-out evaluation or
+proof that the model has learned a biological promoter mechanism.
 
 ## Tests
 
