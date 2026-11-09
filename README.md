@@ -98,7 +98,7 @@ Exercise 1 CSV path. In Colab, upload the CSV and set `ifile` to its filename.
 
 - Train a decision tree and a random forest with 100 trees on the artificial data.
 - Use the same 70% training / 20% validation / 10% test split as Exercise 2.
-- Walk through both models at k=4, then compare k=1 through 10 separately; no mixed k-mers.
+- Walk through both models at k=4, then compare k=1 through 7 separately; no mixed k-mers.
 - Show the same metrics, ROC/precision-recall curves, and confusion matrices as Exercise 2.
 - Select k separately for each model using validation ROC-AUC.
 - Evaluate the two selected models on test data only in the final cell.
