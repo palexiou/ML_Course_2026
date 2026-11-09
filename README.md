@@ -1,29 +1,46 @@
 # Machine learning for bioinformatics
 
-The course now focuses only on hands-on exercises. Presentations and slide-generation tools were removed on 2026-11-08. New exercise code will be written only from the instructor's explicit specifications; earlier teaching plans are historical, not authorization for new implementation.
+Simple hands-on exercises, with code that is easy to read and teach.
+Only Exercise 1 is implemented for now.
 
-- **New Exercise 1:** [artificial TFBS dataset](docs/exercise-1.md), using the first 10 PFM positions, 10,000 positives and 10,000 negatives of 100 nt each.
+## Setup
 
-- **Run the workflows:** [completed GitHub notebooks and Colab links](notebooks/README.md). Four notebooks cover six stages; [course_code/](course_code/) is the canonical Python source.
-- **Teach and practice:** [instructor guide](instructor/guide.md), [scaffolded practicals](instructor/practicals.md), [separate answers](instructor/answers.md), and [printable audit checklist](instructor/audit-checklist.html).
-- **Evidence and decisions:** [verification](instructor/verification/README.md), [course design history](docs/course-design.md), [dated wiki](docs/course-wiki/index.md), [glossary](GLOSSARY.md), and [ADRs](docs/adr/).
-- **Day 4:** [agent workshop](agent_workshop/README.md), retained with genuine run evidence distinct from authored fixtures.
+```powershell
+python -m pip install -r course_code/requirements.txt
+```
 
-The course moves from k-mer classical models through CNNs and frozen DNA embeddings to agent-assisted analyses. Examples use simulated sequence classification; they do not establish real promoter prediction or a universal model ranking. Development uses validation; the Day 3 freeze and explicitly authorized test reveal are separate actions.
+## Exercise 1: artificial TFBS dataset
 
-## GitHub notebooks and Colab
+Open `exercise_1.ipynb` for the step-by-step, self-contained notebook.
+In Google Colab, choose **File > Upload notebook**, select this file, then
+run the cells from top to bottom. Change `ofile` in the first code cell to
+choose the output CSV path. The final Markdown cell explains how to download
+the CSV from Colab.
 
-Yes—this delivery is agreed. Open the real notebook links/badges in [notebooks/README.md](notebooks/README.md); that is the single setup/runtime/access reference. The repo is private: students need access and Colab authorization. Live hands-on depth remains open; instructor demonstration with optional follow-along is a recommendation. The full runnable workflow and scaffolded exercises remain available. Actual Colab execution, full-session timing, genuine agent recording and the Agentomics demonstration remain unverified or pending as detailed in the verification record.
+The command-line script remains available:
 
-## Cleanup map · 2026-11-03
+```powershell
+python course_code/exercise_1.py --ofile "exercise_1_output/dataset.csv"
+```
 
-| Earlier location | Canonical home / treatment |
-| --- | --- |
-| `paste_ready/01…06.py`, its README/manifest | Replaced by four generated `notebooks/*.ipynb` and their metadata source hashes. Dependent stages 03–05 share one notebook; duplicate generated Python copies removed. |
-| `course_code/README.md` | Consolidated into `notebooks/README.md`; the eight canonical Python modules and requirement files remain. |
-| `instructor/exercises.md`, `instructor/day1-practical.md` | Merged into `instructor/practicals.md`; separate answers and four completed miniature scripts retained. |
-| `docs/timed-course-plan.md` | Consolidated into `instructor/guide.md`; course-design interview history and detailed historical Day 1 cues retained. |
-| `docs/*verification.md`, `docs/leakage-exercise.md`, `instructor/verification.md` | Grouped in `instructor/verification/`, with `README.md` as evidence index; unique reports retained. |
-| `Initial_Chat_Log.txt` | `.scratch/ml-bioinformatics-course/initial-chat-log.txt`, preserved source history. |
+Without `--ofile`, the output is also `exercise_1_output/dataset.csv`.
+Parent directories are created automatically.
 
-The prior layout is also preserved in commit `ea59dd8`. Required agent rules, local issues, source reviews, glossary, accepted ADRs and wiki remain. The unrelated `agent_workshop/` data/code/history remain; only its functional links change if needed. No new archive hierarchy or parallel planning framework was added.
+- 10,000 positives and 10,000 negatives, each 100 nt long.
+- Background bases are sampled independently: A = C = G = T = 25%.
+- Each positive has one sampled 10-nt motif planted at a random valid position.
+- Only the first 10 columns of the supplied PFM are used, with each column
+  normalized separately to nucleotide probabilities. No pseudocounts are added.
+- Motifs replace background bases and use the supplied orientation.
+- Negatives have no planted motif; chance motif matches are not filtered out.
+- CSV columns: `sequence`, `label` (1 = positive, 0 = negative).
+- Random seed: 42. No data splits or models.
+
+## Tests
+
+```powershell
+python -m unittest discover -s tests
+```
+
+Future notebooks will be short, manually written, and focused on the specified
+exercise. No notebook generators, shared course framework, or presentation tools.

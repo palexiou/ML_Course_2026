@@ -1,7 +1,12 @@
 """Check the specified Exercise 1 dataset and motif sampling."""
 
+from contextlib import chdir, redirect_stdout
+from io import StringIO
+import json
 from pathlib import Path
+import subprocess
 import sys
+from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 
@@ -13,6 +18,32 @@ import exercise_1
 
 
 class Exercise1Tests(unittest.TestCase):
+    def test_notebook_runs_independently_and_matches_script(self):
+        path = Path(__file__).resolve().parents[1] / "exercise_1.ipynb"
+        notebook = json.loads(path.read_text(encoding="utf-8"))
+        namespace = {"__name__": "__main__"}
+        with TemporaryDirectory() as directory, chdir(directory), redirect_stdout(StringIO()):
+            for cell in notebook["cells"]:
+                if cell["cell_type"] == "code":
+                    exec(compile("".join(cell["source"]), str(path), "exec"), namespace)
+            saved = pd.read_csv(namespace["ofile"])
+        pd.testing.assert_frame_equal(saved, exercise_1.generate_dataset())
+
+    def test_cli_default_and_custom_output_paths(self):
+        script = Path(exercise_1.__file__).resolve()
+        for output in (exercise_1.OUTPUT_PATH, Path("custom directory/nested/data.csv")):
+            with self.subTest(output=output), TemporaryDirectory() as directory:
+                arguments = [] if output == exercise_1.OUTPUT_PATH else ["--ofile", str(output)]
+                result = subprocess.run(
+                    [sys.executable, str(script), *arguments], cwd=directory,
+                    capture_output=True, text=True, check=True,
+                )
+                saved = pd.read_csv(Path(directory) / output)
+                pd.testing.assert_frame_equal(saved, exercise_1.generate_dataset())
+                self.assertIn(str(output), result.stdout)
+                if arguments:
+                    self.assertFalse((Path(directory) / exercise_1.OUTPUT_PATH).exists())
+
     def test_first_ten_columns_and_position_probabilities(self):
         expected = np.array([
             [87, 167, 281, 56, 8, 744, 40, 107, 851, 5],

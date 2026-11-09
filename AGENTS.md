@@ -1,16 +1,9 @@
-## Agent skills
+# Teaching code
 
-### Issue tracker
-
-Issues and specs are tracked as local Markdown under `.scratch/`.
-See `docs/agents/issue-tracker.md`.
-
-### Triage labels
-
-Use the five default triage roles, recorded as local issue statuses.
-See `docs/agents/triage-labels.md`.
-
-### Domain docs
-
-Single-context layout: root `GLOSSARY.md` and `docs/adr/`.
-See `docs/agents/domain.md`.
+- Keep Python simple, explicit, and easy for a non-expert to teach.
+- Implement only exercises explicitly specified by the instructor.
+- Use short, manually written notebooks when notebooks are requested.
+- Do not add generators, course frameworks, or elaborate abstractions.
+- Keep Exercise 1's `--ofile` command working.
+- For coding tasks, load and follow the `coding` skill.
+- Commit or push only when explicitly requested.

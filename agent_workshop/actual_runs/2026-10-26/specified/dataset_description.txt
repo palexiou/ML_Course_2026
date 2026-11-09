@@ -1,1 +1,0 @@
-Simulated160baseDNAbinaryclassification; motifTATAAATG deliberatelyinserted withprobability.9 positive/.1negative; uniformbackground; seed2026; singletonindependentgroups. Notrealpromoterdata.

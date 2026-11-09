@@ -1,7 +1,3 @@
 __pycache__/
-.mypy_cache/
-simple_signal_output/
-course_output/
 exercise_1_output/
-
 .ipynb_checkpoints/

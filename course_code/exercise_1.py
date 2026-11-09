@@ -1,5 +1,6 @@
 """Generate Exercise 1: uniform DNA backgrounds with a planted 10-nt TFBS motif."""
 
+import argparse
 from pathlib import Path
 
 import numpy as np
@@ -47,10 +48,16 @@ def generate_dataset(seed: int = SEED) -> pd.DataFrame:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--ofile", type=Path, default=OUTPUT_PATH,
+        help="Output CSV path (default: %(default)s).",
+    )
+    args = parser.parse_args()
     dataset = generate_dataset()
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    dataset.to_csv(OUTPUT_PATH, index=False)
-    print(f"Saved {len(dataset):,} sequences to {OUTPUT_PATH}")
+    args.ofile.parent.mkdir(parents=True, exist_ok=True)
+    dataset.to_csv(args.ofile, index=False)
+    print(f"Saved {len(dataset):,} sequences to {args.ofile}")
     print("10,000 positives (label 1), 10,000 negatives (label 0); 100 nt each.")
 
 
