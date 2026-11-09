@@ -1,7 +1,7 @@
 # Machine learning for bioinformatics
 
 Simple hands-on exercises, with code that is easy to read and teach.
-Exercises 1 through 4 are available as simple, self-contained notebooks.
+Exercises 1 through 5 are available as simple, self-contained notebooks.
 
 ## Open the exercises in Google Colab
 
@@ -11,11 +11,12 @@ Exercises 1 through 4 are available as simple, self-contained notebooks.
 | [Exercise 2](exercise_2.ipynb) | Logistic regression with a bag of k-mers | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_2.ipynb) |
 | [Exercise 3](exercise_3.ipynb) | Logistic regression on real human non-TATA promoter sequences | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_3.ipynb) |
 | [Exercise 4](exercise_4.ipynb) | Decision tree and random forest on artificial TFBS data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_4.ipynb) |
+| [Exercise 5](exercise_5.ipynb) | Gradient boosting on artificial TFBS data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_5.ipynb) |
 
 Start with Exercise 1 and download its CSV. Then open Exercise 2, upload the CSV
 using the Colab Files sidebar, and set `ifile` to the uploaded filename.
 Exercise 3 downloads its own public benchmark data; no CSV upload is needed.
-Exercise 4 uses the same Exercise 1 CSV as Exercise 2; upload it and set `ifile` in the same way.
+Exercises 4 and 5 use the same Exercise 1 CSV as Exercise 2; upload it and set `ifile` in the same way.
 
 The buttons open the versions on GitHub's `main` branch, not local changes.
 If the repository is private, you need repository access and must authorize Colab
@@ -106,6 +107,20 @@ Exercise 1 CSV path. In Colab, upload the CSV and set `ifile` to its filename.
 
 The random forest uses sparse counts and available CPU cores, but larger k can
 be slower to train. Full Exercise 4 training has not yet been timed or validated.
+
+## Exercise 5: gradient boosting
+
+Open `exercise_5.ipynb` and set `ifile` to the Exercise 1 CSV path.
+In Colab, upload the CSV and set `ifile` to its filename.
+
+- Keep k=4 fixed and use the same 70% training / 20% validation / 10% test split.
+- Add shallow trees sequentially with `GradientBoostingClassifier` and binary log loss.
+- Plot training and validation log loss for 1 through 200 trees.
+- Select the tree count by lowest validation log loss, with learning rate 0.1 and depth 2 fixed.
+- Compare with a decision tree and a 100-tree random forest at the same k and split.
+- Show all eight metrics, ROC/precision-recall curves, and confusion matrices.
+- Evaluate only the selected gradient boosting model on test data in the final cell.
+  **Run all includes test evaluation.**
 
 ## Tests
 
