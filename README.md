@@ -1,7 +1,7 @@
 # Machine learning for bioinformatics
 
 Simple hands-on exercises, with code that is easy to read and teach.
-Exercises 1 through 7 are available as simple, self-contained notebooks.
+Exercises 1 through 8 are available as simple, self-contained notebooks.
 
 ## Open the exercises in Google Colab
 
@@ -14,18 +14,28 @@ Exercises 1 through 7 are available as simple, self-contained notebooks.
 | [Exercise 5](exercise_5.ipynb) | Gradient boosting on artificial TFBS data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_5.ipynb) |
 | [Exercise 6](exercise_6.ipynb) | Compare logistic regression, random forest, and gradient boosting on real non-TATA promoters | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_6.ipynb) |
 | [Exercise 7](exercise_7.ipynb) | Motif XOR: perceptron and random forest, then a ReLU MLP | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_7.ipynb) |
+| [Exercise 8](exercise_8.ipynb) | Probabilistic positional motifs with one-hot DNA and a 1D CNN | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_8.ipynb) |
 
 Start with Exercise 1 and download its CSV. Then open Exercise 2, upload the CSV
 using the Colab Files sidebar, and set `ifile` to the uploaded filename.
 Exercises 3 and 6 download their own public benchmark data; no CSV upload is needed.
 Exercises 4 and 5 use the same Exercise 1 CSV as Exercise 2; upload it and set `ifile` in the same way.
-Exercise 7 creates and saves its own dataset; no upload is needed.
+Exercises 7 and 8 create and save their own datasets; no upload is needed.
 
 The buttons open the versions on GitHub's `main` branch, not local changes.
 If the repository is private, you need repository access and must authorize Colab
 to access private repositories through its GitHub notebook browser.
 
 ## Local setup (optional)
+
+Exercise 8 adds PyTorch, which is normally available in Colab. For a CPU-only local
+installation, first install PyTorch from its official CPU wheel index:
+
+```powershell
+python -m pip install torch==2.9.1 --index-url https://download.pytorch.org/whl/cpu
+```
+
+Then install the course dependencies:
 
 ```powershell
 python -m pip install -r course_code/requirements.txt
@@ -177,6 +187,43 @@ all four correctly: its accuracy ceiling on this balanced dataset is 75%, not 50
 The task is a controlled demonstration of nonlinear feature combinations, not a model of
 a particular natural promoter. A possible follow-up is motif spacing, where short-k-mer
 counts discard the relationship between separated elements.
+
+## Exercise 8: probabilistic positional motifs with a CNN
+
+Open `exercise_8.ipynb` and run cells in order. Dataset generation and model training
+are in the same notebook. No earlier exercise or CSV upload is needed.
+
+- Create 20,000 independent 1,000-nt sequences with equal class sizes and uniformly sampled
+  background bases. Plant one sampled instance of each of two 10-nt motifs per sequence.
+- Specify count matrices, normalize columns to sampling probabilities, and calculate
+  log-odds PWMs. Motif A has an ATG core with 99.9% conservation per base; motif B has
+  a TATAAA core with 97% conservation per base. Flanks are more variable.
+- Class 0: motif B is uniform across full-length placements that do not overlap A.
+- Class 1: the nominal TATA core start relative to the A of ATG follows a discrete,
+  truncated two-sided Gaussian shape on -100 through -30 nt, peaked at -50 nt. Its widths
+  are 20 nt on the upstream side and 8 nt on the downstream side. The asymmetric curve's
+  mean is upstream of its peak; samples are not clipped at the endpoints.
+- Use the same ATG anchor range (101–996 inclusive) and motif probabilities in both classes.
+  Keep chance background matches and class-0 placements in the concentrated region.
+  Labels record the generating class, rather than a hard offset threshold.
+- Save `exercise_8_output/dataset.csv`, including labels, nominal core anchors, full motif
+  starts, offsets and the sampled motif strings. Change `ofile` to choose the path.
+- Split 70% / 20% / 10% per label for training, validation and test.
+- Encode bases as one-hot vectors. Only sequences reach the model; metadata is used for
+  dataset checks and interpretation of errors.
+- Use the supplied PWMs as fixed convolutional motif scanners, followed by local pooling,
+  a trainable convolution/ReLU layer, global max pooling and a binary output. The learned
+  part combines known motif responses over a 133-base receptive field; it does not discover
+  the motifs from scratch. All model inputs are one-hot sequence encodings.
+- Show the forward pass, `loss.backward()`, and the Adam optimizer update explicitly.
+  Run 25 epochs and restore the weights with the lowest validation cross-entropy.
+- Report all eight metrics and errors by class and offset region. Evaluate the selected
+  weights on test sequences only in the final code cell. **Run all includes test evaluation.**
+
+This is an artificial spacing task. TATA boxes concern transcription initiation; ATG is
+a translation start codon, not a transcription start site. The labels are not a biological
+rule for recognizing functional promoters or translated genes. Chance positional overlap
+and motif variability make some examples intrinsically ambiguous.
 
 ## Tests
 
