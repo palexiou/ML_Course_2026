@@ -3,7 +3,21 @@
 Simple hands-on exercises, with code that is easy to read and teach.
 Exercises 1 and 2 are implemented as simple, self-contained notebooks.
 
-## Setup
+## Open the exercises in Google Colab
+
+| Exercise | Topic | Run notebook |
+| --- | --- | --- |
+| [Exercise 1](exercise_1.ipynb) | Create an artificial TFBS dataset | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_1.ipynb) |
+| [Exercise 2](exercise_2.ipynb) | Logistic regression with a bag of k-mers | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_2.ipynb) |
+
+Start with Exercise 1 and download its CSV. Then open Exercise 2, upload the CSV
+using the Colab Files sidebar, and set `ifile` to the uploaded filename.
+
+The buttons open the versions on GitHub's `main` branch, not local changes.
+If the repository is private, you need repository access and must authorize Colab
+to access private repositories through its GitHub notebook browser.
+
+## Local setup (optional)
 
 ```powershell
 python -m pip install -r course_code/requirements.txt
@@ -12,8 +26,8 @@ python -m pip install -r course_code/requirements.txt
 ## Exercise 1: artificial TFBS dataset
 
 Open `exercise_1.ipynb` for the step-by-step, self-contained notebook.
-In Google Colab, choose **File > Upload notebook**, select this file, then
-run the cells from top to bottom. Change `ofile` in the first code cell to
+Use its **Open In Colab** button above, then run the cells from top to bottom.
+Change `ofile` in the first code cell to
 choose the output CSV path. The final Markdown cell explains how to download
 the CSV from Colab.
 
