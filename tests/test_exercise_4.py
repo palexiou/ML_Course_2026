@@ -51,7 +51,7 @@ class Exercise4Tests(unittest.TestCase):
                         exec(compile("".join(cell["source"]), str(path), "exec"), namespace)
 
         self.assertEqual(fitted_ranges, [(4, 4)] + [(k, k) for k in range(1, 8)])
-        self.assertEqual(visible_axes, [6, 4, 7, 7, 6])
+        self.assertEqual(visible_axes, [6, 1, 4, 7, 7, 6])
         results = namespace["validation_results"]
         self.assertEqual(len(results), 14)
         self.assertTrue(np.isfinite(results.to_numpy()).all())
