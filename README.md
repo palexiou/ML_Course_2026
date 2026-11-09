@@ -1,7 +1,7 @@
 # Machine learning for bioinformatics
 
 Simple hands-on exercises, with code that is easy to read and teach.
-Exercises 1 through 5 are available as simple, self-contained notebooks.
+Exercises 1 through 6 are available as simple, self-contained notebooks.
 
 ## Open the exercises in Google Colab
 
@@ -12,10 +12,11 @@ Exercises 1 through 5 are available as simple, self-contained notebooks.
 | [Exercise 3](exercise_3.ipynb) | Logistic regression on real human non-TATA promoter sequences | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_3.ipynb) |
 | [Exercise 4](exercise_4.ipynb) | Decision tree and random forest on artificial TFBS data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_4.ipynb) |
 | [Exercise 5](exercise_5.ipynb) | Gradient boosting on artificial TFBS data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_5.ipynb) |
+| [Exercise 6](exercise_6.ipynb) | Compare logistic regression, random forest, and gradient boosting on real non-TATA promoters | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_6.ipynb) |
 
 Start with Exercise 1 and download its CSV. Then open Exercise 2, upload the CSV
 using the Colab Files sidebar, and set `ifile` to the uploaded filename.
-Exercise 3 downloads its own public benchmark data; no CSV upload is needed.
+Exercises 3 and 6 download their own public benchmark data; no CSV upload is needed.
 Exercises 4 and 5 use the same Exercise 1 CSV as Exercise 2; upload it and set `ifile` in the same way.
 
 The buttons open the versions on GitHub's `main` branch, not local changes.
@@ -121,6 +122,24 @@ In Colab, upload the CSV and set `ifile` to its filename.
 - Show all eight metrics, ROC/precision-recall curves, and confusion matrices.
 - Evaluate only the selected gradient boosting model on test data in the final cell.
   **Run all includes test evaluation.**
+
+## Exercise 6: compare three models on real non-TATA promoters
+
+Open `exercise_6.ipynb` with its **Open In Colab** button and run the cells in order.
+No CSV upload or earlier notebook is required.
+
+- Download the same pinned non-TATA promoter benchmark as Exercise 3.
+- Preserve its official test set and reserve 20% per label from official training for validation.
+- Give all three models the same training-fitted, sparse bag-of-6-mers representation.
+- Compare logistic regression (not the classic perceptron), a 100-tree random forest,
+  and gradient boosting with 200 depth-2 trees and learning rate 0.1.
+- Keep k=6 and model settings fixed; there is no hyperparameter search.
+- Compare all eight metrics, overlaid ROC/precision-recall curves, and confusion matrices.
+- Evaluate all three fitted models on the official test set only in the final cell.
+  **Run all includes test evaluation.**
+
+This is a fixed-setting benchmark comparison, not an equally tuned competition or
+chromosome-held-out evaluation. Gradient boosting may take longer to train.
 
 ## Tests
 
