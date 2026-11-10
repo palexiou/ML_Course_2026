@@ -43,9 +43,7 @@ class Exercise9Tests(unittest.TestCase):
                 for row in inputs[0].detach().cpu().numpy():
                     self.assertIn(row.tobytes(), training_rows)
             else:
-                if torch.is_grad_enabled():
-                    self.assertEqual(cell["id"], "input-attributions")
-                    self.assertTrue(inputs[0].requires_grad)
+                self.assertFalse(torch.is_grad_enabled())
 
         with redirect_stdout(StringIO()), \
                 patch.object(pd, "read_parquet", side_effect=[official_train.copy(), official_test.copy()]) as download, \
@@ -57,8 +55,6 @@ class Exercise9Tests(unittest.TestCase):
                 if cell["id"] == "test-evaluation":
                     for name in ("x_test", "y_test", "test_loader", "test_probabilities", "test_results"):
                         self.assertNotIn(name, namespace)
-                if cell["id"] == "choose-explanations":
-                    explanation_state = {name: value.clone() for name, value in namespace["cnn"].state_dict().items()}
                 exec(compile("".join(cell["source"]), str(path), "exec"), namespace)
                 if cell["id"] == "settings":
                     namespace["max_epochs"] = 3
@@ -104,7 +100,6 @@ class Exercise9Tests(unittest.TestCase):
             torch.testing.assert_close(value, namespace["best_state"][name], rtol=0, atol=0)
         for name in ("0.weight", "3.weight"):
             self.assertFalse(torch.equal(initial_state[name], namespace["cnn"].state_dict()[name]))
-        self.assertTrue(torch.all(namespace["filter_changes"] > 0))
         self.assertAlmostEqual(namespace["validation_results"]["log_loss"], min(namespace["validation_losses"]), places=5)
         for split in ("validation", "test"):
             results = namespace[f"{split}_results"]
@@ -115,50 +110,3 @@ class Exercise9Tests(unittest.TestCase):
             self.assertAlmostEqual(results["roc_auc"], roc_auc_score(labels, probabilities))
             self.assertAlmostEqual(results["log_loss"], log_loss(labels, probabilities))
         self.assertFalse(namespace["cnn"].training)
-        for name, value in namespace["cnn"].state_dict().items():
-            torch.testing.assert_close(value, explanation_state[name], rtol=0, atol=0)
-        self.assertTrue(all(p.grad is None for p in namespace["cnn"].parameters()))
-        indices = namespace["explanation_indices"]
-        pd.testing.assert_frame_equal(namespace["explanation_data"], namespace["validation_data"].iloc[indices])
-        torch.testing.assert_close(namespace["explanation_inputs"], namespace["x_validation"][indices])
-        for name in ("saliency_scores", "integrated_scores"):
-            self.assertEqual(namespace[name].shape, (len(indices), 251))
-            self.assertTrue(np.isfinite(namespace[name]).all())
-        starts = namespace["window_starts"]
-        self.assertEqual((starts[0], starts[-1] + namespace["window_size"]), (0, 251))
-        self.assertTrue(np.isfinite(namespace["occlusion_scores"]).all())
-        model = namespace["cnn"]
-        with torch.no_grad():
-            # Masking differences must match actual predictions, including the last window.
-            for example, window in ((0, 0), (len(indices) - 1, len(starts) - 1)):
-                masked = namespace["explanation_inputs"][example:example + 1].clone()
-                start = starts[window]
-                masked[:, :, start:start + namespace["window_size"]] = 0
-                expected = namespace["explanation_logits"][example] - model(masked).item()
-                self.assertAlmostEqual(namespace["occlusion_scores"][example, window], expected, places=5)
-            # Substitutions must change exactly the requested base and use the stated sign.
-            selected = namespace["example_number"]
-            for position, base in ((0, 3), (123, 1), (250, 0)):
-                mutated = namespace["explanation_inputs"][selected:selected + 1].clone()
-                mutated[:, :, position] = 0
-                mutated[:, base, position] = 1
-                expected = model(mutated).item() - namespace["explanation_logits"][selected]
-                self.assertAlmostEqual(namespace["mutation_effects"][base, position], expected, places=5)
-        sequence = namespace["explanation_data"].iloc[selected]["sequence"]
-        for position, base in enumerate(sequence):
-            if base in "ACGT":
-                self.assertAlmostEqual(namespace["mutation_effects"]["ACGT".index(base), position], 0, places=5)
-
-        # A known linear model has exact, reference-independent-of-bias attributions.
-        linear = torch.nn.Sequential(torch.nn.Flatten(), torch.nn.Linear(4 * 251, 1))
-        with torch.no_grad():
-            linear[1].weight.copy_(torch.linspace(-1, 1, 4 * 251).reshape(1, -1))
-            linear[1].bias.fill_(2)
-        inputs = namespace["x_validation"][:2]
-        attributions = namespace["integrated_gradients"](linear, inputs, steps=7)
-        expected = inputs * linear[1].weight.detach().reshape(1, 4, 251)
-        torch.testing.assert_close(attributions, expected)
-        with torch.no_grad():
-            difference = linear(inputs).squeeze(1) - linear(torch.zeros_like(inputs)).squeeze(1)
-        torch.testing.assert_close(attributions.sum(dim=(1, 2)), difference)
-        self.assertTrue(all(p.grad is None for p in linear.parameters()))

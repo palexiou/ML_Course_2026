@@ -16,7 +16,9 @@ Use these columns:
 
 Use only the two sequence columns as model inputs. **Do not use the other columns, including `Nunique`, which reveals the label.**
 
-**Do not use the official test set.** Create your own training, validation, and held-out evaluation splits from the training file.
+Reserve **20% of the training data for validation**. Keep the official test set for final evaluation after all model choices are fixed.
+
+The [example notebook](exercise_10.ipynb) shows a 2D sequence-pair representation and a small CNN. Use it as a starting point for your own approach.
 
 ## Project
 
