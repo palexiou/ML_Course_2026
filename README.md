@@ -12,6 +12,7 @@ Hands-on notebooks. Open one locally or in Google Colab and run the cells in ord
 | [Exercise 6](exercise_6.ipynb) | Compare models on real promoters | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_6.ipynb) |
 | [Exercise 7](exercise_7.ipynb) | Motif XOR: perceptron, random forest, and MLP | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_7.ipynb) |
 | [Exercise 8](exercise_8.ipynb) | Positional motifs with a CNN | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_8.ipynb) |
+| [Exercise 9](exercise_9.ipynb) | Learn CNN filters on real promoters | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_9.ipynb) |
 
 Exercises 2, 4, and 5 use the CSV from Exercise 1; set `ifile` to its path.
 In Colab, upload that CSV first. Other notebooks generate or download their data.
