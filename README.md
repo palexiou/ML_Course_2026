@@ -1,8 +1,8 @@
 # Machine learning for bioinformatics
 
-Hands-on notebooks. Open one locally or in Google Colab and run the cells in order.
+Hands-on notebooks and a group project. Open notebooks locally or in Google Colab and run the cells in order.
 
-| Notebook | Topic | Colab |
+| Exercise | Topic | Colab |
 | --- | --- | --- |
 | [Exercise 1](exercise_1.ipynb) | Generate a synthetic motif dataset | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_1.ipynb) |
 | [Exercise 2](exercise_2.ipynb) | Logistic regression with k-mers | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_2.ipynb) |
@@ -13,6 +13,7 @@ Hands-on notebooks. Open one locally or in Google Colab and run the cells in ord
 | [Exercise 7](exercise_7.ipynb) | Motif XOR: perceptron, random forest, and MLP | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_7.ipynb) |
 | [Exercise 8](exercise_8.ipynb) | Positional motifs with a CNN | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_8.ipynb) |
 | [Exercise 9](exercise_9.ipynb) | Learn CNN filters on real promoters | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_9.ipynb) |
+| [Exercise 10](exercise_10.md) | Group project: miRNA target prediction | — |
 
 Exercises 2, 4, and 5 use the CSV from Exercise 1; set `ifile` to its path.
 In Colab, upload that CSV first. Other notebooks generate or download their data.
