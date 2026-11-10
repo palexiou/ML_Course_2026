@@ -1,6 +1,6 @@
 # Exercise 10: miRNA–target prediction group project
 
-Work in **groups of three** to build a predictor for the Hejret 2023 dataset.
+Work in **groups of two or three** to build a predictor for the Hejret 2023 dataset.
 
 ## Data
 
@@ -22,7 +22,7 @@ Use only the two sequence columns as model inputs. **Do not use the other column
 
 - Build a predictor. Choose and justify your own representation and model.
 - Build a separate evaluation system that accepts predictions from any model and evaluates them against reference labels on held-out data. Choose appropriate metrics and explain them.
-- Work in a shared GitHub repository. All three members should contribute, commit meaningful work regularly, and keep notes of decisions, experiments, and results.
+- Work in a shared GitHub repository. All members should contribute, commit meaningful work regularly, and keep notes of decisions, experiments, and results.
 - Document how someone else can reproduce your work and run prediction and evaluation.
 
 Organize the work yourselves and make your own implementation decisions.
