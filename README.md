@@ -20,8 +20,10 @@ Exercises 2, 4, and 5 use the CSV from Exercise 1; set `ifile` to its path.
 In Colab, upload that CSV first. Other notebooks generate or download their data.
 Colab links open the version on GitHub's `main` branch.
 
-Exercise 11 reuses Exercise 9's promoter data and split. It extracts frozen
-Nucleotide Transformer embeddings and trains logistic regression on them.
+Exercise 11 is self-contained: it downloads real promoter data and compares
+mean-pooled Nucleotide Transformer embeddings with logistic regression against
+ordered token embeddings with a single convolutional layer. The transformer
+stays frozen in both paths, with detailed explanations of the model settings.
 Use a Colab GPU for embedding extraction; CPU execution is much slower.
 
 For local use, install dependencies:
