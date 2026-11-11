@@ -14,10 +14,15 @@ Hands-on notebooks and a group project. Open notebooks locally or in Google Cola
 | [Exercise 8](exercise_8.ipynb) | Positional motifs with a CNN | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_8.ipynb) |
 | [Exercise 9](exercise_9.ipynb) | Learn CNN filters on real promoters | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_9.ipynb) |
 | [Exercise 10](exercise_10.md) | Group project: miRNA target prediction · [2D CNN example](exercise_10.ipynb) | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_10.ipynb) |
+| [Exercise 11](exercise_11.ipynb) | Foundation model embeddings for real promoters | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_11.ipynb) |
 
 Exercises 2, 4, and 5 use the CSV from Exercise 1; set `ifile` to its path.
 In Colab, upload that CSV first. Other notebooks generate or download their data.
 Colab links open the version on GitHub's `main` branch.
+
+Exercise 11 reuses Exercise 9's promoter data and split. It extracts frozen
+Nucleotide Transformer embeddings and trains logistic regression on them.
+Use a Colab GPU for embedding extraction; CPU execution is much slower.
 
 For local use, install dependencies:
 
