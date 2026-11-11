@@ -15,6 +15,7 @@ Hands-on notebooks and a group project. Open notebooks locally or in Google Cola
 | [Exercise 9](exercise_9.ipynb) | Learn CNN filters on real promoters | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_9.ipynb) |
 | [Exercise 10](exercise_10.md) | Group project: miRNA target prediction · [2D CNN example](exercise_10.ipynb) | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_10.ipynb) |
 | [Exercise 11](exercise_11.ipynb) | Foundation model embeddings for real promoters | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_11.ipynb) |
+| [Exercise 12](exercise_12.ipynb) | Bringing it all together: six-model promoter benchmark | [Open](https://colab.research.google.com/github/palexiou/ML_Course_2026/blob/main/exercise_12.ipynb) |
 
 Exercises 2, 4, and 5 use the CSV from Exercise 1; set `ifile` to its path.
 In Colab, upload that CSV first. Other notebooks generate or download their data.
@@ -25,6 +26,12 @@ mean-pooled Nucleotide Transformer embeddings with logistic regression against
 ordered token embeddings with a single convolutional layer. The transformer
 stays frozen in both paths, with detailed explanations of the model settings.
 Use a Colab GPU for embedding extraction; CPU execution is much slower.
+
+Exercise 12 compares k-mer logistic regression, random forest, XGBoost, a sequence
+CNN, and two frozen-transformer classifiers on one shared promoter split. It
+exports metrics, paired bootstrap intervals, calibration and error plots,
+timing/model-size comparisons, predictions, and a reproducibility manifest to
+`exercise_12_output/`. A GPU is recommended for the neural models.
 
 For local use, install dependencies:
 
