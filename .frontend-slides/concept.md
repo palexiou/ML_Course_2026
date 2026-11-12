@@ -5,30 +5,30 @@ follow the instructor's six-part sequence. This revision makes the accepted flow
 more instructional: definitions, explanations, source examples, and practical
 usage replace the earlier sparse, punchy style.
 
-## Current structure: 48 slides
+## Current structure: 49 slides
 
-1. How LLMs work (01–07): training versus generation, system/user prompts,
+1. How LLMs work (02–08): training versus generation, system/user prompts,
    tokens, next-token generation, context, and the context window. Begin with
    the students' familiar copy-paste workflow.
-2. Agents (09–11): an action/result loop, a real read-file command and returned
+2. Agents (10–12): an action/result loop, a real read-file command and returned
    coding rule, and a bounded inspection request with completion criteria.
-3. Subagents (12–14): focused assignments, separate context, an illustrative
+3. Subagents (13–15): focused assignments, separate context, an illustrative
    Claude Code agent configuration, and context-management trade-offs.
-4. Skills (16–21): definition, Matt's full grill-me/SKILL.md, annotated metadata
+4. Skills (17–22): definition, Matt's full grill-me/SKILL.md, annotated metadata
    and instruction body, excerpts from the shared grilling instructions,
    progressive loading, invocation, and optional references/scripts/assets.
-5. Harnesses (22–26): the execution/session layer, Claude Code and Codex CLI,
+5. Harnesses (23–27): the execution/session layer, Claude Code and Codex CLI,
    and T3 Code as an agent harness control surface. Three dedicated T3 slides
    explain starting a session, project/thread/worktree, and inspecting changes.
-6. Matt Pocock's skills (28–36): grill-me, the instructor's routing table,
+6. Matt Pocock's skills (29–37): grill-me, the instructor's routing table,
    the full Main Flow, and one slide per skill. A small independent DNA-validation
    example connects specification, ticket, implementation, and review.
-7. Scientific coding in practice (38–47): ten explanatory slides follow a
+7. Scientific coding in practice (39–48): ten explanatory slides follow a
    hypothetical patient-grouped gene-expression analysis. Students learn to state
    the scientific goal, supply relevant context, resolve choices, inspect small
    changes, check the evaluation, use known-answer checks, request run evidence,
    reproduce results, record decisions, and explain their conclusions.
-8. Slide 48 contains only **Live Demo on Exercise 10**. No spec, app design,
+8. Slide 49 contains only **Live Demo on Exercise 10**. No spec, app design,
    feature list, or scripted implementation is included. Develop it live.
 
 Allow roughly 75–80 minutes including a 15-minute demo, or move more quickly through
@@ -82,13 +82,24 @@ Branch: BioIT_AI_Eng. No exercise changes, commits, pushes, deployment, or insta
 A native subagent scored all 44 original slides in
 [slide-engagement-review.md](slide-engagement-review.md); 25 scored 8 or higher
 on a subjective boredom scale. The [redesign map](engagement-redesign-map.md)
-connects original critique numbers to the revised 48-slide order.
+connects original critique numbers to the revised 49-slide order.
 
-The revision adds four explanatory, illustrated section breaks (08, 15, 27, 37).
+The revision adds four explanatory, illustrated section breaks (09, 16, 28, 38).
 Instructional pages vary among feedback loops, context boundaries, annotated
 source and folder diagrams, layered architecture, dialogue, specification and
 ticket artifacts, a six-step workflow, scientific sample alignment, paired
 patient partitions, an evidence bundle, and a reproducibility path. Native
 SVG/HTML/CSS visuals remain crisp and embedded. The white Agentomics typography
 and palette remain consistent. Teaching definitions and source distinctions are
-retained, and slide 48 still contains only the requested demo title.
+retained, and slide 49 still contains only the requested demo title.
+
+## Title slide
+
+Slide 01 adds the Agentomics title composition and the exact original embedded
+University of Malta, BioGeMT, and European Union logos. The sole presenter is
+Panagiotis Alexiou. The teaching opening now starts at slide 02; the final live
+demo is slide 49. Both Agentomics reference files remain unchanged.
+
+The 49-slide version passes the desktop/mobile, offline, navigation, notes,
+editing/autosave, export, and exact-demo-text checks. The three title logos load
+offline and match the reference images exactly. See [title validation](title-validation.json).

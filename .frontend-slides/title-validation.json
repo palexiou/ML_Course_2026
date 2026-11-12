@@ -1,0 +1,20 @@
+{
+  "slides": 49,
+  "offline": "passed",
+  "viewports": [
+    "1280x720",
+    "390x844"
+  ],
+  "navigation": "passed",
+  "notes": "passed",
+  "tokenIllustration": "passed",
+  "editingAndAutosave": "passed",
+  "export": "passed",
+  "demoText": "exact match",
+  "failures": [],
+  "errors": [],
+  "titleLogos": "exact embedded copies; all three load offline",
+  "presenter": "Panagiotis Alexiou",
+  "existingSlides": "unchanged except numbering",
+  "agentomicsReferences": "both original SHA-256 checksums unchanged"
+}

@@ -22,7 +22,7 @@ parts, recognise them in a coding tool, give a bounded request, invoke a skill,
 and assess the work produced. A final applied section connects those concepts
 to scientific judgement, evidence, and reproducibility.
 
-The revised deck has **48 slides**. Its style follows the instructor's
+The revised deck has **49 slides**. Its style follows the instructor's
 `Alexiou_Agentomics_3.html`: white backgrounds, Newsreader serif text, JetBrains
 Mono labels and code, warm beige panels, fine neutral rules, and restrained gold
 accents. Definitions remain visible, while process maps, annotated source files, scientific diagrams, and four illustrated section breaks vary the composition. The reference
@@ -49,14 +49,15 @@ methods record. No actual patient data or performance results are presented.
 
 | Part | Slides | Learning question | Suggested time |
 | --- | --- | --- | ---: |
-| How LLMs work | 01–07 | How do instructions and context become generated text? | 10 min |
-| Agents (transition 08) | 09–11 | What changes when the model can request real actions? | 5 min |
-| Subagents | 12–14 | Why delegate a focused task with separate context? | 5 min |
-| Skills (transition 15) | 16–21 | What is in a skill, and how do I use it? | 9 min |
-| Harnesses and T3 Code | 22–26 | What runs the actions, and where do I inspect them? | 7 min |
-| Matt's skills and Main Flow (transition 27) | 28–36 | How does an idea become checked work? | 9 min |
-| Scientific coding in practice (transition 37) | 38–47 | What evidence lets us trust this analysis? | 15 min |
-| Live demonstration | 48 | Live Demo on Exercise 10 | 15+ min |
+| Title | 01 | Introduce the lecture and presenter. | 1 min |
+| How LLMs work | 02–08 | How do instructions and context become generated text? | 10 min |
+| Agents (transition 09) | 10–12 | What changes when the model can request real actions? | 5 min |
+| Subagents | 13–15 | Why delegate a focused task with separate context? | 5 min |
+| Skills (transition 16) | 17–22 | What is in a skill, and how do I use it? | 9 min |
+| Harnesses and T3 Code | 23–27 | What runs the actions, and where do I inspect them? | 7 min |
+| Matt's skills and Main Flow (transition 28) | 29–37 | How does an idea become checked work? | 9 min |
+| Scientific coding in practice (transition 38) | 39–48 | What evidence lets us trust this analysis? | 15 min |
+| Live demonstration | 49 | Live Demo on Exercise 10 | 15+ min |
 
 The expanded material, including short section transitions, takes roughly 75–80 minutes with a 15-minute demonstration.
 For a one-hour session, move more quickly through the terminology and use the
@@ -101,8 +102,8 @@ forms for different teaching jobs:
   own explanatory slide. The same small DNA policy connects the examples.
 - Show patient/sample alignment and paired partition diagrams. The scientific
   example asks about unseen patients without inventing performance results.
-- Use illustrated transitions at 08, 15, 27, and 37. Each states the question
-  that the next section answers. Slide 47 asks students to justify a claim
+- Use illustrated transitions at 09, 16, 28, and 38. Each states the question
+  that the next section answers. Slide 48 asks students to justify a claim
   before the unscripted live demonstration.
 
 All illustrations are authored SVG or HTML/CSS diagrams. Conceptual software
@@ -111,7 +112,17 @@ and practical explanations remain part of the visible slides.
 
 ## Slide-by-slide teaching script
 
-### 01 — From copy-paste to coding agents
+### 01 — AI Engineering
+
+**Title slide:** BioIT / MSc Bioinformatics. AI Engineering — From language models to scientific coding agents.
+
+**Presenter:** Panagiotis Alexiou. University of Malta.
+
+**Visual form:** Agentomics title composition: centered serif title, gold monospace kicker, and the original embedded University of Malta, BioGeMT, and European Union logos. The Agentomics source file remains unchanged.
+
+**Teaching notes:** Introduce the lecture, then advance to the familiar copy-paste workflow.
+
+### 02 — From copy-paste to coding agents
 
 **Definition / framing:** A coding assistant can do more than suggest snippets. In this lecture we will see how a language model becomes a system that can inspect files, use tools, and follow a working process.
 
@@ -145,7 +156,7 @@ You choose the scientific question and judge the result. The change is who moves
 
 Source: [AI Hero · Dictionary](https://www.aihero.dev/ai-coding-dictionary).
 
-### 02 — What is a language model?
+### 03 — What is a language model?
 
 **Definition / framing:** A large language model (LLM) is a trained model that generates text from the information supplied to it. Code is one kind of text it can generate.
 
@@ -177,7 +188,7 @@ Reading your notebook supplies context for a request; it does not normally retra
 
 Source: [AI Hero · Dictionary](https://www.aihero.dev/ai-coding-dictionary).
 
-### 03 — System prompts and user prompts
+### 04 — System prompts and user prompts
 
 **Definition / framing:** A prompt gives instructions or a request to the model. Message roles distinguish standing application guidance from what the user is asking for now.
 
@@ -207,7 +218,7 @@ Which inputs would fail it?
 
 Source: [AI Hero · Dictionary](https://www.aihero.dev/ai-coding-dictionary).
 
-### 04 — What is a token?
+### 05 — What is a token?
 
 **Definition / framing:** A token is a piece of text used by the model. A token can be a whole word, part of a word, punctuation, or whitespace; tokens are not the same as words.
 
@@ -226,7 +237,7 @@ Your messages, code, file contents, tool results, and generated response all use
 
 Source: [AI Hero · Dictionary](https://www.aihero.dev/ai-coding-dictionary).
 
-### 05 — How next-token generation works
+### 06 — How next-token generation works
 
 **Definition / framing:** An autoregressive LLM repeatedly predicts possible next tokens, chooses one using a decoding procedure, appends it, and uses the extended text to predict again.
 
@@ -250,7 +261,7 @@ Fluent code is still generated text. It has not been executed or checked merely 
 
 Source: [AI Hero · Dictionary](https://www.aihero.dev/ai-coding-dictionary).
 
-### 06 — What belongs in the context?
+### 07 — What belongs in the context?
 
 **Definition / framing:** Context is the information available to the model for the current request: instructions, conversation, and any file contents or tool results that have been supplied.
 
@@ -282,7 +293,7 @@ A repository can contain thousands of files. The model only uses file contents t
 
 Source: [AI Hero · Dictionary](https://www.aihero.dev/ai-coding-dictionary).
 
-### 07 — The context window and longer tasks
+### 08 — The context window and longer tasks
 
 **Definition / framing:** The context window is the finite amount of information a model request can hold, measured in tokens. Available capacity depends on the model and the surrounding software.
 
@@ -301,7 +312,7 @@ Save requirements in project files. Ask a new session to read them before contin
 
 Source: [AI Hero · Dictionary](https://www.aihero.dev/ai-coding-dictionary).
 
-### 08 — From generated text to actions
+### 09 — From generated text to actions
 
 **Section transition.** How does a model work with files and tools?
 
@@ -311,7 +322,7 @@ We will follow a tool request through execution and feedback, then see how a sub
 
 Source: [Claude Code · How it works](https://code.claude.com/docs/en/how-claude-code-works).
 
-### 09 — What is an agent?
+### 10 — What is an agent?
 
 **Definition / framing:** An agent is a system in which a model uses instructions and tools to work toward a goal over multiple steps. Results from one action inform what it does next.
 
@@ -342,7 +353,7 @@ Inspect the code → change it → run the check → read the result. A person s
 
 Source: [Claude Code · How it works](https://code.claude.com/docs/en/how-claude-code-works).
 
-### 10 — What happens during a tool call?
+### 11 — What happens during a tool call?
 
 **Definition / framing:** A tool call is a request for software to perform an action. The result returns to the model as information it can use for its next step.
 
@@ -368,7 +379,7 @@ The model generates the request. The harness checks permissions and executes it.
 
 Source: [Course · Coding instructions](AGENTS.md).
 
-### 11 — Give an agent a bounded task
+### 12 — Give an agent a bounded task
 
 **Definition / framing:** A useful brief states the goal, permitted scope, and evidence of success. It helps the agent decide which actions are relevant and when to stop.
 
@@ -386,7 +397,7 @@ A brief with three checkable parts
 
 Source: [Claude Code · How it works](https://code.claude.com/docs/en/how-claude-code-works).
 
-### 12 — What is a subagent?
+### 13 — What is a subagent?
 
 **Definition / framing:** A subagent is another agent given a focused assignment by the main agent. It generally works with separate instructions and context, then returns findings or completed work.
 
@@ -409,7 +420,7 @@ The main agent must supply enough information for the child to work. The child r
 
 Source: [Claude Code · Subagents](https://code.claude.com/docs/en/sub-agents).
 
-### 13 — A subagent can have its own configuration
+### 14 — A subagent can have its own configuration
 
 **Definition / framing:** A harness may let you configure a subagent’s instructions, model, and tool access. A code reader and an implementer can therefore have different capabilities.
 
@@ -439,7 +450,7 @@ What the fields control
 
 Source: [Claude Code · Subagents](https://code.claude.com/docs/en/sub-agents).
 
-### 14 — Why delegate into a separate context?
+### 15 — Why delegate into a separate context?
 
 **Definition / framing:** A subagent can inspect lengthy files or logs without placing the entire exploration in the main conversation. It returns the evidence needed for the next decision.
 
@@ -471,7 +482,7 @@ Summaries can omit detail. Delegation adds coordination, and separate contexts d
 
 Source: [Claude Code · Subagents](https://code.claude.com/docs/en/sub-agents).
 
-### 15 — Procedures the agent can read
+### 16 — Procedures the agent can read
 
 **Section transition.** How do we give a recurring task a repeatable method?
 
@@ -481,7 +492,7 @@ A skill is a readable package of instructions. We will open a real skill, follow
 
 Source: [Claude Code · Skills](https://code.claude.com/docs/en/skills).
 
-### 16 — What is a skill?
+### 17 — What is a skill?
 
 **Definition / framing:** A skill is a reusable package of instructions for a type of task. Its main file, SKILL.md, describes when the skill is useful and how the agent should approach the work.
 
@@ -503,7 +514,7 @@ A review skill can tell the agent what to inspect, which questions to ask, and h
 
 Source: [Claude Code · Skills](https://code.claude.com/docs/en/skills).
 
-### 17 — Anatomy of a real SKILL.md file
+### 18 — Anatomy of a real SKILL.md file
 
 **Definition / framing:** This is Matt Pocock’s actual grill-me skill. The YAML block between the --- lines is metadata; the text below it is the instruction body.
 
@@ -535,7 +546,7 @@ This small wrapper loads the shared grilling procedure. Loading a skill does not
 
 Source: [Matt Pocock · grill-me](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md).
 
-### 18 — The shared instructions explain the behaviour
+### 19 — The shared instructions explain the behaviour
 
 **Definition / framing:** The grill-me wrapper loads grilling, which contains the interview procedure. The agent follows these instructions in the conversation rather than learning a new capability through training.
 
@@ -560,7 +571,7 @@ What the user experiences
 
 Source: [Matt Pocock · grilling](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md).
 
-### 19 — How a skill gets loaded
+### 20 — How a skill gets loaded
 
 **Definition / framing:** Skills commonly use progressive loading: a short description helps selection, the full instructions are read when the skill is chosen, and supporting material is loaded as needed.
 
@@ -586,7 +597,7 @@ Reading every skill and reference for every request would consume context. Progr
 
 Source: [OpenAI Docs · Skills](https://learn.chatgpt.com/docs/build-skills).
 
-### 20 — How you ask to use a skill
+### 21 — How you ask to use a skill
 
 **Definition / framing:** Install or make the skill available to your harness, then invoke it in your request. Invocation syntax and automatic selection depend on the application and the skill’s configuration.
 
@@ -615,7 +626,7 @@ A useful first-use check
 
 Source: [OpenAI Docs · Skills](https://learn.chatgpt.com/docs/build-skills).
 
-### 21 — What else can be in a skill folder?
+### 22 — What else can be in a skill folder?
 
 **Definition / framing:** A skill can link to reference documents, executable helpers, and assets. These are optional; an instruction-only skill can be useful on its own.
 
@@ -650,7 +661,7 @@ Scripts act only when run with tools. A skill does not bypass permissions.
 
 Source: [Claude Code · Skills](https://code.claude.com/docs/en/skills).
 
-### 22 — What is an agent harness?
+### 23 — What is an agent harness?
 
 **Definition / framing:** A harness is the software around the model that manages the conversation, supplies tools, runs permitted actions, and returns their results to continue the agent loop.
 
@@ -678,7 +689,7 @@ Around the model, the harness manages sessions, permissions, continuation, and s
 
 Source: [Claude Code · How it works](https://code.claude.com/docs/en/how-claude-code-works).
 
-### 23 — Models, harnesses, and T3 Code
+### 24 — Models, harnesses, and T3 Code
 
 **Definition / framing:** These names refer to different layers. Claude Code and Codex CLI are coding-agent harness examples; T3 Code describes itself as a control surface for supported agent harnesses.
 
@@ -696,7 +707,7 @@ These are different layers. T3 Code describes itself as a control surface for su
 
 Source: [T3 Code · Documentation](https://github.com/pingdotgg/t3code).
 
-### 24 — T3 Code: start a working session
+### 25 — T3 Code: start a working session
 
 **Definition / framing:** T3 Code brings a project and its agent conversations into one interface. The connected agent system provides the model and tools used to work on the files.
 
@@ -724,7 +735,7 @@ Conceptual session map, not a screenshot. Confirm the working folder and constra
 
 Source: [T3 Code · Documentation](https://github.com/pingdotgg/t3code).
 
-### 25 — T3 Code: project, thread, and worktree
+### 26 — T3 Code: project, thread, and worktree
 
 **Definition / framing:** These organise different things: a project identifies the codebase, a thread holds a task’s conversation, and a worktree provides a separate Git working directory.
 
@@ -754,7 +765,7 @@ Conceptual example: a thread can use a separate worktree when isolation is neede
 
 Source: [T3 Code · Documentation](https://github.com/pingdotgg/t3code).
 
-### 26 — T3 Code: inspect the work produced
+### 27 — T3 Code: inspect the work produced
 
 **Definition / framing:** Use the workspace to inspect changed files and test actual behaviour. A completion message is the agent’s report; accepting the change requires evidence about the result.
 
@@ -786,7 +797,7 @@ Can you reproduce the claimed result?
 
 Source: [T3 Code · Documentation](https://github.com/pingdotgg/t3code).
 
-### 27 — From an idea to checked work
+### 28 — From an idea to checked work
 
 **Section transition.** Which decisions and evidence connect the steps?
 
@@ -796,7 +807,7 @@ Matt’s skills provide a practical example: clarify the need, capture the agree
 
 Source: [Matt Pocock · grill-me](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md).
 
-### 28 — Matt’s grill-me: clarify an idea
+### 29 — Matt’s grill-me: clarify an idea
 
 **Definition / framing:** Grill-me uses an interview to turn an unclear intention into explicit decisions. It is useful when you know what you want to achieve but have not worked through the details.
 
@@ -818,7 +829,7 @@ An explicit user, outcome, and small first step — before choosing what to buil
 
 Source: [Matt Pocock · grill-me](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md).
 
-### 29 — Choose the skill by where the answers are
+### 30 — Choose the skill by where the answers are
 
 **Definition / framing:** Different uncertainties need different ways of finding answers. Choose the starting point that fits what is missing, rather than running every skill in sequence.
 
@@ -835,7 +846,7 @@ Source: [Matt Pocock · grill-me](https://github.com/mattpocock/skills/blob/main
 
 Source: [AI Hero · Skills](https://www.aihero.dev/skills).
 
-### 30 — Matt’s Main Flow: idea to checked work
+### 31 — Matt’s Main Flow: idea to checked work
 
 **Definition / framing:** This sequence connects familiar engineering habits. Each step produces something the next step can use; use only as much process as the task needs.
 
@@ -878,7 +889,7 @@ Each step leaves something the next step can use. Return to clarification when a
 
 Source: [AI Hero · Skills](https://www.aihero.dev/skills).
 
-### 31 — grill-with-docs: understand the project
+### 32 — grill-with-docs: understand the project
 
 **Definition / framing:** This skill combines clarification with reading the codebase and recording shared terminology and decisions. It helps prevent guesses about what already exists or what the project’s terms mean.
 
@@ -909,7 +920,7 @@ Call the Skill tool twice, for
 
 Source: [Matt Pocock · grill-with-docs](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md).
 
-### 32 — to-spec: write down the agreement
+### 33 — to-spec: write down the agreement
 
 **Definition / framing:** A specification describes the behaviour already agreed in the conversation. Matt’s to-spec synthesises those decisions so implementation and review share the same reference.
 
@@ -935,7 +946,7 @@ to-spec synthesises decisions already made in the conversation. Make the scope a
 
 Source: [Matt Pocock · Skills](https://github.com/mattpocock/skills).
 
-### 33 — to-tickets: make a checkable increment
+### 34 — to-tickets: make a checkable increment
 
 **Definition / framing:** A ticket is a bounded piece of work with an observable result. Good tickets connect inputs, user-visible behaviour, and a way to check completion; dependencies make the order clear.
 
@@ -963,7 +974,7 @@ This is one complete, checkable increment. It can be implemented and exercised o
 
 Source: [Matt Pocock · Skills](https://github.com/mattpocock/skills).
 
-### 34 — implement: build and verify the behaviour
+### 35 — implement: build and verify the behaviour
 
 **Definition / framing:** Implementation turns the agreed task into code, runs appropriate checks, and uses their results to guide changes. Keep the work small enough to understand and review.
 
@@ -993,7 +1004,7 @@ What the checks establish
 
 Source: [Matt Pocock · Skills](https://github.com/mattpocock/skills).
 
-### 35 — code-review: check two different questions
+### 36 — code-review: check two different questions
 
 **Definition / framing:** Matt’s review skill separates conformance to project standards from conformance to the specification. It can delegate these two reviews to separate subagents and aggregate their findings.
 
@@ -1017,7 +1028,7 @@ Matt’s skill can delegate the lenses to separate subagents. Choose a fixed Git
 
 Source: [Matt Pocock · Skills](https://github.com/mattpocock/skills).
 
-### 36 — retro: improve the next session
+### 37 — retro: improve the next session
 
 **Definition / framing:** A retrospective examines what actually happened and proposes improvements to the agent’s working environment, instructions, checks, or tooling. Useful changes address observed friction.
 
@@ -1041,7 +1052,7 @@ A retrospective uses what actually happened to improve instructions, checks, or 
 
 Source: [Matt Pocock · Skills](https://github.com/mattpocock/skills).
 
-### 37 — Scientific judgement still matters
+### 38 — Scientific judgement still matters
 
 **Section transition.** What would make the analysis answer our question?
 
@@ -1051,7 +1062,7 @@ A hypothetical dataset with repeated samples per patient connects the workflow t
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 38 — Define the scientific question first
+### 39 — Define the scientific question first
 
 **Definition / framing:** A useful request explains the population, the outcome, and what you want to learn. These choices determine whether the code will answer the scientific question.
 
@@ -1071,7 +1082,7 @@ The condition of patients the model has never seen. New samples from a familiar 
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 39 — Give the assistant relevant evidence
+### 40 — Give the assistant relevant evidence
 
 **Definition / framing:** The assistant needs enough information to understand the data and existing analysis. A short schema, relevant code, and representative inputs are often more useful than an entire dataset.
 
@@ -1099,7 +1110,7 @@ Supply the join code, split code, column meanings, and representative inputs. As
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 40 — Resolve analysis choices before coding
+### 41 — Resolve analysis choices before coding
 
 **Definition / framing:** When a request leaves a scientific choice open, an assistant may fill in the gap. Ask it to surface assumptions so you can agree on the analysis before those choices become code.
 
@@ -1123,7 +1134,7 @@ Ask: “List unresolved choices, explain their effects, and recommend an approac
 
 Source: [scikit-learn · Common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html).
 
-### 41 — Make one change you can inspect
+### 42 — Make one change you can inspect
 
 **Definition / framing:** A small complete change is easier to understand, check, and reverse. State the behaviour you want, the files or cells in scope, and how you will recognise completion.
 
@@ -1149,7 +1160,7 @@ Read the changed code, run the relevant cells, and inspect the partition summary
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 42 — Check what your evaluation measures
+### 43 — Check what your evaluation measures
 
 **Definition / framing:** A program can run without errors while its evaluation answers the wrong question. The way you partition observations must match the kind of future prediction you want to assess.
 
@@ -1175,7 +1186,7 @@ Illustrative IDs only. Patient separation addresses overlap; preprocessing, batc
 
 Source: [scikit-learn · Grouped validation](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data).
 
-### 43 — Use examples with known answers
+### 44 — Use examples with known answers
 
 **Definition / framing:** A check is useful when you can say in advance what should happen and why. Small examples help expose a mistake that a plausible explanation or a high performance score can hide.
 
@@ -1203,7 +1214,7 @@ For the real analysis, derive IDs from the actual partition metadata. A passing 
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 44 — Ask for evidence of completed work
+### 45 — Ask for evidence of completed work
 
 **Definition / framing:** An agent’s completion message summarises its work. To decide whether the result is acceptable, inspect the changes and the observations that support its claims.
 
@@ -1227,7 +1238,7 @@ Ask for the changed split logic, patient-overlap check, actual outputs, and unre
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 45 — Record how the result was produced
+### 46 — Record how the result was produced
 
 **Definition / framing:** A reproducible analysis has a recoverable path from identified inputs to outputs. Someone should be able to run the saved code without reconstructing your chat or your notebook’s hidden state.
 
@@ -1253,7 +1264,7 @@ Investigate missing dependencies or unexpected differences. A random seed helps;
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 46 — Keep decisions with the analysis
+### 47 — Keep decisions with the analysis
 
 **Definition / framing:** Code shows what was implemented, but may not explain why it was chosen. Record important methodological decisions in the project so a future reader or agent can recover the reasoning.
 
@@ -1280,7 +1291,7 @@ Balanced accuracy averages recall across classes. Keep the question, assumptions
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 47 — Explain why you trust the analysis
+### 48 — Explain why you trust the analysis
 
 **Definition / framing:** Using an assistant well includes understanding the decisions that support the result. You should be able to explain the analysis, reproduce its behaviour, and describe what the checks establish.
 
@@ -1309,13 +1320,13 @@ Ask the assistant to explain unfamiliar code with small examples. You should be 
 
 Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 
-### 48 — Live Demo on Exercise 10
+### 49 — Live Demo on Exercise 10
 
 **Teaching notes:** Develop Exercise 10 live. No specification, interface plan, features, or completed application are included in these slides.
 
 ## Source and example distinctions
 
-- Slides 38–47 use a hypothetical patient-grouped analysis. The schema, prompts,
+- Slides 39–48 use a hypothetical patient-grouped analysis. The schema, prompts,
   and methods note are illustrative; no course analysis is implemented. The
   grouped-splitting and leakage explanations are supported by the linked
   scikit-learn documentation. The intentionally overlapping patient sets fail
@@ -1324,7 +1335,7 @@ Source: [Worked example · scientific coding](BioIT_AI_Eng_story.md).
 - The complete `grill-me/SKILL.md` and excerpts from `grilling/SKILL.md` come from
   the corrected **mattpocock/skills** repository. Excerpts are labelled; they are
   not presented as a complete procedure. Check installed versions for changes.
-- The sequence assertion on slide 03 comes from `exercise_2.ipynb`. The system
+- The sequence assertion on slide 04 comes from `exercise_2.ipynb`. The system
   and user prompts surrounding it are authored teaching examples.
 - `AGENTS.md` supplies the concrete read-file example and the teaching-code rule.
 - The Claude Code subagent YAML is illustrative. It is not a configured agent
@@ -1351,7 +1362,7 @@ and N / Notes for speaker notes. E enables text editing; Escape finishes editing
 Ctrl/Cmd+S downloads an edited HTML copy. Browser autosave uses a new version key
 so edits from the older slide order are not restored into this one.
 
-The revised 48-slide deck was checked in local Chrome at 1280 × 720 and
+The revised 49-slide deck was checked in local Chrome at 1280 × 720 and
 390 × 844. Checks cover stage fit, content overflow, panel overlap, offline use,
 navigation, notes, the token illustration, text editing/autosave, HTML export
 and reopening, and the exact text of the Exercise 10 slide. Rendered screenshots of all slides were also visually inspected. The original-slide critique and final-number mapping are stored in `.frontend-slides/`. T3's separate HTML preview checker is unavailable because of
