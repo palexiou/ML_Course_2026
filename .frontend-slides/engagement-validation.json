@@ -1,0 +1,16 @@
+{
+  "slides": 48,
+  "offline": "passed",
+  "viewports": [
+    "1280x720",
+    "390x844"
+  ],
+  "navigation": "passed",
+  "notes": "passed",
+  "tokenIllustration": "passed",
+  "editingAndAutosave": "passed",
+  "export": "passed",
+  "demoText": "exact match",
+  "failures": [],
+  "errors": []
+}
